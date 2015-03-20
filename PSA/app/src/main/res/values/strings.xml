@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Main Activity -->
+    <string name="action_add_emergency">Adicionar</string>
+
+
 </resources>

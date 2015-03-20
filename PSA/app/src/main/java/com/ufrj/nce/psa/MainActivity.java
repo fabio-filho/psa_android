@@ -1,12 +1,19 @@
 package com.ufrj.nce.psa;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
+import Objects.Emergency;
+
 
 public class MainActivity extends ActionBarActivity {
+
+    private List<Emergency> mListEmergency;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +37,44 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_emergency) {
+            removeEmergency();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loadEmergency();
+        setEmergencyListView();
+    }
+
+
+    //====================================================
+    //Personal Methods.
+
+
+    private void setEmergencyListView(){
+
+
+
+    }
+
+    private void loadEmergency(){
+
+
+
+    }
+
+    private void removeEmergency(){
+
+
+
+    }
+
+
 }
