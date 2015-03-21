@@ -1,4 +1,4 @@
-package Objects;
+package com.ufrj.nce.psa.Objects;
 
 /**
  * Created by fabiofilho on 20/03/15.
