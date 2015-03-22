@@ -11,6 +11,9 @@ import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.Values;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by fabiofilho on 11/11/14.
  */
@@ -79,15 +82,15 @@ public class SQLite {
     }
 
 
-
-    public static void insertContact(SQLiteDatabase db, Emergency emergency, Contact contact){
+    public static void insertContact(SQLiteDatabase db, Emergency emergency){
 
         try {
 
-            db.execSQL("insert into " + ContactTable.TABLE_NAME + " VALUES(null, '"
-                    + emergency.getCode() + "', '"
-                    + contact.getName()+"', '"
-                    + contact.getNumber()+"') ");
+            for(Contact contact: emergency.getListContact().getListContacts())
+                db.execSQL("insert into " + ContactTable.TABLE_NAME + " VALUES(null, '"
+                        + emergency.getCode() + "', '"
+                        + contact.getName() + "', '"
+                        + contact.getNumber() + "') ");
 
             db.close();
 
@@ -99,6 +102,37 @@ public class SQLite {
 
 
 
+    public static List<Emergency> getEmergencies(SQLiteDatabase db){
+
+        List<Emergency> mListEmergency = new ArrayList<Emergency>();
+
+        try{
+            Cursor cursor = db.rawQuery("select * from "+EmergencyTable.TABLE_NAME, null);
+
+            if(cursor == null) return mListEmergency;
+
+            if(cursor.getCount() == 0) return mListEmergency;
+
+            cursor.moveToFirst();
+
+            for (int index=0; index < cursor.getCount()-1; index++){
+
+                Emergency emergency = new Emergency();
+
+                emergency.setCode(cursor.getString(0));
+                emergency.setName(cursor.getString(1));
+
+                cursor.moveToNext();
+
+                Functions.Log("getEmergencies", cursor.getString(1));
+            }
+
+        }catch (Exception o){
+            Functions.Log("getEmergencies", o.toString());
+        }
+
+        return mListEmergency;
+    }
 
 
 

@@ -1,23 +1,26 @@
 package com.ufrj.nce.psa.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ufrj.nce.psa.Connections.SQLite;
+import com.ufrj.nce.psa.Connections.Tables.ContactTable;
+import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
+import com.ufrj.nce.psa.Objects.Contact;
+import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.ufrj.nce.psa.Utilities.Functions;
+import com.ufrj.nce.psa.Utilities.MessageBox;
 
 /**
  * Created by fabiofilho on 3/22/15.
@@ -29,7 +32,11 @@ public class EmergencyViewActivity extends Activity {
     private Menu menu;
 
     private EditText editTextName, editTextListContacts;
-    private List<String> mListContacts = new ArrayList<String>();
+
+    private final Context thisContext = this;
+
+    private Emergency mEmergency = new Emergency();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,75 +94,99 @@ public class EmergencyViewActivity extends Activity {
 
     public void onSaveEmergency(View view) {
 
-        Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
-        finish();
+        //Check if can save.
+
+        if (editTextName.getText().length() == 0) {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    MessageBox.showOk(thisContext, getResources().getString(R.string.activity_emergency_view_message_empty_name));
+                }
+            });
+
+            return;
+        }
+
+        if(editTextListContacts.getText().length() == 0){
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    MessageBox.showOk(thisContext, getResources().getString(R.string.activity_emergency_view_message_empty_number_list));
+                }
+            });
+            return;
+        }
+
+        if(insertEmergencyOnDB()) {
+            Toast.makeText(getApplicationContext(), "Emergência " + editTextName.getText() + " Adicionada ", Toast.LENGTH_SHORT).show();
+            finish();
+        }else
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.activity_emergency_view_message_error_save), Toast.LENGTH_SHORT).show();
+
     }
 
-    //==============================================================================================
-    //==============================================================================================
-    //==============================================================================================
-    //==============================================================================================
-    //==============================================================================================
+
+    public void onDeleteContacts(View view){
+
+        mEmergency.getListContact().removeLastContact();
+        editTextListContacts.setText(mEmergency.getListContact().getListContactsShow());
+
+    }
+
 
     @Override
-    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        //Toast.makeText(getApplicationContext(), "Selected", Toast.LENGTH_SHORT).show();
-        String contactID = "";
+        if (requestCode == PICK_CONTACT && resultCode == RESULT_OK)
+            setContactInfoOnActivityLayout( new Contact(getApplicationContext(), data.getData()));
 
-        if (reqCode == PICK_CONTACT) {
-            Uri result = data.getData();
+    }
 
-            String contactNumber = null;
+    //==============================================================================================
+    //==============================================================================================
+    //==============================================================================================
+    //==============================================================================================
+    //==============================================================================================
 
-            // getting contacts ID
-            Cursor cursorID = getContentResolver().query(result,
-                    new String[]{ContactsContract.Contacts._ID},
-                    null, null, null);
 
-            if (cursorID.moveToFirst()) {
 
-                contactID = cursorID.getString(cursorID.getColumnIndex(ContactsContract.Contacts._ID));
-            }
+    private void setContactInfoOnActivityLayout(Contact contact){
 
-            cursorID.close();
+        if(!mEmergency.getListContact().addContact(contact))
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.activity_emergency_view_message_item_already_exist), Toast.LENGTH_LONG).show();
 
-            Log.i("onActivityResult", "Contact ID: " + contactID);
-
-            // Using the contact ID now we will get contact phone number
-            Cursor cursorPhone = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER},
-
-                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? AND " +
-                            ContactsContract.CommonDataKinds.Phone.TYPE + " = " +
-                            ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE,
-
-                    new String[]{contactID},
-                    null);
-
-            if (cursorPhone.moveToFirst()) {
-                contactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                Log.i("onActivityResult", contactNumber);
-            }
-
-            cursorPhone.close();
-
-            Log.d("onActivityResult", "Contact Phone Number: " + contactNumber);
-            Toast.makeText(getApplicationContext(), " \nPhone: " + contactNumber , Toast.LENGTH_SHORT).show();
-
-        }
+        editTextListContacts.setText(mEmergency.getListContact().getListContactsShow());
     }
 
 
+    private Boolean insertEmergencyOnDB(){
 
+        try{
 
+            SQLiteDatabase db = new EmergencyTable(getApplicationContext()).getWritableDatabase();
+            SQLite.insertEmergency(db, mEmergency);
+
+            db = new ContactTable(getApplicationContext()).getWritableDatabase();
+            SQLite.insertContact(db, mEmergency);
+
+            return true;
+
+        }catch (Exception o){
+            Functions.Log("insertEmergencyOnDB", o.toString());
+        }
+
+        return false;
+    }
 
     private void openContacts(){
 
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        //intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
         startActivityForResult(intent, PICK_CONTACT);
+
     }
 
 

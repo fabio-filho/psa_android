@@ -36,6 +36,12 @@
     <!-- End Main Activity-->
 
 
+    <!-- Fragment Home-->
+
+
+    <!-- End Fragment Home-->
+
+    <string name="fragment_home_title">Todas Emergências</string>
 
     <!-- Emergency Activity -->
 
@@ -47,6 +53,12 @@
     <string name="activity_emergency_view_actionbar_add_contact">Adicionar um Contato</string>
 
 
+    <string name="activity_emergency_view_message_empty_name">O campo: Nome da Emergência, não pode estar vazio!</string>
+    <string name="activity_emergency_view_message_empty_number_list">O campo: Lista de Contatos, não pode estar vazio!</string>
+
+    <string name="activity_emergency_view_message_item_already_exist">Este contato já foi adicionado.</string>
+    <string name="activity_emergency_view_btn_delete_contact">Apagar Contato</string>
+    <string name="activity_emergency_view_message_error_save">Houve algum erro ao salvar a Emergência. Tente Novamente.</string>
 
     <!-- End Emergency Activity-->
 

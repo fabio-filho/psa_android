@@ -2,21 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <TextView
-        android:id="@+id/txtLabel"
-         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="16dp"
-        android:text="Home View"/>
-    
-    <ImageView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtLabel"
-        android:src="@mipmap/ic_home"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="30dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            style="@style/text_format_emergency"
+            android:id="@+id/txtTitleHomeFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_home_title"/>
+
+        <ListView
+            android:id="@+id/listViewHomeFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            </ListView>
+
+    </LinearLayout>
+
     
 
 </RelativeLayout>

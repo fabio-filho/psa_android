@@ -10,4 +10,7 @@ public class Strings {
 
             //Caption Default for Message Box.
             CAPTION_DEFAULT = "Atenção";
+
+
+
 }

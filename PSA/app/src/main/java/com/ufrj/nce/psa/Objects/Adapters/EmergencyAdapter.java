@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fabiofilho on 20/03/15.
@@ -18,14 +18,16 @@ import java.util.ArrayList;
 public class EmergencyAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Emergency> mList;
+    private List<Emergency> mList;
     private LayoutInflater mLayoutInflater;
 
 
-    public EmergencyAdapter(Context context, ArrayList<Emergency> mList){
+    public EmergencyAdapter(Context context, List<Emergency> mList){
 
         this.mList = mList;
         this.context = context;
+
+        mLayoutInflater = LayoutInflater.from(context);
     }
 
 
@@ -41,17 +43,17 @@ public class EmergencyAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return mList.get(position).getCode();
+        return Integer.parseInt(mList.get(position).getCode());
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View view, ViewGroup parent) {
 
-        convertView = mLayoutInflater.inflate(R.layout.list_emergency, null);
+        view = mLayoutInflater.inflate(R.layout.list_emergency, null);
 
-        Button btnEmergency = (Button) convertView.findViewById(R.id.btnEmergency);
+        Button btnEmergency = (Button) view.findViewById(R.id.btnEmergency);
         btnEmergency.setText(mList.get(position).getName());
 
-        return convertView;
+        return view;
     }
 }

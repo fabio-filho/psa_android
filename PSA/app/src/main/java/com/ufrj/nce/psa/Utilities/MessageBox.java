@@ -9,6 +9,7 @@ import android.content.DialogInterface;
  */
 public class MessageBox {
 
+    private static final String CAPTION_DEFAULT = "Atenção";
 
     public static int ID_YES = 1, ID_NO = 0, ID_CANCEL = 2;
 
@@ -57,28 +58,31 @@ public class MessageBox {
 
     private static void show(Context context, String message, String caption)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        builder.setTitle(caption);
-        builder.setMessage(message);
+            builder.setTitle(caption);
+            builder.setMessage(message);
 
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialog, int which) {
-                // Do do my action here
-                dialog.dismiss();
-            }
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do do my action here
+                    dialog.dismiss();
+                }
 
-        });
+            });
 
-        AlertDialog alert = builder.create();
-        alert.show();
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }catch (Exception o){o.printStackTrace();}
 
     }
 
     public static void showOk(Context context, String message)
     {
-        show(context,message,"Atenção!");
+        show(context, message, CAPTION_DEFAULT);
     }
 
     public static void showOk(Context context, String message, String caption)

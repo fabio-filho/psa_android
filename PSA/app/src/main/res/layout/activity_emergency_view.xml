@@ -44,7 +44,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="false"
-            android:layout_marginBottom="30dp" />
+            android:enabled="false"
+             />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_btn_delete_contact"
+            android:onClick="onDeleteContacts"
+            android:layout_marginBottom="40dp"
+            />
 
 
         <Button

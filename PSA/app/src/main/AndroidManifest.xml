@@ -24,7 +24,8 @@
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +38,8 @@
         <activity
             android:name=".Activities.EmergencyViewActivity"
             android:label="@string/activity_emergency_view_txt_title"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:icon="@mipmap/ic_emergency">
             <intent-filter>
                 <action android:name="android.intent.action.EMERGENCY_VIEW"/>
 
