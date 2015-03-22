@@ -1,6 +1,5 @@
 package com.ufrj.nce.psa.Fragments;
 
-import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import com.ufrj.nce.psa.R;
 /**
  * Created by fabiofilho on 3/20/15.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends EmergencyFragment {
 
     public SettingsFragment(){}
 

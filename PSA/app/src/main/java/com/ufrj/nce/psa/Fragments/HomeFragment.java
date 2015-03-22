@@ -1,6 +1,5 @@
 package com.ufrj.nce.psa.Fragments;
 
-import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +8,12 @@ import android.view.ViewGroup;
 
 import com.ufrj.nce.psa.R;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends EmergencyFragment {
 
-    public HomeFragment(){}
+    public HomeFragment(){
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,6 +24,10 @@ public class HomeFragment extends Fragment {
         if(Build.VERSION.SDK_INT >= 14)
             getActivity().getActionBar().setIcon(R.mipmap.ic_home);
 
+        refreshEmergencyItems();
+
         return rootView;
     }
+
+
 }

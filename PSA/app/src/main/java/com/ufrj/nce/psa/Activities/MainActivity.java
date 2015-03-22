@@ -1,8 +1,8 @@
 package com.ufrj.nce.psa.Activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Build;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.ufrj.nce.psa.Fragments.EmergencyFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyManagerFragment;
 import com.ufrj.nce.psa.Fragments.HistoryEmergencyFragment;
 import com.ufrj.nce.psa.Fragments.HomeFragment;
@@ -46,8 +47,11 @@ public class MainActivity extends Activity {
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
-
+    //Items action bar
     private Menu menu;
+    //Fragment atributte
+    private EmergencyFragment fragment;
+    private static int FRAGMENT_CURRENT = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,6 @@ public class MainActivity extends Activity {
 
 		// enabling action bar app icon and behaving it as toggle button
         settingChangesOnActionsBar(savedInstanceState);
-
 	}
 
 
@@ -121,7 +124,7 @@ public class MainActivity extends Activity {
 
         if (savedInstanceState == null) {
             // on first time display view for first nav item
-            displayView(0);
+            displayView(FRAGMENT_CURRENT);
         }
     }
 
@@ -166,13 +169,14 @@ public class MainActivity extends Activity {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-		// Handle action bar actions click
-		switch (item.getItemId()) {
-		case R.id.action_settings:
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+
+        if(item.getItemId() == R.id.action_add_emergency) {
+            openAdderEmergency();
+            return true;
+        }
+
+		return super.onOptionsItemSelected(item);
+
 	}
 
 	/* *
@@ -182,16 +186,23 @@ public class MainActivity extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// if nav drawer is opened, hide the action items
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        menu.findItem(R.id.action_add_emergency).setVisible(false);
+
+        if(!drawerOpen)
+           if(FRAGMENT_CURRENT == 0 || FRAGMENT_CURRENT == 1)
+               menu.findItem(R.id.action_add_emergency).setVisible(true);
+
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	/**
-	 * Diplaying fragment view for selected nav drawer list item
+	 * Displaying fragment view for selected nav drawer list item
 	 * */
 	private void displayView(int position) {
+        //set current fragment value
+        FRAGMENT_CURRENT = position;
 		// update the main content by replacing fragments
-		Fragment fragment = null;
+		fragment = null;
 		switch (position) {
 		case 0:
 			fragment = new HomeFragment();
@@ -224,7 +235,6 @@ public class MainActivity extends Activity {
 			setTitle(navMenuTitles[position]);
 			mDrawerLayout.closeDrawer(mDrawerList);
 
-
 		} else {
 			// error in creating fragment
 			Log.e("displayView", "Error in creating fragment");
@@ -255,5 +265,12 @@ public class MainActivity extends Activity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
+
+
+    private void openAdderEmergency(){
+
+        startActivity(new Intent("android.intent.action.EMERGENCY_VIEW"));
+
+    }
 
 }

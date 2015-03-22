@@ -1,6 +1,5 @@
 package com.ufrj.nce.psa.Fragments;
 
-import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +12,7 @@ import com.ufrj.nce.psa.R;
 /**
  * Created by fabiofilho on 3/21/15.
  */
-public class InformationFragment extends Fragment {
+public class InformationFragment extends EmergencyFragment {
 
 
     @Nullable

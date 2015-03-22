@@ -3,6 +3,11 @@ package com.ufrj.nce.psa.Connections;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.ufrj.nce.psa.Connections.Tables.ContactTable;
+import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
+import com.ufrj.nce.psa.Connections.Tables.HistoryEmergencyTable;
+import com.ufrj.nce.psa.Objects.Contact;
+import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.Values;
 
@@ -41,6 +46,60 @@ public class SQLite {
             db.close();
         }
     }
+
+
+    public static void insertEmergency(SQLiteDatabase db, Emergency emergency){
+
+        try {
+
+            db.execSQL("insert into " + EmergencyTable.TABLE_NAME + " VALUES(null, '" + emergency.getName() + "') ");
+            db.close();
+
+        }catch(Exception o){
+            Functions.Log("insertEmergency", o.toString());
+        }
+
+    }
+
+
+    public static void insertHistoryEmergency(SQLiteDatabase db, Emergency emergency, Contact contact, Boolean isReceived){
+
+        try {
+
+            db.execSQL("insert into " + HistoryEmergencyTable.TABLE_NAME + " VALUES(null, NOW(), '"
+                    + contact.getNumber()+"', '"
+                    + emergency.getName()+"', '"
+                    + isReceived.toString()+"') ");
+            db.close();
+
+        }catch(Exception o){
+            Functions.Log("insertEmergency", o.toString());
+        }
+
+    }
+
+
+
+    public static void insertContact(SQLiteDatabase db, Emergency emergency, Contact contact){
+
+        try {
+
+            db.execSQL("insert into " + ContactTable.TABLE_NAME + " VALUES(null, '"
+                    + emergency.getCode() + "', '"
+                    + contact.getName()+"', '"
+                    + contact.getNumber()+"') ");
+
+            db.close();
+
+        }catch(Exception o){
+            Functions.Log("insertEmergency", o.toString());
+        }
+
+    }
+
+
+
+
 
 
 
