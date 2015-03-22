@@ -38,10 +38,22 @@
 
     <!-- Fragment Home-->
 
+    <string name="fragment_home_title">Todas Emergências</string>
+    <string name="fragment_home_no_emergencies">Sem Emergências - Clique para Adicionar</string>
 
     <!-- End Fragment Home-->
 
-    <string name="fragment_home_title">Todas Emergências</string>
+
+
+
+    <!-- Fragment Emergency Manager-->
+
+    <string name="fragment_emergency_manager_title">Gerenciamento das Emergências</string>
+
+    <!-- End Fragment Emergency Manager-->
+
+
+
 
     <!-- Emergency Activity -->
 

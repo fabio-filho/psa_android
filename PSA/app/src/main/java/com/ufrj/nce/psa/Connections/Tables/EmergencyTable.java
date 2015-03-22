@@ -31,7 +31,6 @@ public class EmergencyTable extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
-
     }
 
     @Override

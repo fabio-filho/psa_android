@@ -55,6 +55,7 @@ public class SQLite {
 
         try {
 
+            Functions.Log("insertEmergency", emergency.getName());
             db.execSQL("insert into " + EmergencyTable.TABLE_NAME + " VALUES(null, '" + emergency.getName() + "') ");
             db.close();
 
@@ -111,20 +112,21 @@ public class SQLite {
 
             if(cursor == null) return mListEmergency;
 
-            if(cursor.getCount() == 0) return mListEmergency;
+            Functions.Log("getEmergencies", "Count: "+cursor.getCount()+"");
 
             cursor.moveToFirst();
 
-            for (int index=0; index < cursor.getCount()-1; index++){
+            for (int index=0; index < cursor.getCount(); index++){
 
                 Emergency emergency = new Emergency();
 
                 emergency.setCode(cursor.getString(0));
                 emergency.setName(cursor.getString(1));
 
-                cursor.moveToNext();
-
                 Functions.Log("getEmergencies", cursor.getString(1));
+
+                mListEmergency.add(emergency);
+                cursor.moveToNext();
             }
 
         }catch (Exception o){

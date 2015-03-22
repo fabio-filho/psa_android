@@ -165,6 +165,7 @@ public class EmergencyViewActivity extends Activity {
     private Boolean insertEmergencyOnDB(){
 
         try{
+            mEmergency.setName(editTextName.getText().toString());
 
             SQLiteDatabase db = new EmergencyTable(getApplicationContext()).getWritableDatabase();
             SQLite.insertEmergency(db, mEmergency);

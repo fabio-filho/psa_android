@@ -271,6 +271,7 @@ public class MainActivity extends Activity {
 
         startActivity(new Intent("android.intent.action.EMERGENCY_VIEW"));
 
+
     }
 
 }

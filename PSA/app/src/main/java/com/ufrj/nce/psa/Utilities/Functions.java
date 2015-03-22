@@ -15,6 +15,15 @@ import java.util.Calendar;
 
 public class Functions {
 
+    public static void sleep(int time){
+
+        try{
+            Thread.sleep(time);
+        }catch(Exception o){
+
+        }
+    }
+
 
     public static void Log(String title, String text){
 

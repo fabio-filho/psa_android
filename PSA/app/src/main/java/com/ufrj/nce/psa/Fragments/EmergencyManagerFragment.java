@@ -20,11 +20,15 @@ public class EmergencyManagerFragment  extends EmergencyFragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_emergency_manager, container, false);
+        this.rootView = rootView;
 
         if(Build.VERSION.SDK_INT >= 14)
             getActivity().getActionBar().setIcon(R.mipmap.ic_emergency);
 
+
         refreshEmergencyItems();
+
+        loadListView(R.id.listViewEmergencyManagerFragment);
 
         return rootView;
     }
