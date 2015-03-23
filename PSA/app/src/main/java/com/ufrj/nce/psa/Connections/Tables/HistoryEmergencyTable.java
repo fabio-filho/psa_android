@@ -17,6 +17,8 @@ public class HistoryEmergencyTable extends SQLiteOpenHelper {
     public static final String FIELD_NUMBER            = "number";
     public static final String FIELD_MESSAGE           = "message";
     public static final String FIELD_IS_RECEIVED       = "is_received";
+    public static final String FIELD_LATITUDE          = "latitude";
+    public static final String FIELD_LONGITUDE         = "longitude";
 
     // creation SQLite statement
     public static final String TABLE_CREATE ="CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ( " +
@@ -24,7 +26,9 @@ public class HistoryEmergencyTable extends SQLiteOpenHelper {
             "    "+FIELD_DATETIME+"      DATETIME  NOT NULL," +
             "    "+FIELD_NUMBER+"        VARCHAR( 1, 20 )  NOT NULL," +
             "    "+FIELD_MESSAGE+"       VARCHAR( 1, 100 )   NOT NULL," +
-            "    "+FIELD_IS_RECEIVED+"   BOOLEAN  NOT NULL" +
+            "    "+FIELD_IS_RECEIVED+"   BOOLEAN  NOT NULL," +
+            "    "+FIELD_LATITUDE+"       VARCHAR( 1, 100 )   NOT NULL," +
+            "    "+FIELD_LONGITUDE+"       VARCHAR( 1, 100 )   NOT NULL" +
             ");\n";
 
 

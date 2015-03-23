@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.ufrj.nce.psa.R;
 
@@ -30,6 +32,19 @@ public class EmergencyManagerFragment  extends EmergencyFragment {
 
         loadListView(R.id.listViewEmergencyManagerFragment);
 
+        loadBtnEmergencyListView();
+
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> av, View view, int i, long l) {
+                Toast.makeText(getActivity().getApplicationContext(), "myPos " + i, Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         return rootView;
     }
+
+
 }

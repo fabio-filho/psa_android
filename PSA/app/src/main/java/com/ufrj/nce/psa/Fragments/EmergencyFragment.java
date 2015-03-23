@@ -32,18 +32,21 @@ public class EmergencyFragment extends Fragment {
 
         mListView = (ListView) rootView.findViewById(layout);
 
+
+
+
         checkListEmergencyIsEmpty();
 
         mAdapterEmergency = new EmergencyAdapter(getActivity().getApplicationContext(), mListEmergency);
 
         mListView.setAdapter(mAdapterEmergency);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    }
 
-            }
-        });
+
+    protected void loadBtnEmergencyListView(){
+
+
 
     }
 
@@ -51,13 +54,8 @@ public class EmergencyFragment extends Fragment {
 
         if(mListEmergency.size() == 0)
             mListEmergency.add(new Emergency( "-1", getResources().getString(R.string.fragment_home_no_emergencies)));
-
     }
 
-
-    protected void onClickEmergency(){
-        Toast.makeText(getActivity().getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
-    }
 
     public void removeEmergency(int code){
         Toast.makeText(getActivity().getApplicationContext(), "Removed", Toast.LENGTH_SHORT).show();
@@ -83,6 +81,11 @@ public class EmergencyFragment extends Fragment {
 
     private void insertEmergencyInDB(List<Emergency> mList){
 
+    }
+
+
+    protected void onClickBtnEmergency(View view){
+        Toast.makeText(getActivity().getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
     }
 
 

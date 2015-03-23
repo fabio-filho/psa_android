@@ -54,7 +54,6 @@ public class SQLite {
     public static void insertEmergency(SQLiteDatabase db, Emergency emergency){
 
         try {
-
             Functions.Log("insertEmergency", emergency.getName());
             db.execSQL("insert into " + EmergencyTable.TABLE_NAME + " VALUES(null, '" + emergency.getName() + "') ");
             db.close();
@@ -66,6 +65,21 @@ public class SQLite {
     }
 
 
+    public static void deleteEmergencyWithContacts(SQLiteDatabase db, Emergency emergency){
+
+        try{
+            db.execSQL("delete from "+EmergencyTable.TABLE_NAME+ " where "+EmergencyTable.FIELD_CODE+ " = '"+emergency.getCode()+"'");
+
+            db.execSQL("delete from "+ContactTable.TABLE_NAME+ " where "+ContactTable.FIELD_EMERGENCY+ " = '"+emergency.getCode()+"'");
+
+        }catch(Exception o){
+            Functions.Log("deleteEmergency", o.toString());
+        }
+
+
+    }
+
+
     public static void insertHistoryEmergency(SQLiteDatabase db, Emergency emergency, Contact contact, Boolean isReceived){
 
         try {
@@ -73,7 +87,10 @@ public class SQLite {
             db.execSQL("insert into " + HistoryEmergencyTable.TABLE_NAME + " VALUES(null, NOW(), '"
                     + contact.getNumber()+"', '"
                     + emergency.getName()+"', '"
-                    + isReceived.toString()+"') ");
+                    + isReceived.toString()+"', '"
+                    + contact.getLatitude()+"', '"
+                    + contact.getLongitude()+"') ");
+
             db.close();
 
         }catch(Exception o){
