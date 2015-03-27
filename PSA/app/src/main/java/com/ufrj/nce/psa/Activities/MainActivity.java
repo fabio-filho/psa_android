@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ufrj.nce.psa.Fragments.EmergencyFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyManagerFragment;
@@ -270,8 +271,19 @@ public class MainActivity extends Activity {
     private void openAdderEmergency(){
 
         startActivity(new Intent("android.intent.action.EMERGENCY_VIEW"));
-
-
     }
 
+/*
+    public void onClickListView(View view){
+
+        if(fragment != null)
+            fragment.onClickListViewEmergency(view);
+    }
+*/
+
+
+    public void onClick(View view) {
+
+        Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
+    }
 }

@@ -3,7 +3,6 @@ package com.ufrj.nce.psa.Fragments;
 import android.app.Fragment;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,12 +27,9 @@ public class EmergencyFragment extends Fragment {
     protected View rootView;
 
 
-    protected void loadListView(int layout){
+    protected void loadListViewEmergency(int layout){
 
         mListView = (ListView) rootView.findViewById(layout);
-
-
-
 
         checkListEmergencyIsEmpty();
 
@@ -65,7 +61,7 @@ public class EmergencyFragment extends Fragment {
         Toast.makeText(getActivity().getApplicationContext(), "Add", Toast.LENGTH_SHORT).show();
     }
 
-    public void refreshEmergencyItems(){
+    public void loadFromDBEmergencyItems(){
 
         SQLiteDatabase db = new EmergencyTable(getActivity().getApplicationContext()).getWritableDatabase();
         mListEmergency = SQLite.getEmergencies(db);
@@ -81,11 +77,6 @@ public class EmergencyFragment extends Fragment {
 
     private void insertEmergencyInDB(List<Emergency> mList){
 
-    }
-
-
-    protected void onClickBtnEmergency(View view){
-        Toast.makeText(getActivity().getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
     }
 
 

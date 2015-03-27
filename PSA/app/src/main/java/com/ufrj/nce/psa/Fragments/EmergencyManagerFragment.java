@@ -28,9 +28,9 @@ public class EmergencyManagerFragment  extends EmergencyFragment {
             getActivity().getActionBar().setIcon(R.mipmap.ic_emergency);
 
 
-        refreshEmergencyItems();
+        loadFromDBEmergencyItems();
 
-        loadListView(R.id.listViewEmergencyManagerFragment);
+        loadListViewEmergency(R.id.listViewEmergencyManagerFragment);
 
         loadBtnEmergencyListView();
 
