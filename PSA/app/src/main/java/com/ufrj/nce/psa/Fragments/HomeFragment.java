@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
 
 import com.ufrj.nce.psa.R;
 
-public class HomeFragment extends EmergencyFragment {
+public class HomeFragment extends EmergencyFragment implements  View.OnClickListener{
 
     public HomeFragment(){
     }
@@ -37,10 +37,20 @@ public class HomeFragment extends EmergencyFragment {
 
     private void initializeListeners(){
 
-        Button btn = (Button) rootView.findViewById(R.id.btnEmergency);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
+        });
 
+        //Log.i("click","Clicked");
     }
 
+    @Override
+    public void onClick(View view) {
+        //super.onClick(view);
 
+        //Log.i("click", "Clicked");
+    }
 }

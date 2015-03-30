@@ -79,5 +79,8 @@ public class EmergencyFragment extends Fragment {
 
     }
 
+    public void onClick(View view){
+
+    }
 
 }

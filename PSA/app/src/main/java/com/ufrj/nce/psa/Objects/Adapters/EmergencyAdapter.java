@@ -1,11 +1,13 @@
 package com.ufrj.nce.psa.Objects.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
@@ -53,6 +55,14 @@ public class EmergencyAdapter extends BaseAdapter {
 
         Button btnEmergency = (Button) view.findViewById(R.id.btnEmergency);
         btnEmergency.setText(mList.get(position).getName());
+
+        btnEmergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+                Log.i("onClick", "clicked");
+            }
+        });
 
         return view;
     }

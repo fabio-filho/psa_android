@@ -11,7 +11,7 @@ import com.ufrj.nce.psa.R;
 /**
  * Created by fabiofilho on 3/20/15.
  */
-public class HistoryEmergencyFragment extends EmergencyFragment{
+public class HistoryEmergencyFragment extends EmergencyFragment {
 
     public HistoryEmergencyFragment(){
 
@@ -32,4 +32,6 @@ public class HistoryEmergencyFragment extends EmergencyFragment{
 
         return rootView;
     }
+
+
 }
