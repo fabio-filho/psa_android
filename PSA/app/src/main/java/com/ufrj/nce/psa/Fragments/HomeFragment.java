@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
@@ -50,6 +51,13 @@ public class HomeFragment extends EmergencyFragment {
             refreshListViewEmergency();
             return;
         }
+
+
+        Toast.makeText(getActivity().getApplicationContext(), "Enviando Emergencia", Toast.LENGTH_SHORT).show();
+
+        mAdapterEmergency.getItem(mListView.getPositionForView(view)).sendAlertToAllContacts(mAdapterEmergency.getItem(mListView.getPositionForView(view)).getName());
+
+        Toast.makeText(getActivity().getApplicationContext(), "Emergencia Enviada", Toast.LENGTH_LONG).show();
 
     }
 
