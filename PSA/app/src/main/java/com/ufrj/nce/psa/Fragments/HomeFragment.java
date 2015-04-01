@@ -6,9 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
 
-public class HomeFragment extends EmergencyFragment implements  View.OnClickListener{
+public class HomeFragment extends EmergencyFragment {
 
     public HomeFragment(){
     }
@@ -42,9 +43,16 @@ public class HomeFragment extends EmergencyFragment implements  View.OnClickList
     }
 
     @Override
-    public void onClick(View view) {
-        //super.onClick(view);
+    protected void onClickItemListView(View view) {
 
-        //Log.i("click", "Clicked");
+        if (mAdapterEmergency.getItem(mListView.getPositionForView(view)).getCode().equals(Emergency.CODE_EMPTY)){
+            openViewEmergency();
+            refreshListViewEmergency();
+            return;
+        }
+
     }
+
+
+
 }

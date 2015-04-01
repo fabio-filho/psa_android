@@ -35,7 +35,7 @@ public class SplashScreenActivity extends Activity{
 
                 Functions.sleep(TIME_SPLASH);
 
-                startActivity(new Intent("android.intent.action.MENU"));
+                startActivity(new Intent("android.intent.action.PSA_MENU"));
                 finish();
             }
         }.start();

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.ufrj.nce.psa.Activities.MainActivity;
+import com.ufrj.nce.psa.Activities.PSAMainActivity;
 import com.ufrj.nce.psa.Connections.SQLite;
 import com.ufrj.nce.psa.Connections.Tables.ContactTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
@@ -119,13 +119,13 @@ public class EmergencyFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == MainActivity.REQUEST_ACTIVITY_CODE)
+        if (requestCode == PSAMainActivity.REQUEST_ACTIVITY_CODE)
             refreshListViewEmergency();
     }
 
     protected void openViewEmergency(){
 
-        startActivityForResult(new Intent("android.intent.action.EMERGENCY_VIEW"), MainActivity.REQUEST_ACTIVITY_CODE);
+        startActivityForResult(new Intent("android.intent.action.EMERGENCY_VIEW"), PSAMainActivity.REQUEST_ACTIVITY_CODE);
     }
 
 

@@ -32,7 +32,7 @@ import com.ufrj.nce.psa.R;
 import java.util.ArrayList;
 
 
-public class MainActivity extends Activity {
+public class PSAMainActivity extends Activity {
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
