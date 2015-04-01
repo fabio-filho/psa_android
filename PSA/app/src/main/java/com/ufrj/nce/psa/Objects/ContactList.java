@@ -41,6 +41,11 @@ public class ContactList {
 
     }
 
+    public void addContactWithoutChecker(Contact contact){
+
+       mListContacts.add(contact);
+    }
+
     public Boolean checkContactExist(Contact contact){
 
         for(Contact mContact: mListContacts)

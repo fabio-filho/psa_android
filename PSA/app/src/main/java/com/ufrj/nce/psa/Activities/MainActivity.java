@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.ufrj.nce.psa.Connections.SQLite;
+import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
 import com.ufrj.nce.psa.Fragments.EmergencyFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyManagerFragment;
 import com.ufrj.nce.psa.Fragments.HistoryEmergencyFragment;
@@ -51,7 +54,9 @@ public class MainActivity extends Activity {
     private Menu menu;
     //Fragment atributte
     private EmergencyFragment fragment;
-    private static int FRAGMENT_CURRENT = 0;
+    private static int FRAGMENT_CURRENT = 0 ;
+
+    public static final int REQUEST_ACTIVITY_CODE = 155;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,10 +135,16 @@ public class MainActivity extends Activity {
     }
 
 
+    private String getCountEmergency(){
+
+        SQLiteDatabase db = new EmergencyTable(getApplicationContext()).getWritableDatabase();
+        return SQLite.getOneStringQuery(db, "select COUNT(*) from " + EmergencyTable.TABLE_NAME);
+    }
+
     private void addingItemsOnNavDrawer(){
 
         // Home
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1), true, "0"));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1), true, getCountEmergency()));
         // Emergency Manager
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
         // History
@@ -271,10 +282,21 @@ public class MainActivity extends Activity {
 
     private void openAdderEmergency(){
 
-        startActivity(new Intent("android.intent.action.EMERGENCY_VIEW"));
+        startActivityForResult(new Intent("android.intent.action.EMERGENCY_VIEW"), REQUEST_ACTIVITY_CODE);
     }
 
-/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_ACTIVITY_CODE) {
+            fragment.refreshListViewEmergency();
+            navDrawerItems.get(0).setCount(getCountEmergency());
+        }
+
+    }
+
+
+    /*
     public void onClickListView(View view){
 
         if(fragment != null)

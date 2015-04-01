@@ -39,7 +39,7 @@
     <!-- Fragment Home-->
 
     <string name="fragment_home_title">Todas Emergências</string>
-    <string name="fragment_home_no_emergencies">Sem Emergências - Clique para Adicionar</string>
+    <string name="fragment_home_no_emergencies">Sem Emergências. Clique para Adicionar</string>
 
     <!-- End Fragment Home-->
 
@@ -49,7 +49,8 @@
     <!-- Fragment Emergency Manager-->
 
     <string name="fragment_emergency_manager_title">Gerenciamento das Emergências</string>
-
+    <string name="fragment_emergency_manager_remove_item">Tem certeza que deseja remover esta Emergência: </string>
+    <string name="fragment_emergency_manager_remove_item_title">Remover Emergência</string>
     <!-- End Fragment Emergency Manager-->
 
 

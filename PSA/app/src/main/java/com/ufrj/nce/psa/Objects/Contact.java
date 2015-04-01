@@ -16,7 +16,7 @@ import java.io.InputStream;
  */
 public class Contact {
 
-    private String name="", number="";
+    private String name="", number="", code="";
     private String id;
     private Uri uriData;
     private Bitmap image=null;
@@ -42,8 +42,9 @@ public class Contact {
 
 
 
-    public Contact(String name, String number) {
+    public Contact(String code, String name, String number) {
 
+        this.code = code;
         this.name = name;
         this.number = number;
     }
@@ -58,6 +59,9 @@ public class Contact {
         setNumber();
     }
 
+    public String getCode(){
+        return code;
+    }
 
     public String getName() {
         return name;
@@ -67,11 +71,9 @@ public class Contact {
         return getName().equals("");
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
-
 
     private void setName() {
 

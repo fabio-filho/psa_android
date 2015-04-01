@@ -18,6 +18,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
 	
 	private Context context;
 	private ArrayList<NavDrawerItem> navDrawerItems;
+    private TextView txtTitle, txtCount;
 	
 	public NavDrawerListAdapter(Context context, ArrayList<NavDrawerItem> navDrawerItems){
 		this.context = context;
@@ -34,6 +35,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
 		return navDrawerItems.get(position);
 	}
 
+
 	@Override
 	public long getItemId(int position) {
 		return position;
@@ -48,8 +50,8 @@ public class NavDrawerListAdapter extends BaseAdapter {
         }
          
         ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
-        TextView txtCount = (TextView) convertView.findViewById(R.id.counter);
+        txtTitle = (TextView) convertView.findViewById(R.id.title);
+        txtCount = (TextView) convertView.findViewById(R.id.counter);
          
         imgIcon.setImageResource(navDrawerItems.get(position).getIcon());        
         txtTitle.setText(navDrawerItems.get(position).getTitle());

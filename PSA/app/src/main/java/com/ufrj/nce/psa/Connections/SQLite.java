@@ -7,6 +7,7 @@ import com.ufrj.nce.psa.Connections.Tables.ContactTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
 import com.ufrj.nce.psa.Connections.Tables.HistoryEmergencyTable;
 import com.ufrj.nce.psa.Objects.Contact;
+import com.ufrj.nce.psa.Objects.ContactList;
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.Values;
@@ -73,7 +74,7 @@ public class SQLite {
             db.execSQL("delete from "+ContactTable.TABLE_NAME+ " where "+ContactTable.FIELD_EMERGENCY+ " = '"+emergency.getCode()+"'");
 
         }catch(Exception o){
-            Functions.Log("deleteEmergency", o.toString());
+            Functions.Log("deleteEmergencyWithContacts", o.toString());
         }
 
 
@@ -104,11 +105,14 @@ public class SQLite {
 
         try {
 
-            for(Contact contact: emergency.getListContact().getListContacts())
+            for(Contact contact: emergency.getListContact().getListContacts()) {
                 db.execSQL("insert into " + ContactTable.TABLE_NAME + " VALUES(null, '"
                         + emergency.getCode() + "', '"
                         + contact.getName() + "', '"
                         + contact.getNumber() + "') ");
+
+                Functions.Log("insertContact", " Code: "+emergency.getCode()+" - Name: "+ contact.getName());
+            }
 
             db.close();
 
@@ -150,8 +154,41 @@ public class SQLite {
             Functions.Log("getEmergencies", o.toString());
         }
 
+        db.close();
+
         return mListEmergency;
     }
+
+
+    public static ContactList getEmergencyContactList (SQLiteDatabase db, String codeEmergency){
+
+        ContactList mContactList = new ContactList();
+
+        try{
+            Cursor cursor = db.rawQuery("select * from "+ContactTable.TABLE_NAME+ " where "+ContactTable.FIELD_EMERGENCY+ " = '"+codeEmergency+"'" , null);
+
+            if(cursor == null) return mContactList;
+
+            Functions.Log("getEmergencyContactList", "Count: "+cursor.getCount()+" - Code Emergency: "+ codeEmergency+ " SQL: select * from "+ContactTable.TABLE_NAME+ " where "+ContactTable.FIELD_EMERGENCY+ " = '"+codeEmergency+"'");
+
+            cursor.moveToFirst();
+
+            for (int index=0; index < cursor.getCount(); index++){
+
+                Contact contact = new Contact(cursor.getString(0), cursor.getString(2), cursor.getString(3));
+
+                mContactList.addContactWithoutChecker(contact);
+
+                cursor.moveToNext();
+            }
+
+        }catch (Exception o){
+            Functions.Log("getEmergencyContactList", o.toString());
+        }
+
+        return mContactList;
+    }
+
 
 
 

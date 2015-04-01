@@ -3,6 +3,7 @@ package com.ufrj.nce.psa.Utilities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.View;
 
 /**
  * Created by fabiofilho on 06/11/14.
@@ -23,7 +24,7 @@ public class MessageBox {
         TEMP_RESULT = tEMP_RESULT;
     }
 
-    public static void showOkCancel(Context context, String message, String caption)
+    public static void showOkCancel(Context context, String message, String caption, final View.OnClickListener onClickListener)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
@@ -34,7 +35,8 @@ public class MessageBox {
 
             public void onClick(DialogInterface dialog, int which) {
                 //Do do my action here
-                setTEMP_RESULT(ID_YES);
+                //setTEMP_RESULT(ID_YES);
+                onClickListener.onClick(null);
                 dialog.dismiss();
             }
 
@@ -45,7 +47,7 @@ public class MessageBox {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // I do not need any action here you might
-                setTEMP_RESULT(ID_CANCEL);
+                //setTEMP_RESULT(ID_CANCEL);
                 dialog.dismiss();
             }
         });

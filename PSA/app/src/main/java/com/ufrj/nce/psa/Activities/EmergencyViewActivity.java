@@ -170,6 +170,9 @@ public class EmergencyViewActivity extends Activity {
             SQLiteDatabase db = new EmergencyTable(getApplicationContext()).getWritableDatabase();
             SQLite.insertEmergency(db, mEmergency);
 
+            db = new EmergencyTable(getApplicationContext()).getWritableDatabase();
+            mEmergency.setCode(SQLite.getOneStringQuery(db, "select MAX(code) from "+EmergencyTable.TABLE_NAME));
+
             db = new ContactTable(getApplicationContext()).getWritableDatabase();
             SQLite.insertContact(db, mEmergency);
 
@@ -191,4 +194,11 @@ public class EmergencyViewActivity extends Activity {
     }
 
 
+    @Override
+    public void finish() {
+
+        setResult(Activity.RESULT_OK, new Intent());
+
+        super.finish();
+    }
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.ufrj.nce.psa.R;
 
@@ -25,26 +24,21 @@ public class HomeFragment extends EmergencyFragment implements  View.OnClickList
         if(Build.VERSION.SDK_INT >= 14)
             getActivity().getActionBar().setIcon(R.mipmap.ic_home);
 
-        loadFromDBEmergencyItems();
-
-        loadListViewEmergency(R.id.listViewHomeFragment);
-
-        initializeListeners();
+        refreshListViewEmergency();
 
         return rootView;
     }
 
 
-    private void initializeListeners(){
+    @Override
+    public void refreshListViewEmergency() {
+        super.refreshListViewEmergency();
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        loadFromDBEmergencyItems();
 
-            }
-        });
+        loadListViewEmergency(R.id.listViewHomeFragment);
 
-        //Log.i("click","Clicked");
+        loadAdapterEmergencyDefault();
     }
 
     @Override
