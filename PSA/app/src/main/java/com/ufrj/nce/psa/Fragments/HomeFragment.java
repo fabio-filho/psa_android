@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ufrj.nce.psa.Objects.Emergency;
+import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.R;
 
 public class HomeFragment extends EmergencyFragment {
@@ -53,9 +54,11 @@ public class HomeFragment extends EmergencyFragment {
         }
 
 
+        EmergencySMS emergencySMS = new EmergencySMS(rootView.getContext(), mAdapterEmergency.getItem(mListView.getPositionForView(view)).getName());
+
         Toast.makeText(getActivity().getApplicationContext(), "Enviando Emergencia", Toast.LENGTH_SHORT).show();
 
-        mAdapterEmergency.getItem(mListView.getPositionForView(view)).sendAlertToAllContacts(mAdapterEmergency.getItem(mListView.getPositionForView(view)).getName());
+        mAdapterEmergency.getItem(mListView.getPositionForView(view)).sendAlertToAllContacts(emergencySMS.getMessageToSend());
 
         Toast.makeText(getActivity().getApplicationContext(), "Emergencia Enviada", Toast.LENGTH_LONG).show();
 

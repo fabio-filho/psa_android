@@ -27,6 +27,7 @@ import com.ufrj.nce.psa.Fragments.InformationFragment;
 import com.ufrj.nce.psa.Fragments.SettingsFragment;
 import com.ufrj.nce.psa.Objects.Adapters.NavDrawerListAdapter;
 import com.ufrj.nce.psa.Objects.NavDrawerItem;
+import com.ufrj.nce.psa.Objects.PushNotification;
 import com.ufrj.nce.psa.R;
 
 import java.util.ArrayList;
@@ -69,7 +70,8 @@ public class PSAMainActivity extends Activity {
 		// enabling action bar app icon and behaving it as toggle button
         settingChangesOnActionsBar(savedInstanceState);
 
-	}
+        PushNotification.createNotification(getApplicationContext(), "Teste de Emergência");
+    }
 
 
     private void initializeSideMenu(){

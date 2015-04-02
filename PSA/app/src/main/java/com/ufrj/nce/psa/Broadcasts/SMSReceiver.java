@@ -4,46 +4,56 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
-import com.ufrj.nce.psa.Objects.Emergency;
+import com.ufrj.nce.psa.Objects.EmergencySMS;
+import com.ufrj.nce.psa.Objects.PushNotification;
+import com.ufrj.nce.psa.Utilities.Functions;
 
 /**
  * Created by fabiofilho on 4/1/15.
  */
 public class SMSReceiver extends BroadcastReceiver {
 
-    @Override
+    // Get the object of SmsManager
+    final SmsManager sms = SmsManager.getDefault();
+
     public void onReceive(Context context, Intent intent) {
 
-        Bundle myBundle = intent.getExtras();
-        SmsMessage[] messages = null;
-        String strMessage = "";
+        // Retrieves a map of extended data from the intent.
+        final Bundle bundle = intent.getExtras();
 
-        if (myBundle != null)
-        {
-            Object [] pdus = (Object[]) myBundle.get("pdus");
-            messages = new SmsMessage[pdus.length];
+        try {
 
-            for (int i = 0; i < messages.length; i++)
-            {
-                messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-                strMessage += "SMS From: " + messages[i].getOriginatingAddress();
-                strMessage += " : ";
-                strMessage += messages[i].getMessageBody();
-                strMessage += "\n";
+            if (bundle != null) {
+
+                final Object[] pdusObj = (Object[]) bundle.get("pdus");
+
+                for (int i = 0; i < pdusObj.length; i++) {
+
+                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
+                    String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+
+                    String senderNum = phoneNumber;
+                    String message = currentMessage.getDisplayMessageBody();
+
+                    if(!message.contains(EmergencySMS.TAG_SMS_IDENTIFICATION)) return;
+
+                    Functions.Log("onReceive", "senderNum: " + senderNum + "; message: " + message);
+
+                    EmergencyReceiverView.MESSAGE = message;
+                    EmergencyReceiverView.NUMBER = phoneNumber;
+
+                    PushNotification.createNotification(context, message);
+                }
             }
 
-            Toast.makeText(context, strMessage, Toast.LENGTH_SHORT).show();
-        }
-        if(strMessage.contains(Emergency.TAG_EMERGENCY_MESSAGE)){
-            EmergencyReceiverView.MESSAGE = strMessage;
-        }
-        else{
-            this.clearAbortBroadcast();
-        }
+        } catch (Exception e) {
+            Functions.Log("onReceive", "Exception smsReceiver" +e);
 
+        }
     }
 }

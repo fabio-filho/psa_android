@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.R;
 
 /**
@@ -11,7 +12,8 @@ import com.ufrj.nce.psa.R;
  */
 public class EmergencyReceiverView extends Activity {
 
-    public static String MESSAGE="";
+    public static String MESSAGE="", NUMBER="";
+
 
 
     @Override
@@ -19,9 +21,19 @@ public class EmergencyReceiverView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_receiver_view);
 
+        TextView textView = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiver);
 
-        TextView textView = (TextView) findViewById(R.id.textViewEmergencyManagerViewContacts);
+        EmergencySMS emergencySMS = new EmergencySMS(MESSAGE);
 
-        textView.setText(MESSAGE);
+        textView.setText(NUMBER+"\n"+emergencySMS.getMessage()+"\n"
+                +emergencySMS.getLocation().getLatitude()+"\n"
+                +emergencySMS.getLocation().getLongitude()+"\n"
+                +emergencySMS.getDateTime() );
     }
+
+
+
+
+
+
 }

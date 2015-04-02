@@ -7,26 +7,31 @@ package com.ufrj.nce.psa.Objects;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.os.Bundle;
+import android.location.LocationManager;
 
 import com.ufrj.nce.psa.Utilities.Functions;
 
 
-public class MyLocation implements android.location.LocationListener {
+public class MyLocation {
+
 
     Location currentLocation;
 
-    public void onLocationChanged(Location location) {
-        // This is where I finally get the latest location information
+    private String longitude, latitude;
 
-        currentLocation = location;
-
-        int Bearing = (int)currentLocation.getBearing();
-
-        Functions.Log("onLocationChanged", "Result: "+ currentLocation.getLongitude() + " - " + currentLocation.getLatitude());
-
-
+    public MyLocation(){
     }
+
+    public MyLocation(String latitude, String longitude){
+
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+
+    public String getLatitude(){ return latitude;}
+
+    public String getLongitude(){ return longitude;}
 
     public void turnGPSOn(Context context) {
 
@@ -37,20 +42,15 @@ public class MyLocation implements android.location.LocationListener {
         return currentLocation;
     }
 
-    public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
+    public void loadLocation(Context context){
 
-    }
+        try {
+            LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            currentLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-    @Override
-    public void onProviderEnabled(String provider) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
+        }catch(Exception o){
+            Functions.Log("refreshDeviceLocation", o.toString());
+        }
 
     }
 }

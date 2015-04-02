@@ -108,7 +108,7 @@ public class EmergencyViewActivity extends Activity {
             return;
         }
 
-        if(editTextListContacts.getText().length() == 0){
+        if(editTextListContacts.getText().length() <= 3){
 
             runOnUiThread(new Runnable() {
                 @Override
