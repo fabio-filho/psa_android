@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
@@ -48,6 +47,7 @@ public class SMSReceiver extends BroadcastReceiver {
                     EmergencyReceiverView.NUMBER = phoneNumber;
 
                     PushNotification.createNotification(context, message);
+
                 }
             }
 

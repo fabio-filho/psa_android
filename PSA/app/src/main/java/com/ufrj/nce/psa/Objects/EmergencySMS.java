@@ -2,6 +2,8 @@ package com.ufrj.nce.psa.Objects;
 
 import android.content.Context;
 
+import com.ufrj.nce.psa.Utilities.Functions;
+
 /**
  * Created by fabiofilho on 4/1/15.
  */
@@ -52,9 +54,13 @@ public class EmergencySMS {
 
         for (int index = 0; index < messageReceived.length(); index++){
 
-            if (String.copyValueOf(messageReceived.toCharArray(), index, TAG_SEPARATOR.length()) == TAG_SEPARATOR) {
-                countTagsSeparator++;
-                index += 3;
+            Functions.Log("loadValuesFromMessageReceived", "Index: "+ index+" - CountSeparator: "+countTagsSeparator);
+            if (countTagsSeparator < 4) {
+                Functions.Log("loadValuesFromMessageReceived", "Entrou");
+                if (String.copyValueOf(messageReceived.toCharArray(), index, TAG_SEPARATOR.length()).equals(TAG_SEPARATOR)) {
+                    countTagsSeparator++;
+                    index += 3;
+                }
             }
 
             switch (countTagsSeparator){

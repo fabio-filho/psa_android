@@ -69,8 +69,6 @@ public class PSAMainActivity extends Activity {
 
 		// enabling action bar app icon and behaving it as toggle button
         settingChangesOnActionsBar(savedInstanceState);
-
-        PushNotification.createNotification(getApplicationContext(), "Teste de Emergência");
     }
 
 
