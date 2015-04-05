@@ -5,7 +5,7 @@ package com.ufrj.nce.psa.Utilities;
  */
 public class Values {
 
-
+    //senha apk:psaufrj
     public static final String VERSION_SYSTEM = "1.0";
 
     public static final String PATH_SDCARD     = "/sdcard/psa/";
