@@ -39,7 +39,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
                     if(!message.contains(EmergencySMS.TAG_SMS_IDENTIFICATION)) return;
 
-                    saveEmergency(context, message, phoneNumber);
+                    saveEmergencyOnDB(context, message, phoneNumber);
                     alertEmergency();
                     showEmergencyNotification(context, message);
                 }
@@ -51,7 +51,7 @@ public class SMSReceiver extends BroadcastReceiver {
         }
     }
 
-    private void saveEmergency(Context context ,String message, String phoneNumber){
+    private void saveEmergencyOnDB(Context context, String message, String phoneNumber){
 
         try{
 
@@ -61,7 +61,7 @@ public class SMSReceiver extends BroadcastReceiver {
             EmergencySMS.saveEmergencyOnDB(context, new EmergencySMS(message));
 
         }catch(Exception o){
-            Functions.Log("saveEmergency", o.toString());
+            Functions.Log("saveEmergencyOnDB", o.toString());
         }
     }
 

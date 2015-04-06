@@ -23,8 +23,8 @@ public class EmergencyReceiverView extends Activity {
         EmergencySMS emergencySMS = new EmergencySMS(EmergencySMS.MESSAGE);
 
         textView.setText(EmergencySMS.NUMBER+"\n"+emergencySMS.getMessage()+"\n"
-                +emergencySMS.getLocation().getLatitude()+"\n"
-                +emergencySMS.getLocation().getLongitude()+"\n"
+                +emergencySMS.getContact().getLatitude()+"\n"
+                +emergencySMS.getContact().getLongitude()+"\n"
                 +emergencySMS.getDateTime() );
     }
 
