@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.ufrj.nce.psa.Connections.Tables.ContactTable;
+import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
-import com.ufrj.nce.psa.Connections.Tables.HistoryEmergencyTable;
 import com.ufrj.nce.psa.R;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.Values;
@@ -58,8 +58,8 @@ public class SplashScreenActivity extends Activity{
         db.execSQL(ContactTable.TABLE_CREATE);
         db.close();
 
-        db = new HistoryEmergencyTable(this).getWritableDatabase() ;
-        db.execSQL(HistoryEmergencyTable.TABLE_CREATE);
+        db = new EmergencyHistoryTable(this).getWritableDatabase() ;
+        db.execSQL(EmergencyHistoryTable.TABLE_CREATE);
         db.close();
 
 

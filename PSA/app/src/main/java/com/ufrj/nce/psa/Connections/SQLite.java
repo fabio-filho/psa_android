@@ -4,11 +4,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrj.nce.psa.Connections.Tables.ContactTable;
+import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
-import com.ufrj.nce.psa.Connections.Tables.HistoryEmergencyTable;
 import com.ufrj.nce.psa.Objects.Contact;
 import com.ufrj.nce.psa.Objects.ContactList;
 import com.ufrj.nce.psa.Objects.Emergency;
+import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.Values;
 
@@ -81,16 +82,15 @@ public class SQLite {
     }
 
 
-    public static void insertHistoryEmergency(SQLiteDatabase db, Emergency emergency, Contact contact, Boolean isReceived){
+    public static void insertEmergencyHistory(SQLiteDatabase db, EmergencySMS emergencySMS){
 
         try {
 
-            db.execSQL("insert into " + HistoryEmergencyTable.TABLE_NAME + " VALUES(null, NOW(), '"
-                    + contact.getNumber()+"', '"
-                    + emergency.getName()+"', '"
-                    + isReceived.toString()+"', '"
-                    + contact.getLatitude()+"', '"
-                    + contact.getLongitude()+"') ");
+            db.execSQL("insert into " + EmergencyHistoryTable.TABLE_NAME + " VALUES(null, NOW(), '"
+                    + emergencySMS.getContact().getNumber()+"', '"
+                    + emergencySMS.getMessage()+"', '"
+                    + emergencySMS.getContact().getLatitude()+"', '"
+                    + emergencySMS.getContact().getLongitude()+"') ");
 
             db.close();
 

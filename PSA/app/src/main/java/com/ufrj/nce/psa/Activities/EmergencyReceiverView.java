@@ -12,9 +12,6 @@ import com.ufrj.nce.psa.R;
  */
 public class EmergencyReceiverView extends Activity {
 
-    public static String MESSAGE="", NUMBER="";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +20,9 @@ public class EmergencyReceiverView extends Activity {
 
         TextView textView = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiver);
 
-        EmergencySMS emergencySMS = new EmergencySMS(MESSAGE);
+        EmergencySMS emergencySMS = new EmergencySMS(EmergencySMS.MESSAGE);
 
-        textView.setText(NUMBER+"\n"+emergencySMS.getMessage()+"\n"
+        textView.setText(EmergencySMS.NUMBER+"\n"+emergencySMS.getMessage()+"\n"
                 +emergencySMS.getLocation().getLatitude()+"\n"
                 +emergencySMS.getLocation().getLongitude()+"\n"
                 +emergencySMS.getDateTime() );

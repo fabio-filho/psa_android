@@ -21,25 +21,7 @@ public class Contact {
     private Uri uriData;
     private Bitmap image=null;
     private Context context;
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    private String latitude, longitude;
-
+    private MyLocation location;
 
 
     public Contact(String code, String name, String number) {
@@ -57,6 +39,32 @@ public class Contact {
         setID();
         setName();
         setNumber();
+    }
+
+    public Contact(Context context, String number){
+
+        this.context = context;
+        this.number = number;
+
+        location = new MyLocation();
+        location.loadLocation(context);
+    }
+
+    private String getNameFromNumber(){
+
+        return "";
+    }
+
+    public String getLatitude() {
+        return location.getLatitude();
+    }
+
+    public String getLongitude() {
+        return location.getLongitude();
+    }
+
+    public void setLocation(MyLocation location) {
+        this.location = location;
     }
 
     public String getCode(){

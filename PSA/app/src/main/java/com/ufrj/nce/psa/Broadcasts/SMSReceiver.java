@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
-import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.Objects.PushNotification;
 import com.ufrj.nce.psa.Utilities.Functions;
@@ -36,18 +35,13 @@ public class SMSReceiver extends BroadcastReceiver {
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
 
-                    String senderNum = phoneNumber;
                     String message = currentMessage.getDisplayMessageBody();
 
                     if(!message.contains(EmergencySMS.TAG_SMS_IDENTIFICATION)) return;
 
-                    Functions.Log("onReceive", "senderNum: " + senderNum + "; message: " + message);
-
-                    EmergencyReceiverView.MESSAGE = message;
-                    EmergencyReceiverView.NUMBER = phoneNumber;
-
-                    PushNotification.createNotification(context, message);
-
+                    saveEmergency(context, message, phoneNumber);
+                    alertEmergency();
+                    showEmergencyNotification(context, message);
                 }
             }
 
@@ -56,4 +50,40 @@ public class SMSReceiver extends BroadcastReceiver {
 
         }
     }
+
+    private void saveEmergency(Context context ,String message, String phoneNumber){
+
+        try{
+
+            EmergencySMS.MESSAGE = message;
+            EmergencySMS.NUMBER = phoneNumber;
+
+            EmergencySMS.saveEmergencyOnDB(context, new EmergencySMS(message));
+
+        }catch(Exception o){
+            Functions.Log("saveEmergency", o.toString());
+        }
+    }
+
+    private void alertEmergency(){
+
+        try{
+
+            //Alert TODO
+
+        }catch (Exception o){
+            Functions.Log("alertEmergency", o.toString());
+        }
+    }
+
+    private void showEmergencyNotification(Context context, String message){
+
+        try{
+            PushNotification.createNotification(context, new EmergencySMS(message).getMessage());
+
+        }catch (Exception o){
+            Functions.Log("showEmergencyNotification", o.toString());
+        }
+    }
+
 }

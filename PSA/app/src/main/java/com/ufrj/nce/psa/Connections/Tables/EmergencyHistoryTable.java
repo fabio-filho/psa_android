@@ -9,7 +9,7 @@ import com.ufrj.nce.psa.Connections.SQLite;
 /**
  * Created by fabiofilho on 3/21/15.
  */
-public class HistoryEmergencyTable extends SQLiteOpenHelper {
+public class EmergencyHistoryTable extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME              = "table_history_emergency";
     public static final String FIELD_CODE              = "code";
@@ -32,7 +32,7 @@ public class HistoryEmergencyTable extends SQLiteOpenHelper {
             ");\n";
 
 
-    public HistoryEmergencyTable(Context context) {
+    public EmergencyHistoryTable(Context context) {
         super(context, SQLite.DATABASE_NAME, null, SQLite.DATABASE_VERSION);
     }
 
