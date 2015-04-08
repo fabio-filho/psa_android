@@ -25,14 +25,10 @@ public class EmergencySMS {
         this.message = message;
 
         contact = new Contact(context, NUMBER);
-    }
-
-    public EmergencySMS(String messageReceived) {
-
-        this.messageReceived = messageReceived;
 
         loadValuesFromMessageReceived();
     }
+
 
 
     public Contact getContact(){

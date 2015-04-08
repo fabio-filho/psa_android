@@ -1,12 +1,16 @@
 package com.ufrj.nce.psa.Objects;
 
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.BaseColumns;
 import android.provider.ContactsContract;
+
+import com.ufrj.nce.psa.Utilities.Functions;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +19,8 @@ import java.io.InputStream;
  * Created by fabiofilho on 3/21/15.
  */
 public class Contact {
+
+    public static final String NO_NAME = "Nenhum nome, da sua lista de contatos, foi encontrado para este número.";
 
     private String name="", number="", code="";
     private String id;
@@ -48,6 +54,13 @@ public class Contact {
 
         location = new MyLocation();
         location.loadLocation(context);
+
+        String resultName = getNameByNumber(context, number);
+
+        if(resultName.equals(NO_NAME))
+            name = number;
+        else
+            name = resultName;
     }
 
     private String getNameFromNumber(){
@@ -72,6 +85,7 @@ public class Contact {
     }
 
     public String getName() {
+
         return name;
     }
 
@@ -176,6 +190,30 @@ public class Contact {
 
 
 
+    public static String getNameByNumber(Context context, String number) {
+
+        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+        String name = NO_NAME;
+
+        ContentResolver contentResolver = context.getContentResolver();
+        Cursor contactLookup = contentResolver.query(uri, new String[] {BaseColumns._ID,
+                ContactsContract.PhoneLookup.DISPLAY_NAME }, null, null, null);
+
+        try {
+            if (contactLookup != null && contactLookup.getCount() > 0) {
+                contactLookup.moveToFirst();
+                name = contactLookup.getString(contactLookup.getColumnIndex(ContactsContract.Data.DISPLAY_NAME));
+            }
+        }catch(Exception o){
+                Functions.Log("getNameByNumber", o.toString());
+        }finally {
+            if (contactLookup != null) {
+                contactLookup.close();
+            }
+        }
+
+        return name;
+    }
 
 
 }

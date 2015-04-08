@@ -6,21 +6,114 @@
 
 <LinearLayout
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:layout_margin="30dp"
+    android:orientation="vertical">
+
 
 
 
     <TextView
-        android:id="@+id/txtViewMessageEmergencyReceiver"
+        android:id="@+id/txtViewMessageEmergencyReceiverTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
+        android:text="Title"
+        android:textSize="35dp"
+        android:layout_marginBottom="15dp"
         />
 
 
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtViewMessageEmergencyReceiverLabelContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Contact:"
+                style="@style/text_format_emergency_view_receiver_label"
+                />
+
+            <TextView
+                android:id="@+id/txtViewMessageEmergencyReceiverContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="967131663"
+                style="@style/text_format_emergency_view_receiver"
+                />
+
+            </LinearLayout>
+
+             <ImageButton
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginLeft="30dp"
+                 android:onClick="onClickButtonCall"
+                 android:background="@mipmap/ic_action_call"
+                 />
+
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtViewMessageEmergencyReceiverLabelMessageReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Message Received:"
+        style="@style/text_format_emergency_view_receiver_label"
+        />
+
+
+
+    <TextView
+        android:id="@+id/txtViewMessageEmergencyReceiverMessageReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Death"
+        style="@style/text_format_emergency_view_receiver"
+        />
+
+
+
+    <TextView
+        android:id="@+id/txtViewMessageEmergencyReceiverLabelDatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Date Time Received:"
+        style="@style/text_format_emergency_view_receiver_label"
+        />
+
+
+
+    <TextView
+        android:id="@+id/txtViewMessageEmergencyReceiverDatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="2015/05/05 14:32"
+        style="@style/text_format_emergency_view_receiver"
+        />
+
 
 </LinearLayout>
+
+
+
 
 
 

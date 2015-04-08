@@ -58,7 +58,7 @@ public class SMSReceiver extends BroadcastReceiver {
             EmergencySMS.MESSAGE = message;
             EmergencySMS.NUMBER = phoneNumber;
 
-            EmergencySMS.saveEmergencyOnDB(context, new EmergencySMS(message));
+            EmergencySMS.saveEmergencyOnDB(context, new EmergencySMS(context, message));
 
         }catch(Exception o){
             Functions.Log("saveEmergencyOnDB", o.toString());
@@ -79,7 +79,7 @@ public class SMSReceiver extends BroadcastReceiver {
     private void showEmergencyNotification(Context context, String message){
 
         try{
-            PushNotification.createNotification(context, new EmergencySMS(message).getMessage());
+            PushNotification.createNotification(context, new EmergencySMS(context, message).getMessage());
 
         }catch (Exception o){
             Functions.Log("showEmergencyNotification", o.toString());

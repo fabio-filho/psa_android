@@ -21,6 +21,7 @@ import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.MessageBox;
+import com.ufrj.nce.psa.Utilities.Strings;
 
 /**
  * Created by fabiofilho on 3/22/15.
@@ -165,7 +166,7 @@ public class EmergencyViewActivity extends Activity {
     private Boolean insertEmergencyOnDB(){
 
         try{
-            mEmergency.setName(editTextName.getText().toString());
+            mEmergency.setName(Strings.setFirtLetterUppercase(editTextName.getText().toString()));
 
             SQLiteDatabase db = new EmergencyTable(getApplicationContext()).getWritableDatabase();
             SQLite.insertEmergency(db, mEmergency);
