@@ -108,7 +108,8 @@ public class EmergencyManagerFragment  extends EmergencyFragment {
         SQLiteDatabase db = new EmergencyTable(getActivity().getApplicationContext()).getWritableDatabase();
         SQLite.deleteEmergencyWithContacts(db, emergency);
 
-        Toast.makeText(getActivity().getApplicationContext(), emergency.getName()+" - Removido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), emergency.getName()+" "
+                +getResources().getString(R.string.activity_emergency_manager_removed_item), Toast.LENGTH_SHORT).show();
     }
 
 

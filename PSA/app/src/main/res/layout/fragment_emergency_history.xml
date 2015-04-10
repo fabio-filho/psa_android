@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="25dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            style="@style/text_format_emergency"
+            android:id="@+id/txtEmergencyHistoryFragmentTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="@string/activity_emergency_history_title"
+            android:layout_marginBottom="5dp"/>
+
+        <ListView
+            android:id="@+id/listViewEmergencyHistoryFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

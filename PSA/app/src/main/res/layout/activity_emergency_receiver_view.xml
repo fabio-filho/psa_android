@@ -11,16 +11,36 @@
     android:orientation="vertical">
 
 
-
-
     <TextView
-        android:id="@+id/txtViewMessageEmergencyReceiverTitle"
+        android:id="@+id/txtEmergencyReceiverViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Title"
+        android:text="@string/activity_emergency_receiver_txt_title"
         android:textSize="35dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="25dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/txtEmergencyReceiverViewLabelMessageReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/activity_emergency_receiver_txt_message_received"
+        style="@style/text_format_emergency_view_receiver_label"
+        />
+
+
+
+    <TextView
+        android:id="@+id/txtEmergencyReceiverViewMessageReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Death"
+        style="@style/text_format_emergency_view_receiver"
         />
 
 
@@ -37,20 +57,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtViewMessageEmergencyReceiverLabelContact"
+                android:id="@+id/txtEmergencyReceiverViewLabelContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Contact:"
+                android:text="@string/activity_emergency_receiver_txt_sender"
                 style="@style/text_format_emergency_view_receiver_label"
                 />
 
             <TextView
-                android:id="@+id/txtViewMessageEmergencyReceiverContact"
+                android:id="@+id/txtEmergencyReceiverViewContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="967131663"
+                android:text="000000000"
                 style="@style/text_format_emergency_view_receiver"
                 />
 
@@ -67,45 +87,26 @@
 
         </LinearLayout>
 
+
+
+
     <TextView
-        android:id="@+id/txtViewMessageEmergencyReceiverLabelMessageReceived"
+        android:id="@+id/txtEmergencyReceiverViewLabelDatetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Message Received:"
+        android:text="@string/activity_emergency_receiver_txt_datetime_received"
         style="@style/text_format_emergency_view_receiver_label"
         />
 
 
 
     <TextView
-        android:id="@+id/txtViewMessageEmergencyReceiverMessageReceived"
+        android:id="@+id/txtEmergencyReceiverViewDatetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Death"
-        style="@style/text_format_emergency_view_receiver"
-        />
-
-
-
-    <TextView
-        android:id="@+id/txtViewMessageEmergencyReceiverLabelDatetime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="Date Time Received:"
-        style="@style/text_format_emergency_view_receiver_label"
-        />
-
-
-
-    <TextView
-        android:id="@+id/txtViewMessageEmergencyReceiverDatetime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="2015/05/05 14:32"
+        android:text="22/04/1500 14:32"
         style="@style/text_format_emergency_view_receiver"
         />
 

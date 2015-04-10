@@ -26,13 +26,13 @@ public class EmergencyReceiverView extends Activity {
 
         emergencySMS = new EmergencySMS(getApplicationContext(), EmergencySMS.MESSAGE);
 
-        textViewLabelContact = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiverLabelContact);
-        textViewLabelMessage = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiverLabelMessageReceived);
-        textViewLabelDatetime = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiverLabelDatetime);
+        textViewLabelContact = (TextView) findViewById(R.id.txtEmergencyReceiverViewLabelContact);
+        textViewLabelMessage = (TextView) findViewById(R.id.txtEmergencyReceiverViewLabelMessageReceived);
+        textViewLabelDatetime = (TextView) findViewById(R.id.txtEmergencyReceiverViewLabelDatetime);
 
-        textViewContact = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiverLabelContact);
-        textViewMessage = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiverMessageReceived);
-        textViewDatetime = (TextView) findViewById(R.id.txtViewMessageEmergencyReceiverDatetime);
+        textViewContact = (TextView) findViewById(R.id.txtEmergencyReceiverViewLabelContact);
+        textViewMessage = (TextView) findViewById(R.id.txtEmergencyReceiverViewMessageReceived);
+        textViewDatetime = (TextView) findViewById(R.id.txtEmergencyReceiverViewDatetime);
 
         textViewContact.setText(emergencySMS.getContact().getName());
         textViewMessage.setText(emergencySMS.getMessage());

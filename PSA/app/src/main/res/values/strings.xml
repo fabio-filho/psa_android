@@ -56,7 +56,7 @@
 
 
 
-    <!-- Emergency Activity -->
+    <!-- Emergency View Activity -->
 
     <string name="activity_emergency_view_txt_title">Adicionando Emergência</string>
     <string name="activity_emergency_view_txt_name_emergency">Nome da Emergência:</string>
@@ -73,7 +73,47 @@
     <string name="activity_emergency_view_btn_delete_contact">Apagar Contato</string>
     <string name="activity_emergency_view_message_error_save">Houve algum erro ao salvar a Emergência. Tente Novamente.</string>
 
-    <!-- End Emergency Activity-->
+    <!-- End Emergency View Activity-->
+
+
+
+
+    <!-- Emergency Receiver Activity -->
+
+    <string name="activity_emergency_receiver_txt_title">Emergência Recebida</string>
+    <string name="activity_emergency_receiver_txt_sender">Remetente:</string>
+    <string name="activity_emergency_receiver_txt_message_received">Mensagem Recebida:</string>
+    <string name="activity_emergency_receiver_txt_datetime_received">Hora e Data de Envio:</string>
+
+
+    <!-- End Emergency Receiver Activity-->
+
+
+
+
+
+
+    <!-- Emergency History Activity -->
+
+    <string name="activity_emergency_history_sender">Emergência Recebida:</string>
+    <string name="activity_emergency_history_from_sender">De:</string>
+    <string name="activity_emergency_history_title">Histórico de Emergências</string>
+
+
+    <!-- End Emergency History Activity-->
+
+
+
+
+
+    <!-- Emergency Manager Activity -->
+
+    <string name="activity_emergency_manager_removed_item">- Removido</string>
+
+    <!-- End Emergency Manager Activity-->
+
+
+
 
 
 </resources>

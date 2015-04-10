@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+
+
+    <TextView
+        android:id="@+id/txtEmergencyHistoryMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Death"
+        style="@style/text_format_emergency_view_receiver_label"
+        android:layout_marginRight="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/txtEmergencyHistoryFromSender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/activity_emergency_history_from_sender"
+            style="@style/text_format_emergency_view_receiver_label"
+            android:layout_marginRight="10dp"
+            />
+
+
+        <TextView
+            android:id="@+id/txtEmergencyHistorySender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Mario Souza"
+            style="@style/text_format_emergency_view_receiver_label"
+            />
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txtEmergencyHistoryDatetimeReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="22/04/1500 14:32"
+        style="@style/text_format_emergency_view_receiver_label"
+        android:layout_marginRight="10dp"
+        />
+
+
+
+</LinearLayout>

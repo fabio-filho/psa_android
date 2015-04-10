@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ufrj.nce.psa.Activities.PSAMainActivity;
 import com.ufrj.nce.psa.Connections.SQLite;
@@ -74,14 +73,7 @@ public class EmergencyFragment extends Fragment {
     }
 
 
-
-
-    public void refreshHistoryEmergencyItems(){
-        Toast.makeText(getActivity().getApplicationContext(), "Refresh History Emergency Items", Toast.LENGTH_SHORT).show();
-    }
-
-
-    private void defineOnClickButtonItemListView(){
+    protected void defineOnClickButtonItemListView(){
 
         onClickListener = new View.OnClickListener() {
             @Override
