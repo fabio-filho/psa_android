@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.ufrj.nce.psa.Connections.SQLite;
+import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
 import com.ufrj.nce.psa.Objects.Adapters.EmergencyHistoryAdapter;
 import com.ufrj.nce.psa.Objects.Emergency;
@@ -21,14 +22,14 @@ import java.util.List;
 /**
  * Created by fabiofilho on 3/20/15.
  */
-public class HistoryEmergencyFragment extends EmergencyFragment {
+public class EmergencyHistoryFragment extends EmergencyFragment {
 
     private ListView mListView;
     private EmergencyHistoryAdapter mAdapterEmergencyHistory;
     private List<EmergencyHistory> mListEmergencyHistory;
 
 
-    public HistoryEmergencyFragment(){
+    public EmergencyHistoryFragment(){
 
 
     }
@@ -38,13 +39,15 @@ public class HistoryEmergencyFragment extends EmergencyFragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_emergency_history, container, false);
+        this.rootView = rootView;
 
         if(Build.VERSION.SDK_INT >= 14)
             getActivity().getActionBar().setIcon(R.mipmap.ic_history_emergency_holo);
 
-        loadListViewEmergencyHistory(R.layout.item_emergency_history);
-        loadAdapterEmergencyHistory();
         refreshHistoryEmergencyItems();
+        loadListViewEmergencyHistory(R.id.listViewEmergencyHistoryFragment);
+        loadAdapterEmergencyHistory();
+
 
         return rootView;
     }
@@ -52,7 +55,11 @@ public class HistoryEmergencyFragment extends EmergencyFragment {
 
     public void refreshHistoryEmergencyItems(){
 
+        SQLiteDatabase db = new EmergencyHistoryTable(getActivity().getApplicationContext()).getWritableDatabase();
+        mListEmergencyHistory = SQLite.getEmergencyHistories(getActivity().getApplicationContext(), db);
 
+        for(EmergencyHistory emergency: mListEmergencyHistory)
+            Functions.Log("loadListEmergency", emergency.getMessage());
     }
 
     public void loadFromDBEmergencyItems(){
@@ -71,18 +78,19 @@ public class HistoryEmergencyFragment extends EmergencyFragment {
         //TODO
     }
 
+
     private void loadListViewEmergencyHistory(int layout){
 
         mListView = (ListView) rootView.findViewById(layout);
 
-        defineOnClickButtonItemListView();
+        //defineOnClickButtonItemListView();
     }
 
 
     private void loadAdapterEmergencyHistory(){
 
         mAdapterEmergencyHistory = new EmergencyHistoryAdapter(getActivity().getApplicationContext(),
-                mListEmergencyHistory, onClickListener);
+                mListEmergencyHistory, null);
 
         mListView.setAdapter(mAdapterEmergencyHistory);
     }

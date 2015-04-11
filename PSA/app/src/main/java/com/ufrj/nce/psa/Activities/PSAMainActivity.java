@@ -20,14 +20,13 @@ import android.widget.ListView;
 import com.ufrj.nce.psa.Connections.SQLite;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
 import com.ufrj.nce.psa.Fragments.EmergencyFragment;
+import com.ufrj.nce.psa.Fragments.EmergencyHistoryFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyManagerFragment;
-import com.ufrj.nce.psa.Fragments.HistoryEmergencyFragment;
 import com.ufrj.nce.psa.Fragments.HomeFragment;
 import com.ufrj.nce.psa.Fragments.InformationFragment;
 import com.ufrj.nce.psa.Fragments.SettingsFragment;
 import com.ufrj.nce.psa.Objects.Adapters.NavDrawerListAdapter;
 import com.ufrj.nce.psa.Objects.NavDrawerItem;
-import com.ufrj.nce.psa.Objects.PushNotification;
 import com.ufrj.nce.psa.R;
 
 import java.util.ArrayList;
@@ -224,7 +223,7 @@ public class PSAMainActivity extends Activity {
 			fragment = new EmergencyManagerFragment();
 			break;
 		case 2:
-			fragment = new HistoryEmergencyFragment();
+			fragment = new EmergencyHistoryFragment();
 			break;
 		case 3:
 			fragment = new SettingsFragment();

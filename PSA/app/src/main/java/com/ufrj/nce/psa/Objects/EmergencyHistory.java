@@ -11,6 +11,7 @@ public class EmergencyHistory {
     private String message, code, latitude, longitude;
     private DateTime datetime;
     private Contact contact;
+    private Context context;
 
 
     public EmergencyHistory(Context mContext, String code, String message, String number,
@@ -24,6 +25,13 @@ public class EmergencyHistory {
         this.contact = new Contact(mContext, number);
     }
 
+    public EmergencyHistory(Context context) {
+        this.context = context;
+    }
+
+    public void setContact(String number){
+        contact = new Contact(context, number);
+    }
 
     public String getMessage() {
         return message;

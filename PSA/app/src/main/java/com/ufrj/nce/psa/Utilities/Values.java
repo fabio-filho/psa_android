@@ -10,6 +10,8 @@ public class Values {
 
     public static final String PATH_SDCARD     = "/sdcard/psa/";
     public static final String PATH_SDCARD_LOG = "/sdcard/psa/log/";
+    public static final String ASSETS_SOUND = "audio/sound_emergency.mp3";
+
 
     //Result values.
     public final static String ERROR_RESULT = "ERROR";

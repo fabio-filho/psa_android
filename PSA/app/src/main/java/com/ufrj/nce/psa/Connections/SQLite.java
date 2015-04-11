@@ -1,5 +1,6 @@
 package com.ufrj.nce.psa.Connections;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -8,7 +9,9 @@ import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
 import com.ufrj.nce.psa.Objects.Contact;
 import com.ufrj.nce.psa.Objects.ContactList;
+import com.ufrj.nce.psa.Objects.DateTime;
 import com.ufrj.nce.psa.Objects.Emergency;
+import com.ufrj.nce.psa.Objects.EmergencyHistory;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.Values;
@@ -86,7 +89,8 @@ public class SQLite {
 
         try {
 
-            db.execSQL("insert into " + EmergencyHistoryTable.TABLE_NAME + " VALUES(null, NOW(), '"
+            db.execSQL("insert into " + EmergencyHistoryTable.TABLE_NAME + " VALUES(null, '"
+                    +emergencySMS.getDateTime().toString()+"', '"
                     + emergencySMS.getContact().getNumber()+"', '"
                     + emergencySMS.getMessage()+"', '"
                     + emergencySMS.getContact().getLatitude()+"', '"
@@ -190,7 +194,45 @@ public class SQLite {
     }
 
 
+    public static List<EmergencyHistory> getEmergencyHistories(Context context, SQLiteDatabase db){
 
+        List<EmergencyHistory> mListEmergencyHistory = new ArrayList<EmergencyHistory>();
+
+        try{
+            Cursor cursor = db.rawQuery("select * from "+EmergencyHistoryTable.TABLE_NAME
+                    +" order by "+EmergencyHistoryTable.FIELD_DATETIME+" desc", null);
+
+            if(cursor == null) return mListEmergencyHistory;
+
+            Functions.Log("getEmergencyHistories", "Count: "+cursor.getCount()+"");
+
+            cursor.moveToFirst();
+
+            for (int index=0; index < cursor.getCount(); index++){
+
+                EmergencyHistory emergency = new EmergencyHistory(context);
+
+                emergency.setCode(cursor.getString(0));
+                emergency.setDatetime(new DateTime(cursor.getString(1)));
+                emergency.setContact(cursor.getString(2));
+                emergency.setMessage(cursor.getString(3));
+                emergency.setLatitude(cursor.getString(4));
+                emergency.setLongitude(cursor.getString(5));
+
+                Functions.Log("getEmergencyHistories", cursor.getString(1));
+
+                mListEmergencyHistory.add(emergency);
+                cursor.moveToNext();
+            }
+
+        }catch (Exception o){
+            Functions.Log("getEmergencyHistories", o.toString());
+        }
+
+        db.close();
+
+        return mListEmergencyHistory;
+    }
 
 
 

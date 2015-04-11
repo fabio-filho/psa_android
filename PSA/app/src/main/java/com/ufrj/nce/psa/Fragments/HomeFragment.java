@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.R;
+import com.ufrj.nce.psa.Utilities.Functions;
 
 public class HomeFragment extends EmergencyFragment {
 
@@ -53,14 +54,22 @@ public class HomeFragment extends EmergencyFragment {
             return;
         }
 
+        try {
 
-        EmergencySMS emergencySMS = new EmergencySMS(rootView.getContext(), mAdapterEmergency.getItem(mListView.getPositionForView(view)).getName());
+            EmergencySMS emergencySMS = new EmergencySMS(rootView.getContext(), mAdapterEmergency.getItem(mListView.getPositionForView(view)).getName());
 
-        Toast.makeText(getActivity().getApplicationContext(), "Enviando Emergencia", Toast.LENGTH_SHORT).show();
+            Functions.Log("onClickItemListView", emergencySMS.getMessageToSend());
 
-        mAdapterEmergency.getItem(mListView.getPositionForView(view)).sendAlertToAllContacts(emergencySMS.getMessageToSend());
+            Toast.makeText(getActivity().getApplicationContext(), "Enviando Emergencia", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(getActivity().getApplicationContext(), "Emergencia Enviada", Toast.LENGTH_LONG).show();
+            Emergency emergency = mAdapterEmergency.getItem(mListView.getPositionForView(view));
+            emergency.sendAlertToAllContacts(emergencySMS.getMessageToSend());
+
+            Toast.makeText(getActivity().getApplicationContext(), "Emergencia Enviada", Toast.LENGTH_LONG).show();
+
+        }catch(Exception o){
+            Functions.Log("onClickItemListView", o.toString());
+        }
 
     }
 

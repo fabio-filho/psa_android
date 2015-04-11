@@ -12,7 +12,7 @@ import com.ufrj.nce.psa.Utilities.Functions;
  */
 public class EmergencySMS {
 
-    public static String NUMBER = "", MESSAGE = "";
+    public static String NUMBER = "", MESSAGE = "", SMS_DEFAULT= "Preciso de ajuda urgente!" ;
 
     private String message = "", messageReceived = "", datetime = "";
     private final String TAG_SEPARATOR = "$.$";
@@ -22,7 +22,7 @@ public class EmergencySMS {
 
     public EmergencySMS(Context context, String message) {
 
-        this.message = message;
+        this.messageReceived = message;
 
         contact = new Contact(context, NUMBER);
 
@@ -38,15 +38,22 @@ public class EmergencySMS {
 
     public String getMessageToSend(){
 
-        return TAG_SMS_IDENTIFICATION+
-                    TAG_SEPARATOR+
-              new DateTime().toString()+
-                    TAG_SEPARATOR+
-              contact.getLatitude()+
-                    TAG_SEPARATOR+
-              contact.getLongitude()+
-                    TAG_SEPARATOR+
-              message;
+        try {
+            return TAG_SMS_IDENTIFICATION +
+                    TAG_SEPARATOR +
+                    new DateTime().toString() +
+                    TAG_SEPARATOR +
+                    contact.getLatitude() +
+                    TAG_SEPARATOR +
+                    contact.getLongitude() +
+                    TAG_SEPARATOR +
+                    message;
+
+        }catch(Exception o){
+            Functions.Log("getMessageToSend", o.toString());
+        }
+
+        return SMS_DEFAULT;
     }
 
 

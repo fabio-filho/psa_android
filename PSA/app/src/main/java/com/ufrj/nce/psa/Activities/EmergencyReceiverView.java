@@ -30,14 +30,13 @@ public class EmergencyReceiverView extends Activity {
         textViewLabelMessage = (TextView) findViewById(R.id.txtEmergencyReceiverViewLabelMessageReceived);
         textViewLabelDatetime = (TextView) findViewById(R.id.txtEmergencyReceiverViewLabelDatetime);
 
-        textViewContact = (TextView) findViewById(R.id.txtEmergencyReceiverViewLabelContact);
+        textViewContact = (TextView) findViewById(R.id.txtEmergencyReceiverViewContact);
         textViewMessage = (TextView) findViewById(R.id.txtEmergencyReceiverViewMessageReceived);
         textViewDatetime = (TextView) findViewById(R.id.txtEmergencyReceiverViewDatetime);
 
         textViewContact.setText(emergencySMS.getContact().getName());
         textViewMessage.setText(emergencySMS.getMessage());
         textViewDatetime.setText(emergencySMS.getDateTime().toString());
-
     }
 
 

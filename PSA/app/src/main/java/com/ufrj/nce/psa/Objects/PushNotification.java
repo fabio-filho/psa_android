@@ -24,7 +24,9 @@ public class PushNotification {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(id_icon)
                         .setContentTitle(title)
-                        .setContentText(message);
+                        .setContentText(message)
+                        .setAutoCancel(true)
+                        ;
 
 
         int mNotificationId = 001;

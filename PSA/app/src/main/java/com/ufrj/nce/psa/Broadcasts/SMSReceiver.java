@@ -9,7 +9,9 @@ import android.telephony.SmsMessage;
 
 import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.Objects.PushNotification;
+import com.ufrj.nce.psa.Objects.SoundStream;
 import com.ufrj.nce.psa.Utilities.Functions;
+import com.ufrj.nce.psa.Utilities.Values;
 
 /**
  * Created by fabiofilho on 4/1/15.
@@ -40,15 +42,16 @@ public class SMSReceiver extends BroadcastReceiver {
                     if(!message.contains(EmergencySMS.TAG_SMS_IDENTIFICATION)) return;
 
                     saveEmergencyOnDB(context, message, phoneNumber);
-                    alertEmergency();
+                    alertEmergency(context);
                     showEmergencyNotification(context, message);
                 }
             }
 
         } catch (Exception e) {
             Functions.Log("onReceive", "Exception smsReceiver" +e);
-
         }
+
+        this.clearAbortBroadcast();
     }
 
     private void saveEmergencyOnDB(Context context, String message, String phoneNumber){
@@ -65,11 +68,11 @@ public class SMSReceiver extends BroadcastReceiver {
         }
     }
 
-    private void alertEmergency(){
+    private void alertEmergency(Context context){
 
         try{
 
-            //Alert TODO
+            new SoundStream(context, context.getAssets().openFd(Values.ASSETS_SOUND)).play(10);
 
         }catch (Exception o){
             Functions.Log("alertEmergency", o.toString());
