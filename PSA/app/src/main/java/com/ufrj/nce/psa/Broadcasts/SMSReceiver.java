@@ -8,6 +8,7 @@ import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
 import com.ufrj.nce.psa.Objects.EmergencySMS;
+import com.ufrj.nce.psa.Objects.MyThread;
 import com.ufrj.nce.psa.Objects.PushNotification;
 import com.ufrj.nce.psa.Objects.SoundStream;
 import com.ufrj.nce.psa.Utilities.Functions;
@@ -20,6 +21,8 @@ public class SMSReceiver extends BroadcastReceiver {
 
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
+    public static MyThread threadAlertEmergency = null;
+    private final static int TIME_ALERT_INTERVAL = 30000;
 
     public void onReceive(Context context, Intent intent) {
 
@@ -68,15 +71,25 @@ public class SMSReceiver extends BroadcastReceiver {
         }
     }
 
-    private void alertEmergency(Context context){
+    private void alertEmergency(final Context context){
 
-        try{
+        threadAlertEmergency = new MyThread(TIME_ALERT_INTERVAL){
 
-            new SoundStream(context, context.getAssets().openFd(Values.ASSETS_SOUND)).play(10);
+            @Override
+            public void runInLoop() {
+                super.runInLoop();
 
-        }catch (Exception o){
-            Functions.Log("alertEmergency", o.toString());
-        }
+                try{
+                    new SoundStream(context, context.getAssets().openFd(Values.ASSETS_SOUND)).play(10);
+
+                }catch (Exception o){
+                    Functions.Log("alertEmergency", o.toString());
+                }
+
+            }
+        };
+
+        threadAlertEmergency.start();
     }
 
     private void showEmergencyNotification(Context context, String message){

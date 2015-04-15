@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.ufrj.nce.psa.Broadcasts.SMSReceiver;
 import com.ufrj.nce.psa.Connections.SQLite;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
 import com.ufrj.nce.psa.Fragments.EmergencyFragment;
@@ -304,4 +305,11 @@ public class PSAMainActivity extends Activity {
 */
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (SMSReceiver.threadAlertEmergency != null)
+            SMSReceiver.threadAlertEmergency.stopProcess();
+    }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ufrj.nce.psa.Broadcasts.SMSReceiver;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.R;
 
@@ -49,7 +50,11 @@ public class EmergencyReceiverView extends Activity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-
-
+        if (SMSReceiver.threadAlertEmergency != null)
+            SMSReceiver.threadAlertEmergency.stopProcess();
+    }
 }

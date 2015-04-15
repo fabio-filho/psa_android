@@ -20,6 +20,10 @@ public class Values {
 
 
 
+    //Threads
+    public final static int THREAD_TIME_ON_UPDATE = 1000;
+
+
 
 
 
