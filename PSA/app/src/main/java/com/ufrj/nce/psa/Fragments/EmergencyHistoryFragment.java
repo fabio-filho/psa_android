@@ -44,12 +44,24 @@ public class EmergencyHistoryFragment extends EmergencyFragment {
         if(Build.VERSION.SDK_INT >= 14)
             getActivity().getActionBar().setIcon(R.mipmap.ic_history_emergency_holo);
 
-        refreshHistoryEmergencyItems();
-        loadListViewEmergencyHistory(R.id.listViewEmergencyHistoryFragment);
-        loadAdapterEmergencyHistory();
-
+        loadItemsOnThread();
 
         return rootView;
+    }
+
+
+    private void loadItemsOnThread(){
+
+        new Thread(){
+            @Override
+            public void run() {
+                refreshHistoryEmergencyItems();
+                loadListViewEmergencyHistory(R.id.listViewEmergencyHistoryFragment);
+                loadAdapterEmergencyHistory();
+
+            }
+        }.start();
+
     }
 
 

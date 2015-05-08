@@ -211,47 +211,70 @@ public class PSAMainActivity extends Activity {
 	/**
 	 * Displaying fragment view for selected nav drawer list item
 	 * */
-	private void displayView(int position) {
-        //set current fragment value
-        FRAGMENT_CURRENT = position;
-		// update the main content by replacing fragments
-		fragment = null;
-		switch (position) {
-		case 0:
-			fragment = new HomeFragment();
-			break;
-		case 1:
-			fragment = new EmergencyManagerFragment();
-			break;
-		case 2:
-			fragment = new EmergencyHistoryFragment();
-			break;
-		case 3:
-			fragment = new SettingsFragment();
-			break;
-        case 4:
-             fragment = new InformationFragment();
-             break;
+	private void displayView(final int position) {
 
-		default:
-			break;
-		}
+        new Thread() {
 
-		if (fragment != null) {
-			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, fragment).commit();
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
-			// update selected item and title, then close the drawer
-			mDrawerList.setItemChecked(position, true);
-			mDrawerList.setSelection(position);
-			setTitle(navMenuTitles[position]);
-			mDrawerLayout.closeDrawer(mDrawerList);
+                        //set current fragment value
+                        FRAGMENT_CURRENT=position;
+                        // update the main content by replacing fragments
+                        fragment=null;
+                        switch(position)
 
-		} else {
-			// error in creating fragment
-			Log.e("displayView", "Error in creating fragment");
-		}
+                        {
+                            case 0:
+                                fragment = new HomeFragment();
+                                break;
+                            case 1:
+                                fragment = new EmergencyManagerFragment();
+                                break;
+                            case 2:
+                                fragment = new EmergencyHistoryFragment();
+                                break;
+                            case 3:
+                                fragment = new SettingsFragment();
+                                break;
+                            case 4:
+                                fragment = new InformationFragment();
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        if(fragment!=null)
+
+                        {
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, fragment).commit();
+
+                            // update selected item and title, then close the drawer
+                            mDrawerList.setItemChecked(position, true);
+                            mDrawerList.setSelection(position);
+                            setTitle(navMenuTitles[position]);
+                            mDrawerLayout.closeDrawer(mDrawerList);
+
+                        }
+
+                        else
+
+                        {
+                            // error in creating fragment
+                            Log.e("displayView", "Error in creating fragment");
+                        }
+                    }
+                });
+            }
+
+
+        }.start();
 	}
 
 	@Override

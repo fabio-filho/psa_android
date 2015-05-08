@@ -22,7 +22,7 @@ public class SMSReceiver extends BroadcastReceiver {
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
     public static MyThread threadAlertEmergency = null;
-    private final static int TIME_ALERT_INTERVAL = 30000;
+    private final static int TIME_ALERT_INTERVAL = 10000;
 
     public void onReceive(Context context, Intent intent) {
 
