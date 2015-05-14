@@ -84,7 +84,7 @@
     <string name="activity_emergency_receiver_txt_sender">Remetente:</string>
     <string name="activity_emergency_receiver_txt_message_received">Mensagem Recebida:</string>
     <string name="activity_emergency_receiver_txt_datetime_received">Hora e Data de Envio:</string>
-
+    <string name="activity_emergency_receiver_static_map_received">Localização do Remetente:</string>
 
     <!-- End Emergency Receiver Activity-->
 
@@ -98,6 +98,7 @@
     <string name="activity_emergency_history_sender">Emergência Recebida:</string>
     <string name="activity_emergency_history_from_sender">De:</string>
     <string name="activity_emergency_history_title">Histórico de Emergências</string>
+    <string name="activity_emergency_history_button">Ver Emergência</string>
 
 
     <!-- End Emergency History Activity-->

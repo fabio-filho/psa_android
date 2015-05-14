@@ -30,6 +30,22 @@ public class EmergencySMS {
     }
 
 
+    public EmergencySMS(Context context) {
+
+        contact = new Contact(context, NUMBER);
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
 
     public Contact getContact(){
 
@@ -93,6 +109,8 @@ public class EmergencySMS {
                     }
 
                 }
+
+                contact.setLocation(latitude, longitude);
 
             }
 

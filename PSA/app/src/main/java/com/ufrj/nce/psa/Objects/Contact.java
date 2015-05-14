@@ -72,9 +72,31 @@ public class Contact {
         return location.getLatitude();
     }
 
+    public Double getLatitude_double() {
+
+        try{
+            return Double.parseDouble(location.getLatitude());
+        }catch (Exception o){
+            Functions.Log("getLatitude_double", o.toString());
+            return 0.0;
+        }
+
+    }
+
     public String getLongitude() {
         return location.getLongitude();
     }
+
+    public Double getLongitude_double() {
+
+        try{
+            return Double.parseDouble(location.getLongitude());
+        }catch (Exception o){
+            Functions.Log("getLongitude_double", o.toString());
+            return 0.0;
+        }
+    }
+
 
     public String getCode(){
         return code;
@@ -84,6 +106,12 @@ public class Contact {
 
         return name;
     }
+
+    public void setLocation(String latitude, String longitude){
+
+        location = new MyLocation(latitude, longitude);
+    }
+
 
     public Boolean isNameEmpty(){
         return getName().equals("");

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
+import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.Objects.MyThread;
 import com.ufrj.nce.psa.Objects.PushNotification;
@@ -60,7 +61,6 @@ public class SMSReceiver extends BroadcastReceiver {
     private void saveEmergencyOnDB(Context context, String message, String phoneNumber){
 
         try{
-
             EmergencySMS.MESSAGE = message;
             EmergencySMS.NUMBER = phoneNumber;
 
@@ -72,6 +72,10 @@ public class SMSReceiver extends BroadcastReceiver {
     }
 
     private void alertEmergency(final Context context){
+
+        if (threadAlertEmergency != null)
+            if(!threadAlertEmergency.isStoped())
+                return;
 
         threadAlertEmergency = new MyThread(TIME_ALERT_INTERVAL){
 
@@ -96,6 +100,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
         try{
             PushNotification.createNotification(context, new EmergencySMS(context, message).getMessage());
+            EmergencyReceiverView.EMERGENCY_RECEIVED = true;
 
         }catch (Exception o){
             Functions.Log("showEmergencyNotification", o.toString());

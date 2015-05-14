@@ -8,6 +8,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
+import com.ufrj.nce.psa.Broadcasts.NotificationDismissedReceiver;
 import com.ufrj.nce.psa.R;
 
 /**
@@ -20,16 +21,17 @@ public class PushNotification {
 
     public static void createNotification(Context context, String title, String message, int id_icon){
 
+        int mNotificationId = 001;
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(id_icon)
                         .setContentTitle(title)
                         .setContentText(message)
                         .setAutoCancel(true)
-                        ;
+                .setDeleteIntent(onDismissedNotification(context, mNotificationId));
 
 
-        int mNotificationId = 001;
         Intent resultIntent = new Intent(context, EmergencyReceiverView.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 
@@ -63,5 +65,18 @@ public class PushNotification {
 
         createNotification(context, TITLE_DEFAULT, message, id_icon);
     }
+
+
+    private static PendingIntent onDismissedNotification(Context context, int notificationId) {
+
+        Intent intent = new Intent(context, NotificationDismissedReceiver.class);
+        //intent.putExtra(".Broadcasts.NotificationDismissedReceiver", notificationId);
+
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(context.getApplicationContext(),
+                        notificationId, intent, 0);
+        return pendingIntent;
+    }
+
 
 }

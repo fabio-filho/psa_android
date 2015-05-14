@@ -1,5 +1,6 @@
 package com.ufrj.nce.psa.Fragments;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
 import com.ufrj.nce.psa.Connections.SQLite;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
 import com.ufrj.nce.psa.Objects.Adapters.EmergencyHistoryAdapter;
+import com.ufrj.nce.psa.Objects.Contact;
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.Objects.EmergencyHistory;
+import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.R;
 import com.ufrj.nce.psa.Utilities.Functions;
 
@@ -55,12 +59,21 @@ public class EmergencyHistoryFragment extends EmergencyFragment {
         new Thread(){
             @Override
             public void run() {
-                refreshHistoryEmergencyItems();
-                loadListViewEmergencyHistory(R.id.listViewEmergencyHistoryFragment);
-                loadAdapterEmergencyHistory();
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        refreshHistoryEmergencyItems();
+                        loadListViewEmergencyHistory(R.id.listViewEmergencyHistoryFragment);
+                        loadAdapterEmergencyHistory();
+
+                    }
+                });
 
             }
         }.start();
+
 
     }
 
@@ -87,7 +100,24 @@ public class EmergencyHistoryFragment extends EmergencyFragment {
 
     protected void onClickItemListView(View view){
 
-        //TODO
+        Functions.Log("onClickListView", "Clicked");
+
+        EmergencyHistory emergencyHistory = mAdapterEmergencyHistory.getItem(mListView.getPositionForView(view));
+
+        EmergencySMS emergencySMS = new EmergencySMS(rootView.getContext());
+
+        Contact contact = emergencyHistory.getContact();
+        contact.setLocation(emergencyHistory.getLatitude(), emergencyHistory.getLongitude());
+
+        emergencySMS.setContact(contact);
+        emergencySMS.setDatetime(emergencyHistory.getDatetime().toString());
+        emergencySMS.setMessage(emergencyHistory.getMessage());
+
+        EmergencyReceiverView.EMERGENCY_RECEIVED = false;
+        EmergencyReceiverView.temp_emergencySMS = emergencySMS;
+
+        startActivity(new Intent("android.intent.action.EMERGENCY_RECEIVER_VIEW"));
+
     }
 
 
@@ -95,16 +125,18 @@ public class EmergencyHistoryFragment extends EmergencyFragment {
 
         mListView = (ListView) rootView.findViewById(layout);
 
-        //defineOnClickButtonItemListView();
+        defineOnClickButtonItemListView();
+
     }
 
 
     private void loadAdapterEmergencyHistory(){
 
         mAdapterEmergencyHistory = new EmergencyHistoryAdapter(getActivity().getApplicationContext(),
-                mListEmergencyHistory, null);
+                mListEmergencyHistory, onClickListener);
 
         mListView.setAdapter(mAdapterEmergencyHistory);
+
     }
 
 

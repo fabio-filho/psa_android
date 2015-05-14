@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.ufrj.nce.psa.Objects.EmergencyHistory;
@@ -53,9 +54,10 @@ public class EmergencyHistoryAdapter extends BaseAdapter {
 
         view = mLayoutInflater.inflate(R.layout.item_emergency_history, null);
 
-        //Button btnEmergency = (Button) view.findViewById(R.id.btnEmergency);
-        //btnEmergency.setText(mList.get(position).getName());
-        //btnEmergency.setOnClickListener(mOnClickListener);
+        Button btnEmergency = (Button) view.findViewById(R.id.btnEmergencyHistoryButtonView);
+        btnEmergency.setText(mContext.getResources().getString(R.string.activity_emergency_history_button));
+        btnEmergency.setOnClickListener(mOnClickListener);
+
         txtMessage  = (TextView) view.findViewById(R.id.txtEmergencyHistoryMessage);
         txtContact  = (TextView) view.findViewById(R.id.txtEmergencyHistorySender);
         txtDatetime = (TextView) view.findViewById(R.id.txtEmergencyHistoryDatetimeReceived);
