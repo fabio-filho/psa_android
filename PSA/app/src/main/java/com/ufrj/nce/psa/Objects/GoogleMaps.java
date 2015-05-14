@@ -19,10 +19,13 @@ import java.io.InputStream;
  */
 public class GoogleMaps {
 
-    public static Bitmap getStaticMap(double latitute, double longitude, int zoom, int width, int height){
+    public static Bitmap getStaticMap(double latitude, double longitude, int zoom, int width, int height){
 
-        String URL = "http://maps.google.com/maps/api/staticmap?center=" +latitute +
-                "," + longitude + "&zoom="+zoom+"&size="+width+"x"+height+"&sensor=false";
+
+        String URL = "http://maps.google.com/maps/api/staticmap?center=" +latitude +
+                "," + longitude + "&zoom="+zoom+"&size="+width+"x"+height
+                +"&sensor=false&markers=color:red%7Clabel:R%7C"+latitude+","+longitude;
+
 
         Bitmap bmp = null;
         HttpClient httpclient = new DefaultHttpClient();
@@ -43,8 +46,8 @@ public class GoogleMaps {
 
     public static Bitmap getStaticMap(double latitute, double longitude){
 
-        int zoom = 15;
-        int width = 400;
+        int zoom = 17;
+        int width = 600;
         int height = 600;
 
         return getStaticMap(latitute, longitude, zoom, width, height);

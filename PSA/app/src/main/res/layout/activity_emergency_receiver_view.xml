@@ -125,7 +125,7 @@
             <ImageView
                 android:id="@+id/imgEmergencyReceiverViewStaticMap"
                 android:layout_width="fill_parent"
-                android:layout_height="600dp" />
+                android:layout_height="wrap_content" />
 
 
         </LinearLayout>

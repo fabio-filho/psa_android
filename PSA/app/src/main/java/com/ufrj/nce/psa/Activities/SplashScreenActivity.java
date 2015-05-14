@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 
 import com.ufrj.nce.psa.Connections.Tables.ContactTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
@@ -40,7 +41,29 @@ public class SplashScreenActivity extends Activity{
 
             }
         }.start();
+
+
+        //createShortCut();
     }
+
+
+    public void createShortCut(){
+
+        // a Intent to create a shortCut
+        Intent shortcutintent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        //repeat to create is forbidden
+        shortcutintent.putExtra("duplicate", true);
+        //set the name of shortCut
+        shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "Call Emergency");
+        //set icon
+        Parcelable icon = Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.mipmap.ic_emergency);
+        shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+        //set the application to lunch when you click the icon
+        shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, new Intent(getApplicationContext(), PSAMainActivity.class));
+        //sendBroadcast,done
+        sendBroadcast(shortcutintent);
+    }
+
 
     private void createDirs(){
 

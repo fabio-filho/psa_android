@@ -87,7 +87,7 @@ public class EmergencyReceiverView extends Activity {
                try {
 
                    final Bitmap bmp = GoogleMaps.getStaticMap(latitude, longitude);
-                   Functions.Log("loadStaticMap", "Before");
+
                    runOnUiThread(new Runnable() {
                        @Override
                        public void run() {
