@@ -3,11 +3,14 @@ package com.ufrj.nce.psa.Broadcasts;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
 import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
+import com.ufrj.nce.psa.Connections.SQLite;
+import com.ufrj.nce.psa.Connections.Tables.SettingsTable;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
 import com.ufrj.nce.psa.Objects.MyThread;
 import com.ufrj.nce.psa.Objects.PushNotification;
@@ -23,7 +26,7 @@ public class SMSReceiver extends BroadcastReceiver {
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
     public static MyThread threadAlertEmergency = null;
-    private final static int TIME_ALERT_INTERVAL = 10000;
+    private final static int ALERT_TIME_INTERVAL = 10000;
 
     public void onReceive(Context context, Intent intent) {
 
@@ -71,13 +74,29 @@ public class SMSReceiver extends BroadcastReceiver {
         }
     }
 
+
+    private int getAlertTime(Context context){
+
+        SQLiteDatabase db = new SettingsTable(context.getApplicationContext()).getWritableDatabase();
+        int result = SQLite.getAlertTime(db);
+
+        //Setting Default if there isn't.
+        db = new SettingsTable(context).getWritableDatabase();
+        SQLite.insertAlertTime(db, ALERT_TIME_INTERVAL/100);
+
+        return (result == 0) ?  ALERT_TIME_INTERVAL : result*100 ;
+    }
+
     private void alertEmergency(final Context context){
 
         if (threadAlertEmergency != null)
             if(!threadAlertEmergency.isStoped())
                 return;
 
-        threadAlertEmergency = new MyThread(TIME_ALERT_INTERVAL){
+
+        int mTimeInterval = getAlertTime(context);
+
+        threadAlertEmergency = new MyThread(mTimeInterval){
 
             @Override
             public void runInLoop() {

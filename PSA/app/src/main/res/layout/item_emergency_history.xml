@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
-            android:text="@string/activity_emergency_history_from_sender"
+            android:text="@string/fragment_emergency_history_from_sender"
             style="@style/text_format_emergency_view_receiver_label"
             android:layout_marginRight="10dp"
             />

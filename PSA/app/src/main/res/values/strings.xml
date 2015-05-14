@@ -73,7 +73,7 @@
     <string name="activity_emergency_view_btn_delete_contact">Apagar Contato</string>
     <string name="activity_emergency_view_message_error_save">Houve algum erro ao salvar a Emergência. Tente Novamente.</string>
 
-    <!-- End Emergency View Activity-->
+    <!-- End Emergency View Fragment-->
 
 
 
@@ -86,35 +86,68 @@
     <string name="activity_emergency_receiver_txt_datetime_received">Hora e Data de Envio:</string>
     <string name="activity_emergency_receiver_static_map_received">Localização do Remetente:</string>
 
-    <!-- End Emergency Receiver Activity-->
+    <!-- End Emergency Receiver Fragment-->
 
 
 
 
 
 
-    <!-- Emergency History Activity -->
+    <!-- Emergency History Fragment -->
 
-    <string name="activity_emergency_history_sender">Emergência Recebida:</string>
-    <string name="activity_emergency_history_from_sender">De:</string>
-    <string name="activity_emergency_history_title">Histórico de Emergências</string>
-    <string name="activity_emergency_history_button">Ver Emergência</string>
-
-
-    <!-- End Emergency History Activity-->
+    <string name="fragment_emergency_history_sender">Emergência Recebida:</string>
+    <string name="fragment_emergency_history_from_sender">De:</string>
+    <string name="fragment_emergency_history_title">Histórico de Emergências</string>
+    <string name="fragment_emergency_history_button">Ver Emergência</string>
 
 
-
-
-
-    <!-- Emergency Manager Activity -->
-
-    <string name="activity_emergency_manager_removed_item">- Removido</string>
-
-    <!-- End Emergency Manager Activity-->
+    <!-- End Emergency History Fragment-->
 
 
 
 
+
+    <!-- Emergency Manager Fragment -->
+
+    <string name="fragment_emergency_manager_removed_item">- Removido</string>
+
+    <!-- End Emergency Manager Fragment-->
+
+
+
+
+
+
+
+    <!-- Settings Fragment -->
+
+    <string name="fragment_settings_title_alert_time">Alerta Emergência Recebida</string>
+    <string name="fragment_settings_label_alert_time">Tocar a cada: </string>
+
+
+    <string-array name="fragment_settings_array_time_alarm">
+            <item>10</item>
+            <item>20</item>
+            <item>30</item>
+            <item>40</item>
+    </string-array>
+
+
+
+
+    <!-- End Settings Fragment-->
+
+
+
+
+
+    <!-- Information Fragment  -->
+
+            <string name="fragment_information_title">UFRJ - NCE </string>
+            <string name="fragment_information_deployment">Desenvolvedor: Fábio Filho</string>
+            <string name="fragment_information_design">Design: Rogério Valença</string>
+            <string name="fragment_information_leader">Professor Orientador: Marcos Borges</string>
+
+    <!-- End Information Fragment  -->
 
 </resources>

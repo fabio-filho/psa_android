@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.ufrj.nce.psa.Connections.Tables.ContactTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
+import com.ufrj.nce.psa.Connections.Tables.SettingsTable;
 import com.ufrj.nce.psa.Objects.Contact;
 import com.ufrj.nce.psa.Objects.ContactList;
 import com.ufrj.nce.psa.Objects.DateTime;
@@ -61,10 +62,12 @@ public class SQLite {
         try {
             Functions.Log("insertEmergency", emergency.getName());
             db.execSQL("insert into " + EmergencyTable.TABLE_NAME + " VALUES(null, '" + emergency.getName() + "') ");
-            db.close();
 
         }catch(Exception o){
             Functions.Log("insertEmergency", o.toString());
+        }
+        finally {
+            db.close();
         }
 
     }
@@ -73,12 +76,15 @@ public class SQLite {
     public static void deleteEmergencyWithContacts(SQLiteDatabase db, Emergency emergency){
 
         try{
-            db.execSQL("delete from "+EmergencyTable.TABLE_NAME+ " where "+EmergencyTable.FIELD_CODE+ " = '"+emergency.getCode()+"'");
+            db.execSQL("delete from " + EmergencyTable.TABLE_NAME + " where " + EmergencyTable.FIELD_CODE + " = '" + emergency.getCode() + "'");
 
-            db.execSQL("delete from "+ContactTable.TABLE_NAME+ " where "+ContactTable.FIELD_EMERGENCY+ " = '"+emergency.getCode()+"'");
+            db.execSQL("delete from " + ContactTable.TABLE_NAME + " where " + ContactTable.FIELD_EMERGENCY + " = '" + emergency.getCode() + "'");
 
         }catch(Exception o){
             Functions.Log("deleteEmergencyWithContacts", o.toString());
+        }
+        finally {
+            db.close();
         }
 
 
@@ -90,16 +96,18 @@ public class SQLite {
         try {
 
             db.execSQL("insert into " + EmergencyHistoryTable.TABLE_NAME + " VALUES(null, '"
-                    +emergencySMS.getDateTime().toString()+"', '"
-                    + emergencySMS.getContact().getNumber()+"', '"
-                    + emergencySMS.getMessage()+"', '"
-                    + emergencySMS.getContact().getLatitude()+"', '"
-                    + emergencySMS.getContact().getLongitude()+"') ");
+                    + emergencySMS.getDateTime().toString() + "', '"
+                    + emergencySMS.getContact().getNumber() + "', '"
+                    + emergencySMS.getMessage() + "', '"
+                    + emergencySMS.getContact().getLatitude() + "', '"
+                    + emergencySMS.getContact().getLongitude() + "') ");
 
-            db.close();
 
         }catch(Exception o){
             Functions.Log("insertEmergency", o.toString());
+        }
+        finally {
+            db.close();
         }
 
     }
@@ -118,10 +126,11 @@ public class SQLite {
                 Functions.Log("insertContact", " Code: "+emergency.getCode()+" - Name: "+ contact.getName());
             }
 
-            db.close();
-
         }catch(Exception o){
             Functions.Log("insertEmergency", o.toString());
+        }
+        finally {
+            db.close();
         }
 
     }
@@ -157,8 +166,9 @@ public class SQLite {
         }catch (Exception o){
             Functions.Log("getEmergencies", o.toString());
         }
-
-        db.close();
+        finally {
+            db.close();
+        }
 
         return mListEmergency;
     }
@@ -188,6 +198,9 @@ public class SQLite {
 
         }catch (Exception o){
             Functions.Log("getEmergencyContactList", o.toString());
+        }
+        finally {
+            db.close();
         }
 
         return mContactList;
@@ -228,12 +241,76 @@ public class SQLite {
         }catch (Exception o){
             Functions.Log("getEmergencyHistories", o.toString());
         }
-
-        db.close();
+        finally {
+            db.close();
+        }
 
         return mListEmergencyHistory;
     }
 
+
+
+    public static int getAlertTime(SQLiteDatabase db){
+
+        try{
+
+            Cursor cursor = db.rawQuery("select "+ SettingsTable.FIELD_ALARM_TIME+ "  from  "+SettingsTable.TABLE_NAME, null);
+
+            if (cursor==null || cursor.getCount() == 0) return 0;
+
+            cursor.moveToFirst();
+
+            cursor.moveToFirst();
+
+            return Integer.parseInt(cursor.getString(0));
+
+        }catch (Exception o){
+            Functions.Log("getAlertTime", o.toString());
+        }
+        finally {
+            db.close();
+        }
+
+
+        return 0;
+    }
+
+
+    public static Boolean updateAlertTime(SQLiteDatabase db, int time){
+
+        try{
+
+            db.execSQL("update " + SettingsTable.TABLE_NAME + " set " + SettingsTable.FIELD_ALARM_TIME + " = " + time);
+
+        }catch (Exception o){
+            Functions.Log("updateAlertTime", o.toString());
+            return false;
+        }
+        finally {
+            db.close();
+        }
+
+        return true;
+
+    }
+
+    public static Boolean insertAlertTime(SQLiteDatabase db, int time){
+
+        try{
+
+            db.execSQL("insert into " + SettingsTable.TABLE_NAME + " values (null, "+ time+" )");
+
+        }catch (Exception o){
+            Functions.Log("insertAlertTime", o.toString());
+            return false;
+        }
+        finally {
+            db.close();
+        }
+
+        return true;
+
+    }
 
 
 

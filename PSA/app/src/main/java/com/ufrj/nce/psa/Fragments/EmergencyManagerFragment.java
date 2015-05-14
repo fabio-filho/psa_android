@@ -109,7 +109,7 @@ public class EmergencyManagerFragment  extends EmergencyFragment {
         SQLite.deleteEmergencyWithContacts(db, emergency);
 
         Toast.makeText(getActivity().getApplicationContext(), emergency.getName()+" "
-                +getResources().getString(R.string.activity_emergency_manager_removed_item), Toast.LENGTH_SHORT).show();
+                +getResources().getString(R.string.fragment_emergency_manager_removed_item), Toast.LENGTH_SHORT).show();
     }
 
 

@@ -55,7 +55,7 @@ public class EmergencyHistoryAdapter extends BaseAdapter {
         view = mLayoutInflater.inflate(R.layout.item_emergency_history, null);
 
         Button btnEmergency = (Button) view.findViewById(R.id.btnEmergencyHistoryButtonView);
-        btnEmergency.setText(mContext.getResources().getString(R.string.activity_emergency_history_button));
+        btnEmergency.setText(mContext.getResources().getString(R.string.fragment_emergency_history_button));
         btnEmergency.setOnClickListener(mOnClickListener);
 
         txtMessage  = (TextView) view.findViewById(R.id.txtEmergencyHistoryMessage);

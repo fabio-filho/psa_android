@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import com.ufrj.nce.psa.Connections.Tables.ContactTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
+import com.ufrj.nce.psa.Connections.Tables.SettingsTable;
 import com.ufrj.nce.psa.R;
 import com.ufrj.nce.psa.Utilities.Functions;
 import com.ufrj.nce.psa.Utilities.Values;
@@ -42,9 +43,12 @@ public class SplashScreenActivity extends Activity{
             }
         }.start();
 
+        int result = 0;
 
+        Functions.Log("onCreate", ((result == 0) ?  "Ok" : "Not"));
         //createShortCut();
     }
+
 
 
     public void createShortCut(){
@@ -84,6 +88,10 @@ public class SplashScreenActivity extends Activity{
 
         db = new EmergencyHistoryTable(this).getWritableDatabase() ;
         db.execSQL(EmergencyHistoryTable.TABLE_CREATE);
+        db.close();
+
+        db = new SettingsTable(this).getWritableDatabase() ;
+        db.execSQL(SettingsTable.TABLE_CREATE);
         db.close();
 
 

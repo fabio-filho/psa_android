@@ -21,4 +21,11 @@
     </style>
 
 
+    <style name="text_format_information">
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+
+    </style>
+
+
 </resources>
