@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
+import com.ufrj.nce.psa.Activities.EmergencyReceivedView;
 import com.ufrj.nce.psa.Connections.SQLite;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyHistoryTable;
 import com.ufrj.nce.psa.Connections.Tables.EmergencyTable;
@@ -113,8 +113,8 @@ public class EmergencyHistoryFragment extends EmergencyFragment {
         emergencySMS.setDatetime(emergencyHistory.getDatetime().toString());
         emergencySMS.setMessage(emergencyHistory.getMessage());
 
-        EmergencyReceiverView.EMERGENCY_RECEIVED = false;
-        EmergencyReceiverView.temp_emergencySMS = emergencySMS;
+        EmergencyReceivedView.EMERGENCY_RECEIVED = false;
+        EmergencyReceivedView.temp_emergencySMS = emergencySMS;
 
         startActivity(new Intent("android.intent.action.EMERGENCY_RECEIVER_VIEW"));
 

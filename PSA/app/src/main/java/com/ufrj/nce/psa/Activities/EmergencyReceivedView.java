@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ import com.ufrj.nce.psa.Utilities.Functions;
 /**
  * Created by fabiofilho on 4/1/15.
  */
-public class EmergencyReceiverView extends Activity {
+public class EmergencyReceivedView extends Activity {
 
 
     public static Boolean EMERGENCY_RECEIVED = false;
@@ -33,14 +34,29 @@ public class EmergencyReceiverView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emergency_receiver_view);
+        setContentView(R.layout.activity_emergency_received_view);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (EMERGENCY_RECEIVED)
             emergencySMS = new EmergencySMS(getApplicationContext(), EmergencySMS.MESSAGE);
         else
             emergencySMS = temp_emergencySMS;
 
+
         loadEmergencyView();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+
+        if (menuItem.getItemId() == android.R.id.home) {
+            if(EMERGENCY_RECEIVED)
+                startActivity(new Intent("android.intent.action.PSA_MENU"));
+            finish();
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
 

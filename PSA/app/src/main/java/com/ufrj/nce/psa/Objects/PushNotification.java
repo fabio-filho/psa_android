@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
+import com.ufrj.nce.psa.Activities.EmergencyReceivedView;
 import com.ufrj.nce.psa.Broadcasts.NotificationDismissedReceiver;
 import com.ufrj.nce.psa.R;
 
@@ -32,10 +32,10 @@ public class PushNotification {
                 .setDeleteIntent(onDismissedNotification(context, mNotificationId));
 
 
-        Intent resultIntent = new Intent(context, EmergencyReceiverView.class);
+        Intent resultIntent = new Intent(context, EmergencyReceivedView.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 
-        stackBuilder.addParentStack(EmergencyReceiverView.class);
+        stackBuilder.addParentStack(EmergencyReceivedView.class);
 
         stackBuilder.addNextIntent(resultIntent);
 

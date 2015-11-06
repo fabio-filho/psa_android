@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 
-import com.ufrj.nce.psa.Activities.EmergencyReceiverView;
+import com.ufrj.nce.psa.Activities.EmergencyReceivedView;
 import com.ufrj.nce.psa.Connections.SQLite;
 import com.ufrj.nce.psa.Connections.Tables.SettingsTable;
 import com.ufrj.nce.psa.Objects.EmergencySMS;
@@ -29,6 +29,29 @@ public class SMSReceiver extends BroadcastReceiver {
     private final static int ALERT_TIME_INTERVAL = 10000;
 
     public void onReceive(Context context, Intent intent) {
+
+        // Retrieves a map of extended data from the intent.
+        final Bundle bundle = intent.getExtras();
+
+        try {
+
+            String message = "#@#$.$2015-04-11 18:22:51$.$-22.96293$.$-43.206499$.$Sequestro";
+
+            if(!message.contains(EmergencySMS.TAG_SMS_IDENTIFICATION)) return;
+
+            saveEmergencyOnDB(context, message, "967131663");
+            alertEmergency(context);
+            showEmergencyNotification(context, message);
+
+        } catch (Exception e) {
+            Functions.Log("onReceive", "Exception smsReceiver" +e);
+        }
+
+        this.clearAbortBroadcast();
+    }
+
+
+    public void onReceive2(Context context, Intent intent) {
 
         // Retrieves a map of extended data from the intent.
         final Bundle bundle = intent.getExtras();
@@ -60,6 +83,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
         this.clearAbortBroadcast();
     }
+
 
     private void saveEmergencyOnDB(Context context, String message, String phoneNumber){
 
@@ -119,7 +143,7 @@ public class SMSReceiver extends BroadcastReceiver {
 
         try{
             PushNotification.createNotification(context, new EmergencySMS(context, message).getMessage());
-            EmergencyReceiverView.EMERGENCY_RECEIVED = true;
+            EmergencyReceivedView.EMERGENCY_RECEIVED = true;
 
         }catch (Exception o){
             Functions.Log("showEmergencyNotification", o.toString());
