@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="25dp"
+        android:orientation="vertical"
+        android:shadowColor="#FF8C00"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0.5">
+
+
+        <TextView
+            style="@style/text_format_emergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_txt_name_emergency"/>
+
+
+        <EditText
+            style="@style/text_format_emergency"
+            android:id="@+id/txtNameEmergency"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:layout_marginBottom="30dp"/>
+
+
+        <TextView
+            style="@style/text_format_emergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_txt_list_contacts"/>
+
+
+        <EditText
+            style="@style/text_format_emergency"
+            android:id="@+id/txtListNumbers"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:enabled="false"
+            />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_btn_delete_contact"
+            android:onClick="onDeleteContacts"
+            android:layout_marginBottom="40dp"
+            />
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_btn_save"
+            android:onClick="onSaveEmergency"
+            />
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_btn_cancel"
+            android:onClick="onCancel"
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

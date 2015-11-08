@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ufrj.nce.psa.Fragments.EmergenciesFragment;
+import com.ufrj.nce.psa.Fragments.EmergencyAddFragment;
 import com.ufrj.nce.psa.Fragments.HistoryFragment;
 import com.ufrj.nce.psa.R;
 
@@ -29,12 +30,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Fragment mFragment = new EmergencyAddFragment();
+                FragmentManager mFragmentManager = getFragmentManager();
+                mFragmentManager.beginTransaction().replace(R.id.frameContainerMainActivity, mFragment).commit();
             }
         });
 

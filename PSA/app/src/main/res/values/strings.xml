@@ -1,8 +1,145 @@
 <resources>
+
     <string name="app_name">PSA</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="drawer_open">Emergências</string>
+    <string name="drawer_close">+Opções</string>
+    <string name="btn_add_emergency">Adicionar Emergência</string>
+
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >Emergências</item>
+        <item >Gerenciar Emergências</item>
+        <item >Histórico Emergências</item>
+        <item >Configurações</item>
+        <item >Informações</item>
+    </string-array>
+
+
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+
+
+    <!-- End Main Activity-->
+
+
+    <!-- Fragment Home-->
+
+    <string name="fragment_home_title">Todas Emergências</string>
+    <string name="fragment_home_no_emergencies">Sem Emergências. Clique para Adicionar</string>
+
+    <!-- End Fragment Home-->
+
+
+
+
+    <!-- Fragment Emergency Manager-->
+
+    <string name="fragment_emergency_manager_title">Gerenciamento das Emergências</string>
+    <string name="fragment_emergency_manager_remove_item">Tem certeza que deseja remover esta Emergência: </string>
+    <string name="fragment_emergency_manager_remove_item_title">Remover Emergência</string>
+    <!-- End Fragment Emergency Manager-->
+
+
+
+
+    <!-- Emergency View Activity -->
+
+    <string name="activity_emergency_view_txt_title">Adicionando Emergência</string>
+    <string name="activity_emergency_view_txt_name_emergency">Nome da Emergência:</string>
+    <string name="activity_emergency_view_txt_list_contacts">Lista de Contatos:</string>
+    <string name="activity_emergency_view_btn_save">Salvar Emergência</string>
+    <string name="activity_emergency_view_btn_cancel">Cancelar</string>
+    <string name="activity_emergency_view_actionbar_add_contact">Adicionar um Contato</string>
+
+
+    <string name="activity_emergency_view_message_empty_name">O campo: Nome da Emergência, não pode estar vazio!</string>
+    <string name="activity_emergency_view_message_empty_number_list">O campo: Lista de Contatos, não pode estar vazio!</string>
+
+    <string name="activity_emergency_view_message_item_already_exist">Este contato já foi adicionado.</string>
+    <string name="activity_emergency_view_btn_delete_contact">Apagar Contato</string>
+    <string name="activity_emergency_view_message_error_save">Houve algum erro ao salvar a Emergência. Tente Novamente.</string>
+
+    <!-- End Emergency View Fragment-->
+
+
+
+
+    <!-- Emergency Receiver Activity -->
+
+    <string name="activity_emergency_receiver_txt_title">Emergência Recebida</string>
+    <string name="activity_emergency_receiver_txt_sender">Remetente:</string>
+    <string name="activity_emergency_receiver_txt_message_received">Mensagem Recebida:</string>
+    <string name="activity_emergency_receiver_txt_datetime_received">Hora e Data de Envio:</string>
+    <string name="activity_emergency_receiver_static_map_received">Localização do Remetente:</string>
+
+    <!-- End Emergency Receiver Fragment-->
+
+
+
+
+
+
+    <!-- Emergency History Fragment -->
+
+    <string name="fragment_emergency_history_sender">Emergência Recebida:</string>
+    <string name="fragment_emergency_history_from_sender">De:</string>
+    <string name="fragment_emergency_history_title">Histórico de Emergências</string>
+    <string name="fragment_emergency_history_button">Ver Emergência</string>
+
+
+    <!-- End Emergency History Fragment-->
+
+
+
+
+
+    <!-- Emergency Manager Fragment -->
+
+    <string name="fragment_emergency_manager_removed_item">- Removido</string>
+
+    <!-- End Emergency Manager Fragment-->
+
+
+
+
+
+
+
+    <!-- Settings Fragment -->
+
+    <string name="fragment_settings_title_alert_time">Alerta Emergência Recebida</string>
+    <string name="fragment_settings_label_alert_time">Tocar a cada: </string>
+
+
+    <string-array name="fragment_settings_array_time_alarm">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+    </string-array>
+
+
+
+
+    <!-- End Settings Fragment-->
+
+
+
+
+
+    <!-- Information Fragment  -->
+
+    <string name="fragment_information_title">UFRJ - NCE </string>
+    <string name="fragment_information_deployment">Desenvolvedor: Fábio Filho</string>
+    <string name="fragment_information_design">Design: Rogério Valença</string>
+    <string name="fragment_information_leader">Professor Orientador: Marcos Borges</string>
+
+    <!-- End Information Fragment  -->
 </resources>
