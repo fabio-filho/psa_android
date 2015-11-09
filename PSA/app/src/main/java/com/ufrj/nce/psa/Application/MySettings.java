@@ -10,10 +10,15 @@ import com.ufrj.nce.psa.Objects.Serialization;
 public class MySettings extends Serialization{
 
     private transient Context mContext;
-    private int mMinutesIntervalEmergencyReceivedAlarm = 30 * 1000;
+    private int mMinutesIntervalEmergencyReceivedAlarm = 20 * 1000;
+
+    public final static int INTERVAL_ALARM_SHORT = 10 * 1000;
+    public final static int INTERVAL_ALARM_MEDIUM = 20 * 1000;
+    public final static int INTERVAL_ALARM_LONG = 30 * 1000;
 
 
-    protected MySettings(Context mContext) {
+
+    public MySettings(Context mContext) {
 
         super(MySettings.class.getName());
 

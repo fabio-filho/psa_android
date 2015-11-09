@@ -19,9 +19,15 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater mInflater, ViewGroup mContainer, Bundle mSavedInstanceState) {
 
-        mRootView = mInflater.inflate(R.layout.fragment_emergencies, mContainer, false);
+        mRootView = mInflater.inflate(R.layout.fragment_settings, mContainer, false);
+
+        getActivity().
 
         return mRootView;
 
     }
+
+
+
+    
 }

@@ -11,7 +11,7 @@ import com.ufrj.nce.psa.R;
 /**
  * Created by filhofilha on 11/8/15.
  */
-public class EmergencyManagmentFragment extends Fragment {
+public class EmergencyManagementFragment extends Fragment {
 
     private View mRootView;
 
@@ -19,7 +19,7 @@ public class EmergencyManagmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater mInflater, ViewGroup mContainer, Bundle mSavedInstanceState) {
 
-        mRootView = mInflater.inflate(R.layout.fragment_emergencies, mContainer, false);
+        mRootView = mInflater.inflate(R.layout.fragment_emergency_management, mContainer, false);
 
         return mRootView;
 

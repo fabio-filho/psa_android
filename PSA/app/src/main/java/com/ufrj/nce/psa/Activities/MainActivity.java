@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,7 +16,11 @@ import android.view.View;
 
 import com.ufrj.nce.psa.Fragments.EmergenciesFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyAddFragment;
+import com.ufrj.nce.psa.Fragments.EmergencyEditFragment;
+import com.ufrj.nce.psa.Fragments.EmergencyManagementFragment;
 import com.ufrj.nce.psa.Fragments.HistoryFragment;
+import com.ufrj.nce.psa.Fragments.InformationFragment;
+import com.ufrj.nce.psa.Fragments.SettingsFragment;
 import com.ufrj.nce.psa.R;
 
 public class MainActivity extends AppCompatActivity
@@ -37,11 +40,11 @@ public class MainActivity extends AppCompatActivity
 
                 Fragment mFragment = new EmergencyAddFragment();
                 FragmentManager mFragmentManager = getFragmentManager();
-                mFragmentManager.beginTransaction().replace(R.id.frameContainerMainActivity, mFragment).commit();
+                mFragmentManager.beginTransaction().replace(R.id.mFrameContainerMainActivity, mFragment).commit();
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mDrawerLayoutMainActivity);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -50,11 +53,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mDrawerLayoutMainActivity);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -86,40 +90,54 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem mItem) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        int mId = mItem.getItemId();
 
         Fragment mFragment = null;
 
 
-        if (id == R.id.nav_camara) {
-            Snackbar.make(getCurrentFocus(), "Emergencies", Snackbar.LENGTH_SHORT).show();
-
+        if (mId == R.id.mNavEmergencyFragment) {
             mFragment = new EmergenciesFragment();
 
-        } else if (id == R.id.nav_gallery) {
-            Snackbar.make(getCurrentFocus(), "History", Snackbar.LENGTH_SHORT).show();
-
+        } else if (mId == R.id.mNavHistoryFragment) {
             mFragment = new HistoryFragment();
 
-        } else if (id == R.id.nav_slideshow) {
-            Snackbar.make(getCurrentFocus(), "SlideShow", Snackbar.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_manage) {
-            Snackbar.make(getCurrentFocus(), "Manage", Snackbar.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_share) {
-            Snackbar.make(getCurrentFocus(), "Share", Snackbar.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_send) {
-            Snackbar.make(getCurrentFocus(), "Send", Snackbar.LENGTH_SHORT).show();
+        } else if (mId == R.id.mNavInformationFragment) {
+            mFragment = new InformationFragment();
+
+        } else if (mId == R.id.mNavEmergencyManagementFragment) {
+            mFragment = new EmergencyManagementFragment();
+
+        } else if (mId == R.id.mNavSettingsFragment) {
+            mFragment = new SettingsFragment();
+
         }
 
-        if(mFragment!=null){
-            FragmentManager mFragmentManager = getFragmentManager();
-            mFragmentManager.beginTransaction().replace(R.id.frameContainerMainActivity, mFragment).commit();
-        }
+        if(mFragment!=null)
+            if (isValidFragment(mFragment.getClass().getName())) {
+                FragmentManager mFragmentManager = getFragmentManager();
+                mFragmentManager.beginTransaction().replace(R.id.mFrameContainerMainActivity, mFragment).commit();
+            }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mDrawerLayoutMainActivity);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /**
+     * This method stops fragment injection in malicious applications.
+     * Make sure to deny any unknown fragments here.
+     */
+    protected boolean isValidFragment(String mFragmentName) {
+
+        return EmergenciesFragment.class.getName().equals(mFragmentName)
+                || EmergencyAddFragment.class.getName().equals(mFragmentName)
+                || EmergencyEditFragment.class.getName().equals(mFragmentName)
+                || EmergencyManagementFragment.class.getName().equals(mFragmentName)
+                || HistoryFragment.class.getName().equals(mFragmentName)
+                || SettingsFragment.class.getName().equals(mFragmentName)
+                || InformationFragment.class.getName().equals(mFragmentName);
+    }
+
 }

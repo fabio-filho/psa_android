@@ -2,22 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Import" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item android:id="@+id/mNavEmergencyFragment" android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/fragment_emergency_title" />
+        <item android:id="@+id/mNavEmergencyManagementFragment" android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/fragment_emergency_management_title" />
+        <item android:id="@+id/mNavHistoryFragment" android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="@string/fragment_emergency_history_title" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/others">
         <menu>
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
+            <item android:id="@+id/mNavSettingsFragment" android:icon="@android:drawable/ic_menu_manage"
+                android:title="@string/fragment_settings_title" />
+            <item android:id="@+id/mNavInformationFragment" android:icon="@android:drawable/ic_menu_send"
+                android:title="@string/fragment_information_title" />
         </menu>
     </item>
 

@@ -12,7 +12,7 @@
     <!-- FrameLayout to display Fragments -->
 
     <FrameLayout
-        android:id="@+id/frameContainerMainActivity"
+        android:id="@+id/mFrameContainerMainActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
