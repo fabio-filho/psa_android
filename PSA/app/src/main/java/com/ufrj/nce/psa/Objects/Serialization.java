@@ -1,7 +1,6 @@
 package com.ufrj.nce.psa.Objects;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -34,7 +33,7 @@ public abstract class Serialization implements Serializable {
             mObjectOutputStream.close();
             mFileOutputStream.close();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             Utilities.log(e.toString());
         }
     }
@@ -62,7 +61,7 @@ public abstract class Serialization implements Serializable {
     }
 
 
-    public abstract void saveData();
+    public abstract void saveData(Context mContext);
 
-    public abstract Object loadData();
+    public abstract Object loadData(Context mContext);
 }

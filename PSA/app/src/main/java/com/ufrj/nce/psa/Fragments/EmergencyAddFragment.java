@@ -14,6 +14,7 @@ import com.ufrj.nce.psa.R;
 public class EmergencyAddFragment extends Fragment {
 
     private View mRootView;
+    public final static boolean SHOW_FLOATING_BUTTON = false;
 
 
     @Override
@@ -25,4 +26,9 @@ public class EmergencyAddFragment extends Fragment {
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
 }

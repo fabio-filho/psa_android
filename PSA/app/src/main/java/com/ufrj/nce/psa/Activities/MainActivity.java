@@ -26,6 +26,10 @@ import com.ufrj.nce.psa.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private FloatingActionButton mFloatingButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +37,20 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.fab);
-        mFab.setOnClickListener(new View.OnClickListener() {
+        mFloatingButton = (FloatingActionButton) findViewById(R.id.fab);
+        mFloatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(EmergencyAddFragment.SHOW_FLOATING_BUTTON)
+                    mFloatingButton.setVisibility(View.VISIBLE);
+                else
+                    mFloatingButton.setVisibility(View.INVISIBLE);
 
                 Fragment mFragment = new EmergencyAddFragment();
                 FragmentManager mFragmentManager = getFragmentManager();
                 mFragmentManager.beginTransaction().replace(R.id.mFrameContainerMainActivity, mFragment).commit();
+
             }
         });
 
@@ -100,18 +110,42 @@ public class MainActivity extends AppCompatActivity
         if (mId == R.id.mNavEmergencyFragment) {
             mFragment = new EmergenciesFragment();
 
+            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
+                mFloatingButton.setVisibility(View.VISIBLE);
+            else
+                mFloatingButton.setVisibility(View.INVISIBLE);
+
         } else if (mId == R.id.mNavHistoryFragment) {
             mFragment = new HistoryFragment();
+
+            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
+                mFloatingButton.setVisibility(View.VISIBLE);
+            else
+                mFloatingButton.setVisibility(View.INVISIBLE);
 
         } else if (mId == R.id.mNavInformationFragment) {
             mFragment = new InformationFragment();
 
+            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
+                mFloatingButton.setVisibility(View.VISIBLE);
+            else
+                mFloatingButton.setVisibility(View.INVISIBLE);
+
         } else if (mId == R.id.mNavEmergencyManagementFragment) {
             mFragment = new EmergencyManagementFragment();
+
+            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
+                mFloatingButton.setVisibility(View.VISIBLE);
+            else
+                mFloatingButton.setVisibility(View.INVISIBLE);
 
         } else if (mId == R.id.mNavSettingsFragment) {
             mFragment = new SettingsFragment();
 
+            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
+                mFloatingButton.setVisibility(View.VISIBLE);
+            else
+                mFloatingButton.setVisibility(View.INVISIBLE);
         }
 
         if(mFragment!=null)

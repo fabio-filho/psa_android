@@ -118,12 +118,16 @@
     <!-- Settings Fragment -->
 
     <string name="fragment_settings_title">Configurações</string>
-    <string name="fragment_settings_label_alert_time">Intervalo de tempo</string>
-    <string name="fragment_settings_label_alert_time_explanation">Definição do intervalo de tempo entre um alerta e outro quando uma emergência é recebida.</string>
+    <string name="fragment_settings_label_alert_time">Intervalo de tempo entre um alerta e outro, quando uma emergência é recebida.</string>
+    <string name="fragment_settings_label_alert_time_explanation">20 segundos.</string>
     <string name="fragment_settings_label_use_gps">Permitir uso do GPS</string>
     <string name="fragment_settings_label_use_gps_explanation">Recomendado deixar ativado, para o envio da localização quando for feito um envio de emergência.</string>
     <string name="fragment_settings_label_title_name">Nome</string>
     <string name="fragment_settings_label_default_name">Seu nome</string>
+
+    <string name="fragment_settings_dialog_alert_time_label_button_title">Escolha o tempo</string>
+    <string name="fragment_settings_dialog_alert_time_label_button_ok">Ok</string>
+    <string name="fragment_settings_dialog_alert_time_label_button_cancel">Cancel</string>
 
 
     <string-array name="fragment_settings_array_time_alarm">

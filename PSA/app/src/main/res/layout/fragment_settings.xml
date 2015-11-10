@@ -15,6 +15,7 @@
 
 
         <Switch
+            android:id="@+id/mSwitchSettingsFragmentUseGPS"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_settings_label_use_gps"
@@ -36,6 +37,7 @@
 
 
         <TextView
+            android:id="@+id/mTextViewSettingsFragmentTimeInterval"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_settings_label_alert_time"
@@ -43,7 +45,7 @@
 
 
         <TextView
-            android:id="@+id/mTextViewSettingsFragmentTimeInterval"
+            android:id="@+id/mTextViewSettingsFragmentTimeIntervalExplanation"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_settings_label_alert_time_explanation"
