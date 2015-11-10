@@ -6,6 +6,53 @@
 
 
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_margin="5dp">
 
+
+
+        <Switch
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_settings_label_use_gps"
+            style="@style/fragment_settings_item_title"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_settings_label_use_gps_explanation"
+            android:paddingTop="5dp"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_settings_label_alert_time"
+            style="@style/fragment_settings_item_title"/>
+
+
+        <TextView
+            android:id="@+id/mTextViewSettingsFragmentTimeInterval"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_settings_label_alert_time_explanation"
+            android:paddingTop="5dp"
+            />
+
+
+
+
+    </LinearLayout>
 
 </LinearLayout>
