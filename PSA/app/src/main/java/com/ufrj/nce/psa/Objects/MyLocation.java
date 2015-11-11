@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 
+import java.io.Serializable;
+
 /**
  * Created by filhofilha on 11/11/15.
  */
 
 
-public class MyLocation {
+public class MyLocation implements Serializable {
 
     Location mCurrentLocation = null;
 

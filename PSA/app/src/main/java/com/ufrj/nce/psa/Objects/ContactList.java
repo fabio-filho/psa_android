@@ -8,18 +8,18 @@ import java.util.List;
  * Created by filhofilha on 11/11/15.
  */
 
-public class AgendaContactList implements Serializable {
+public class ContactList implements Serializable {
 
 
-    private List<AgendaContact> mList;
+    private List<Contact> mList;
 
 
-    public AgendaContactList(){
+    public ContactList(){
         mList = new ArrayList<>();
     }
 
 
-    public AgendaContact get(int index){
+    public Contact get(int index){
 
         try{
             return mList.get(index);
@@ -31,7 +31,7 @@ public class AgendaContactList implements Serializable {
         return null;
     }
 
-    public Boolean add(AgendaContact contact){
+    public Boolean add(Contact contact){
 
         if(!checkContactExist(contact)) {
             mList.add(contact);
@@ -41,16 +41,16 @@ public class AgendaContactList implements Serializable {
 
     }
 
-    public Boolean checkContactExist(AgendaContact contact){
+    public Boolean checkContactExist(Contact contact){
 
-        for(AgendaContact mContact: mList)
+        for(Contact mContact: mList)
             if(mContact.getId().equals(contact.getId()))
                 return true;
 
         return false;
     }
 
-    public List<AgendaContact> getList(){
+    public List<Contact> getList(){
         return mList;
     }
 
@@ -59,7 +59,7 @@ public class AgendaContactList implements Serializable {
 
         String result = "";
 
-        for (AgendaContact contact : mList)
+        for (Contact contact : mList)
             if(contact.isNameEmpty())
                 result += contact.getNumber()+"; ";
             else

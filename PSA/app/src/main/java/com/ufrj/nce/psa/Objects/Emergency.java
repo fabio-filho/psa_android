@@ -16,7 +16,7 @@ public class Emergency implements Serializable{
     private String mId;
     private View.OnClickListener mOnClickListener;
 
-    private AgendaContactList mListContact;
+    private ContactList mListContact;
 
 
     public Emergency(String mId, String mName, View.OnClickListener onClickListener){
@@ -33,17 +33,17 @@ public class Emergency implements Serializable{
 
 
     public Emergency(){
-        mListContact = new AgendaContactList();
+        mListContact = new ContactList();
     }
 
 
-    public AgendaContactList getListContact() {
+    public ContactList getListContact() {
         return mListContact;
     }
 
 
 
-    public Boolean sendAlertToContact(String message, AgendaContact contact){
+    public Boolean sendAlertToContact(String message, Contact contact){
 
         try {
             SmsSender smsSender = new SmsSender(contact.getNumber(), message);
@@ -62,7 +62,7 @@ public class Emergency implements Serializable{
 
         try {
 
-            for (AgendaContact contact : mListContact.getList())
+            for (Contact contact : mListContact.getList())
                 sendAlertToContact(message, contact);
 
         }catch (Exception o){

@@ -12,10 +12,12 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 
+import java.io.Serializable;
+
 /**
  * Created by fabiofilho on 3/21/15.
  */
-public class Contact {
+public class Contact implements Serializable{
 
     public static final String NO_NAME = "Nenhum nome foi encontrado para este número.";
 
@@ -23,7 +25,6 @@ public class Contact {
     private String mId;
 
     private Bitmap mImage;
-    private Context mContext;
     private MyLocation mMyLocation;
 
 
@@ -76,6 +77,24 @@ public class Contact {
         return mMyLocation;
     }
 
+    public String getName() {
+        return mName;
+    }
 
+    public String getNumber() {
+        return mNumber;
+    }
+
+    public String getId() {
+        return mId;
+    }
+
+    public boolean isNameEmpty(){
+
+        if(mName.equals(""))
+            return true;
+        else
+            return false;
+    }
 }
 

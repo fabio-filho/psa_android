@@ -125,4 +125,11 @@ public class AgendaContact implements Serializable {
             return false;
     }
 
+
+    public Contact getContact(){
+
+        return new Contact(mId, mName, mNumber, null);
+    }
+
+
 }

@@ -41,7 +41,7 @@
 
         <EditText
             style="@style/text_format_emergency"
-            android:id="@+id/mEditTextEmergencyFragmentAddAgendaContacts"
+            android:id="@+id/mEditTextEmergencyFragmentAddContacts"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="false"
@@ -49,7 +49,7 @@
             />
 
         <Button
-            android:id="@+id/mButtonEmergencyFragmentAddRemoveAgendaContact"
+            android:id="@+id/mButtonEmergencyFragmentAddRemoveContact"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/activity_emergency_view_btn_delete_contact"

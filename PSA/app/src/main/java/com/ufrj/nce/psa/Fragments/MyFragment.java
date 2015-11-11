@@ -1,6 +1,7 @@
 package com.ufrj.nce.psa.Fragments;
 
 import android.app.Fragment;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 
 /**
@@ -25,4 +26,14 @@ public abstract class MyFragment extends Fragment{
     public void setChangeFragmentOnClickListener(View.OnClickListener mChangeFragmentOnClickListener) {
         this.mChangeFragmentOnClickListener = mChangeFragmentOnClickListener;
     }
+
+    protected void showSnackBar(View mView, String mContent, boolean mIsLongDuration){
+
+        if(mIsLongDuration)
+            Snackbar.make(mView, mContent, Snackbar.LENGTH_LONG).show();
+        else
+            Snackbar.make(mView, mContent, Snackbar.LENGTH_SHORT).show();
+    }
+
 }
+

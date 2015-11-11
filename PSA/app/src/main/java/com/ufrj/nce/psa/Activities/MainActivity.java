@@ -22,6 +22,7 @@ import com.ufrj.nce.psa.Fragments.HistoryFragment;
 import com.ufrj.nce.psa.Fragments.InformationFragment;
 import com.ufrj.nce.psa.Fragments.MyFragment;
 import com.ufrj.nce.psa.Fragments.SettingsFragment;
+import com.ufrj.nce.psa.Objects.Utilities;
 import com.ufrj.nce.psa.R;
 
 public class MainActivity extends AppCompatActivity
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         /* Set Default Fragment into Activity */
         setFragmentIntoActivity(new EmergencyAddFragment());
+
     }
 
     @Override
@@ -109,8 +111,6 @@ public class MainActivity extends AppCompatActivity
             mFragment = new SettingsFragment();
         }
 
-        addOnClickListenersToFragments(mFragment);
-
         if(mFragment!=null)
             if (isValidFragment(mFragment.getClass().getName()))
                 setFragmentIntoActivity(mFragment);
@@ -124,18 +124,22 @@ public class MainActivity extends AppCompatActivity
 
     private void addOnClickListenersToFragments(MyFragment mFragment){
 
-        if(mFragment instanceof EmergencyAddFragment)
+        if(mFragment instanceof EmergencyAddFragment) {
+            Utilities.log("Okkkkkkk");
             mFragment.setChangeFragmentOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     setFragmentIntoActivity(new EmergenciesFragment());
                 }
             });
+        }
 
 
     }
 
     private void setFragmentIntoActivity(MyFragment mFragment){
+
+        addOnClickListenersToFragments(mFragment);
 
         if(mFragment.isShowFloatingButton())
             mFloatingButton.setVisibility(View.VISIBLE);

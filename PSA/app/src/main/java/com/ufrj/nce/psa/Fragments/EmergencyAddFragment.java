@@ -3,16 +3,15 @@ package com.ufrj.nce.psa.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.ufrj.nce.psa.Application.Data.Emergencies;
 import com.ufrj.nce.psa.Objects.AgendaContact;
+import com.ufrj.nce.psa.Objects.Contact;
 import com.ufrj.nce.psa.Objects.Dialogs.MessageBox;
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.Objects.Utilities;
@@ -26,7 +25,7 @@ public class EmergencyAddFragment extends MyFragment{
     private View mRootView;
     final int PICK_CONTACT = 1;
     private Emergency mEmergency = new Emergency();
-    private EditText mEmergencyNameEditText, mAgendaContactsEditText;
+    private EditText mEmergencyNameEditText, mContactsEditText;
     private Button mSaveButton, mCancelButton, mRemoveAgendaContactButton;
     private Emergencies mEmergencies;
 
@@ -77,11 +76,11 @@ public class EmergencyAddFragment extends MyFragment{
     private void definingUIObjects(){
 
         mEmergencyNameEditText  = (EditText) mRootView.findViewById(R.id.mEditTextEmergencyFragmentAddEmergencyName);
-        mAgendaContactsEditText = (EditText) mRootView.findViewById(R.id.mEditTextEmergencyFragmentAddAgendaContacts);
+        mContactsEditText = (EditText) mRootView.findViewById(R.id.mEditTextEmergencyFragmentAddContacts);
 
         mSaveButton                = (Button) mRootView.findViewById(R.id.mButtonEmergencyFragmentAddSave);
         mCancelButton              = (Button) mRootView.findViewById(R.id.mButtonEmergencyFragmentAddCancel);
-        mRemoveAgendaContactButton = (Button) mRootView.findViewById(R.id.mButtonEmergencyFragmentAddRemoveAgendaContact);
+        mRemoveAgendaContactButton = (Button) mRootView.findViewById(R.id.mButtonEmergencyFragmentAddRemoveContact);
 
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +97,7 @@ public class EmergencyAddFragment extends MyFragment{
             public void onClick(View v) {
 
                 mEmergency.getListContact().removeLastItem();
-                mAgendaContactsEditText.setText(mEmergency.getListContact().getListInStringFormat());
+                mContactsEditText.setText(mEmergency.getListContact().getListInStringFormat());
             }
         });
 
@@ -111,7 +110,7 @@ public class EmergencyAddFragment extends MyFragment{
         super.onActivityResult(requestCode, resultCode, mData);
 
         if (requestCode == PICK_CONTACT && resultCode == getActivity().RESULT_OK)
-            setAgendaContactOnUI(new AgendaContact(mRootView.getContext(), mData.getData()));
+            setContactOnUI(new AgendaContact(mRootView.getContext(), mData.getData()).getContact());
 
     }
 
@@ -132,7 +131,7 @@ public class EmergencyAddFragment extends MyFragment{
                 return;
             }
 
-            if(mAgendaContactsEditText.getText().length() <= 3){
+            if(mContactsEditText.getText().length() <= 3){
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -146,7 +145,7 @@ public class EmergencyAddFragment extends MyFragment{
             mEmergencies.add(mEmergency);
             mEmergencies.saveData(mRootView.getContext());
 
-            Snackbar.make(mRootView.findFocus(), "Emergência " + mEmergencyNameEditText.getText() + " Adicionada ", Snackbar.LENGTH_SHORT).show();
+            showSnackBar(mRootView.findFocus(), "Emergência " + mEmergencyNameEditText.getText() + " Adicionada ", false);
 
             mCancelButton.performClick();
 
@@ -155,15 +154,13 @@ public class EmergencyAddFragment extends MyFragment{
         }
     }
 
-    private void setAgendaContactOnUI(AgendaContact mAgendaContact){
+    private void setContactOnUI(Contact mContact){
 
-        if(!mEmergency.getListContact().add(mAgendaContact))
-            Toast.makeText(mRootView.getContext(),
-                    getResources().getString(R.string.activity_emergency_view_message_item_already_exist),
-                    Toast.LENGTH_LONG).show();
+        if(!mEmergency.getListContact().add(mContact))
+            showSnackBar(mRootView.findFocus(), getResources().getString(R.string.activity_emergency_view_message_item_already_exist), true);
 
 
-        mAgendaContactsEditText.setText(mEmergency.getListContact().getListInStringFormat());
+        mContactsEditText.setText(mEmergency.getListContact().getListInStringFormat());
     }
 
 

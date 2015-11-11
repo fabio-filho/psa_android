@@ -13,7 +13,6 @@ import com.ufrj.nce.psa.R;
 public class EmergenciesFragment extends MyFragment  {
 
     private View mRootView;
-    public final static boolean SHOW_FLOATING_BUTTON = true;
 
 
     @Override
