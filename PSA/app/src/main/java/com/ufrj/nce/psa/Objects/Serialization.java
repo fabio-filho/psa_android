@@ -34,7 +34,7 @@ public abstract class Serialization implements Serializable {
             mFileOutputStream.close();
 
         } catch (Exception e) {
-            Utilities.log(e.toString());
+            e.printStackTrace();
         }
     }
 
@@ -52,10 +52,10 @@ public abstract class Serialization implements Serializable {
             mFileInputStream.close();
 
         } catch (IOException e) {
-            Utilities.log(e.toString());
+            e.printStackTrace();
         }
         catch (ClassNotFoundException e) {
-            Utilities.log(e.toString());
+            e.printStackTrace();
         }
         return mObject;
     }

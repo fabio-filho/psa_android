@@ -37,6 +37,33 @@
 
 
         <TextView
+            android:id="@+id/mTextViewSettingsFragmentTitleName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_settings_label_title_name"
+            style="@style/fragment_settings_item_title"/>
+
+
+        <TextView
+            android:id="@+id/mTextViewSettingsFragmentName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_settings_label_default_name"
+            android:paddingTop="5dp"
+            />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
+
+
+
+        <TextView
             android:id="@+id/mTextViewSettingsFragmentTimeInterval"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -51,8 +78,6 @@
             android:text="@string/fragment_settings_label_alert_time_explanation"
             android:paddingTop="5dp"
             />
-
-
 
 
     </LinearLayout>

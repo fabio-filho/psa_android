@@ -11,7 +11,7 @@
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-    <EditTextPreference
+    <edit
         android:key="example_text"
         android:title="@string/fragment_settings_label_title_name"
         android:defaultValue="@string/fragment_settings_label_default_name"

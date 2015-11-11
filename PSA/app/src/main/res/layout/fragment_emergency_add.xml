@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="25dp"
+        android:layout_margin="10dp"
         android:orientation="vertical"
         android:shadowColor="#FF8C00"
         android:shadowDx="0"
@@ -25,7 +25,7 @@
 
         <EditText
             style="@style/text_format_emergency"
-            android:id="@+id/txtNameEmergency"
+            android:id="@+id/mEditTextEmergencyFragmentAddEmergencyName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="false"
@@ -41,7 +41,7 @@
 
         <EditText
             style="@style/text_format_emergency"
-            android:id="@+id/txtListNumbers"
+            android:id="@+id/mEditTextEmergencyFragmentAddAgendaContacts"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="false"
@@ -49,27 +49,27 @@
             />
 
         <Button
+            android:id="@+id/mButtonEmergencyFragmentAddRemoveAgendaContact"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/activity_emergency_view_btn_delete_contact"
-            android:onClick="onDeleteContacts"
             android:layout_marginBottom="40dp"
             />
 
 
         <Button
+            android:id="@+id/mButtonEmergencyFragmentAddSave"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/activity_emergency_view_btn_save"
-            android:onClick="onSaveEmergency"
             />
 
 
         <Button
+            android:id="@+id/mButtonEmergencyFragmentAddCancel"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/activity_emergency_view_btn_cancel"
-            android:onClick="onCancel"
             />
 
 

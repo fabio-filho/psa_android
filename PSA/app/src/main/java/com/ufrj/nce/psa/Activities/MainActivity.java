@@ -1,7 +1,7 @@
 package com.ufrj.nce.psa.Activities;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,6 +20,7 @@ import com.ufrj.nce.psa.Fragments.EmergencyEditFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyManagementFragment;
 import com.ufrj.nce.psa.Fragments.HistoryFragment;
 import com.ufrj.nce.psa.Fragments.InformationFragment;
+import com.ufrj.nce.psa.Fragments.MyFragment;
 import com.ufrj.nce.psa.Fragments.SettingsFragment;
 import com.ufrj.nce.psa.R;
 
@@ -37,22 +38,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mFloatingButton = (FloatingActionButton) findViewById(R.id.fab);
-        mFloatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(EmergencyAddFragment.SHOW_FLOATING_BUTTON)
-                    mFloatingButton.setVisibility(View.VISIBLE);
-                else
-                    mFloatingButton.setVisibility(View.INVISIBLE);
-
-                Fragment mFragment = new EmergencyAddFragment();
-                FragmentManager mFragmentManager = getFragmentManager();
-                mFragmentManager.beginTransaction().replace(R.id.mFrameContainerMainActivity, mFragment).commit();
-
-            }
-        });
+        mFloatingButton = (FloatingActionButton) findViewById(R.id.mFabMainActivity);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mDrawerLayoutMainActivity);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,7 +49,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        /* Set Default Fragment into Activity */
+        setFragmentIntoActivity(new EmergencyAddFragment());
     }
 
     @Override
@@ -104,59 +91,79 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int mId = mItem.getItemId();
 
-        Fragment mFragment = null;
-
+        MyFragment mFragment = null;
 
         if (mId == R.id.mNavEmergencyFragment) {
             mFragment = new EmergenciesFragment();
 
-            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
-                mFloatingButton.setVisibility(View.VISIBLE);
-            else
-                mFloatingButton.setVisibility(View.INVISIBLE);
-
         } else if (mId == R.id.mNavHistoryFragment) {
             mFragment = new HistoryFragment();
-
-            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
-                mFloatingButton.setVisibility(View.VISIBLE);
-            else
-                mFloatingButton.setVisibility(View.INVISIBLE);
 
         } else if (mId == R.id.mNavInformationFragment) {
             mFragment = new InformationFragment();
 
-            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
-                mFloatingButton.setVisibility(View.VISIBLE);
-            else
-                mFloatingButton.setVisibility(View.INVISIBLE);
-
         } else if (mId == R.id.mNavEmergencyManagementFragment) {
             mFragment = new EmergencyManagementFragment();
 
-            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
-                mFloatingButton.setVisibility(View.VISIBLE);
-            else
-                mFloatingButton.setVisibility(View.INVISIBLE);
-
         } else if (mId == R.id.mNavSettingsFragment) {
             mFragment = new SettingsFragment();
-
-            if(EmergenciesFragment.SHOW_FLOATING_BUTTON)
-                mFloatingButton.setVisibility(View.VISIBLE);
-            else
-                mFloatingButton.setVisibility(View.INVISIBLE);
         }
 
+        addOnClickListenersToFragments(mFragment);
+
         if(mFragment!=null)
-            if (isValidFragment(mFragment.getClass().getName())) {
-                FragmentManager mFragmentManager = getFragmentManager();
-                mFragmentManager.beginTransaction().replace(R.id.mFrameContainerMainActivity, mFragment).commit();
-            }
+            if (isValidFragment(mFragment.getClass().getName()))
+                setFragmentIntoActivity(mFragment);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mDrawerLayoutMainActivity);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+
+    private void addOnClickListenersToFragments(MyFragment mFragment){
+
+        if(mFragment instanceof EmergencyAddFragment)
+            mFragment.setChangeFragmentOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setFragmentIntoActivity(new EmergenciesFragment());
+                }
+            });
+
+
+    }
+
+    private void setFragmentIntoActivity(MyFragment mFragment){
+
+        if(mFragment.isShowFloatingButton())
+            mFloatingButton.setVisibility(View.VISIBLE);
+        else
+            mFloatingButton.setVisibility(View.INVISIBLE);
+
+        if(mFragment.getFloatingButtonIcon() == 0)
+            mFloatingButton.setImageResource(android.R.drawable.ic_input_add);
+        else
+            mFloatingButton.setImageResource(mFragment.getFloatingButtonIcon());
+
+        if(mFragment.getFloatingButtonColor() == 0)
+            mFloatingButton.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_red_light));
+        else
+            mFloatingButton.setBackgroundTintList(getResources().getColorStateList(mFragment.getFloatingButtonColor()));
+
+        if(mFragment.getFloatingButtonOnClickListener()!=null)
+            mFloatingButton.setOnClickListener(mFragment.getFloatingButtonOnClickListener());
+        else
+            mFloatingButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setFragmentIntoActivity(new EmergencyAddFragment());
+                }
+            });
+
+        FragmentManager mFragmentManager = getFragmentManager();
+        mFragmentManager.beginTransaction().replace(R.id.mFrameContainerMainActivity, mFragment).commit();
     }
 
     /**
@@ -174,4 +181,9 @@ public class MainActivity extends AppCompatActivity
                 || InformationFragment.class.getName().equals(mFragmentName);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

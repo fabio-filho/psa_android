@@ -21,4 +21,21 @@ public class Dialogs {
 
         mDialogFragment.show(mFragmentManager, DialogSingleListChoice.class.getName());
     }
+
+
+    public static void showEditText(FragmentManager mFragmentManager, String mTitle, String mEditTextHint, String mButtonLabelOk, String mButtonLabelCancel,
+                                                    DialogInterface.OnClickListener mDialogOnClickListenerOk,
+                                                    DialogInterface.OnClickListener mDialogOnClickListenerCancel) {
+
+
+        DialogEditText mDialogFragment = new DialogEditText();
+
+        mDialogFragment.setAttributes(mTitle, mEditTextHint, mButtonLabelOk, mButtonLabelCancel,
+                mDialogOnClickListenerOk, mDialogOnClickListenerCancel);
+
+        mDialogFragment.show(mFragmentManager, DialogEditText.class.getName());
+    }
+
+
+
 }

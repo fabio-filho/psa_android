@@ -1,4 +1,4 @@
-package com.ufrj.nce.psa.Application;
+package com.ufrj.nce.psa.Application.Data;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import com.ufrj.nce.psa.Objects.Utilities;
 /**
  * Created by filhofilha on 11/8/15.
  */
-public class MySettings extends Serialization{
+public class Settings extends Serialization{
 
 
     public final static int INTERVAL_ALARM_SHORT = 10 * 1000;
@@ -18,11 +18,15 @@ public class MySettings extends Serialization{
 
     private int mIndexAlarmIntervalMinutesArray = 1;
     private boolean mUseGPS = true;
+    private String mName = "";
 
 
-    public MySettings() {
-        super(MySettings.class.getName());
+    public Settings() {
+        super(Settings.class.getName());
     }
+
+
+    /* =================================================================  Serialization settings. */
 
     @Override
     public void saveData(Context mContext) {
@@ -30,20 +34,25 @@ public class MySettings extends Serialization{
     }
 
     @Override
-    public MySettings loadData(Context mContext) {
+    public Settings loadData(Context mContext) {
 
-        Object mObject = loadInstance(mContext, MySettings.class.getName());
+        Object mObject = loadInstance(mContext, Settings.class.getName());
 
         try {
             if(mObject !=null)
-                return (MySettings) mObject;
+                return (Settings) mObject;
 
         }catch (Exception o){
             Utilities.log(o.toString());
         }
 
-        return new MySettings();
+        return new Settings();
     }
+
+
+
+
+    /* ===================================================================   Settings proprieties */
 
 
     public int getIndexAlarmIntervalMinutesArray() {
@@ -60,5 +69,13 @@ public class MySettings extends Serialization{
 
     public void setUseGPS(boolean mUseGPS) {
         this.mUseGPS = mUseGPS;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String mName) {
+        this.mName = mName;
     }
 }
