@@ -1,7 +1,5 @@
 package com.ufrj.nce.psa.Objects;
 
-import android.view.View;
-
 import java.io.Serializable;
 
 /**
@@ -12,24 +10,12 @@ public class Emergency implements Serializable{
     public static final String CODE_EMPTY = "-1";
     public final static String TAG_EMERGENCY_MESSAGE = "@%$#";
 
-    private String mName;
-    private String mId;
-    private View.OnClickListener mOnClickListener;
+    private String mName, mMessage, mDoctorMessage;
+
+    private Contact mDoctorContact;
+    private boolean mIsDoctorPartActioned = false;
 
     private ContactList mListContact;
-
-
-    public Emergency(String mId, String mName, View.OnClickListener onClickListener){
-
-        this.mName = mName;
-        this.mId = mId;
-        this.mOnClickListener = onClickListener;
-    }
-
-    public View.OnClickListener getOnClickListener() {
-        return mOnClickListener;
-    }
-
 
 
     public Emergency(){
@@ -72,5 +58,56 @@ public class Emergency implements Serializable{
         return false;
     }
 
+    public boolean isDoctorPartActioned() {
+        return mIsDoctorPartActioned;
+    }
 
+    public void setDoctorPartActioned(boolean mIsDoctorPartActived) {
+        this.mIsDoctorPartActioned = mIsDoctorPartActived;
+    }
+
+    public Contact getDoctorContact() {
+        return mDoctorContact;
+    }
+
+    public void setDoctorContact(Contact mDoctorContact) {
+        this.mDoctorContact = mDoctorContact;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getMessage() {
+        return mMessage;
+    }
+
+    public void setMessage(String mMessage) {
+        this.mMessage = mMessage;
+    }
+
+    public String getDoctorMessage() {
+        return mDoctorMessage;
+    }
+
+    public void setDoctorMessage(String mDoctorMessage) {
+        this.mDoctorMessage = mDoctorMessage;
+    }
+
+    /* Statics methods */
+    public static boolean isValidMessage(String mMessage){
+
+        if(mMessage.length() <= 3 ||
+                mMessage.contains(TAG_EMERGENCY_MESSAGE) ||
+                mMessage.contains(EmergencyReceived.TAG_SMS_IDENTIFICATION)||
+                mMessage.contains(EmergencyReceived.TAG_SEPARATOR))
+
+            return false;
+
+        return true;
+    }
 }

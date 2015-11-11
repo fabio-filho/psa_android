@@ -15,17 +15,6 @@
     <string name="navigation_drawer_close">Fechar</string>
 
 
-    <!-- Nav Drawer Menu Items -->
-    <string-array name="nav_drawer_items">
-        <item >Emergências</item>
-        <item >Gerenciar Emergências</item>
-        <item >Histórico Emergências</item>
-        <item >Configurações</item>
-        <item >Informações</item>
-    </string-array>
-
-
-
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 
@@ -35,8 +24,9 @@
 
     <!-- Fragment Home-->
 
-    <string name="fragment_emergency_title">Emergências</string>
-    <string name="fragment_emergency_no_emergencies">Sem emergências. Clique para Adicionar</string>
+    <string name="fragment_emergencies_title">Emergências</string>
+    <string name="fragment_emergencies_subtitle">Clique para disparar uma emergência</string>
+    <string name="fragment_emergencies_no_emergencies">Sem emergências. Clique para Adicionar</string>
 
     <!-- End Fragment Home-->
 
@@ -45,7 +35,7 @@
 
     <!-- Fragment Emergency Manager-->
 
-    <string name="fragment_emergency_management_title">Gerenciamento das Emergências</string>
+    <string name="fragment_emergency_management_title">Gerenciamento</string>
     <string name="fragment_emergency_management_remove_item">Tem certeza que deseja remover esta Emergência: </string>
     <string name="fragment_emergency_management_remove_item_title">Remover Emergência</string>
     <!-- End Fragment Emergency Manager-->
@@ -57,18 +47,26 @@
 
     <string name="activity_emergency_view_txt_title">Adicionando Emergência</string>
     <string name="activity_emergency_view_txt_name_emergency">Nome da Emergência:</string>
+    <string name="activity_emergency_view_txt_message">Mensagem:</string>
     <string name="activity_emergency_view_txt_list_contacts">Lista de Contatos:</string>
     <string name="activity_emergency_view_btn_save">Salvar Emergência</string>
     <string name="activity_emergency_view_btn_cancel">Cancelar</string>
     <string name="activity_emergency_view_actionbar_add_contact">Adicionar um Contato</string>
 
 
-    <string name="activity_emergency_view_message_empty_name">O campo: Nome da Emergência, não pode estar vazio!</string>
-    <string name="activity_emergency_view_message_empty_number_list">O campo: Lista de Contatos, não pode estar vazio!</string>
+    <string name="activity_emergency_view_message_empty_name">O campo \"Nome da Emergência\", não pode estar vazio!</string>
+    <string name="activity_emergency_view_message_empty_number_list">O campo \"Lista de Contatos\", não pode estar vazio!</string>
+    <string name="activity_emergency_view_message_empty_message">O campo \"Mensagem\", não pode estar vazio!</string>
 
     <string name="activity_emergency_view_message_item_already_exist">Este contato já foi adicionado.</string>
     <string name="activity_emergency_view_btn_delete_contact">Apagar Contato</string>
     <string name="activity_emergency_view_message_error_save">Houve algum erro ao salvar a Emergência. Tente Novamente.</string>
+
+    <string name="activity_emergency_view_checkbox_doctor_send">Ativar envio para um médico.</string>
+    <string name="activity_emergency_view_txt_doctor_message">Mensagem para o médico:</string>
+    <string name="activity_emergency_view_txt_doctor_number">Número do médico:</string>
+    <string name="activity_emergency_view_message_empty_doctor_message">O campo \"Mensagem para o médico\", não pode estar vazio!</string>
+    <string name="activity_emergency_view_message_empty_doctor_number">O campo \"Número do médico\", não pode estar vazio!</string>
 
     <!-- End Emergency View Fragment-->
 
@@ -130,6 +128,9 @@
     <string name="fragment_settings_dialog_change_name_title">Digite seu nome</string>
     <string name="fragment_settings_dialog_label_button_ok">Ok</string>
     <string name="fragment_settings_dialog_label_button_cancel">Cancel</string>
+
+    <string name="fragment_settings_dialog_gps_disabled_title">O GPS está desativado.</string>
+    <string name="fragment_settings_dialog_gps_disabled_message_content">Deseja ativá-lo agora?</string>
 
 
     <string-array name="fragment_settings_array_time_alarm">

@@ -10,10 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.ufrj.nce.psa.Application.Data.Settings;
 import com.ufrj.nce.psa.Fragments.EmergenciesFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyAddFragment;
 import com.ufrj.nce.psa.Fragments.EmergencyEditFragment;
@@ -22,7 +25,6 @@ import com.ufrj.nce.psa.Fragments.HistoryFragment;
 import com.ufrj.nce.psa.Fragments.InformationFragment;
 import com.ufrj.nce.psa.Fragments.MyFragment;
 import com.ufrj.nce.psa.Fragments.SettingsFragment;
-import com.ufrj.nce.psa.Objects.Utilities;
 import com.ufrj.nce.psa.R;
 
 public class MainActivity extends AppCompatActivity
@@ -30,28 +32,39 @@ public class MainActivity extends AppCompatActivity
 
 
     private FloatingActionButton mFloatingButton;
+    private TextView mNavBarNameTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         mFloatingButton = (FloatingActionButton) findViewById(R.id.mFabMainActivity);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.mDrawerLayoutMainActivity);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        DrawerLayout mDrawer = (DrawerLayout) findViewById(R.id.mDrawerLayoutMainActivity);
+        ActionBarDrawerToggle mToggle = new ActionBarDrawerToggle(
+                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(mToggle);
+        mToggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+
+        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+
+        /* Layout inflater from nav_header_main.xml */
+        View mHeader = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
+        /* Adding manually the nav_header_main into Navigation View */
+        mNavigationView.addHeaderView(mHeader);
+
+        mNavBarNameTextView = (TextView) mHeader.findViewById(R.id.mTextViewNavBarMainActivityName);
+
+        mNavBarNameTextView.setText( new Settings().loadData(getApplicationContext()).getName());
 
         /* Set Default Fragment into Activity */
-        setFragmentIntoActivity(new EmergencyAddFragment());
+        setFragmentIntoActivity(new EmergenciesFragment());
 
     }
 
@@ -125,7 +138,6 @@ public class MainActivity extends AppCompatActivity
     private void addOnClickListenersToFragments(MyFragment mFragment){
 
         if(mFragment instanceof EmergencyAddFragment) {
-            Utilities.log("Okkkkkkk");
             mFragment.setChangeFragmentOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -134,6 +146,14 @@ public class MainActivity extends AppCompatActivity
             });
         }
 
+
+        if(mFragment instanceof SettingsFragment)
+            ((SettingsFragment) mFragment).setChangeNameOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mNavBarNameTextView.setText( new Settings().loadData(getApplicationContext()).getName() );
+                }
+            });
 
     }
 

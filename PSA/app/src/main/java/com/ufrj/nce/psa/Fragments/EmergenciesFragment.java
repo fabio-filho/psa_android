@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.ufrj.nce.psa.Application.Data.Emergencies;
+import com.ufrj.nce.psa.Objects.Adapters.EmergencyAdapter;
+import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
 
 /**
@@ -13,6 +17,9 @@ import com.ufrj.nce.psa.R;
 public class EmergenciesFragment extends MyFragment  {
 
     private View mRootView;
+    private ListView mListView;
+    private EmergencyAdapter mEmergencyAdapter;
+    private Emergencies mEmergencies;
 
 
     @Override
@@ -41,7 +48,41 @@ public class EmergenciesFragment extends MyFragment  {
 
         mRootView = mInflater.inflate(R.layout.fragment_emergencies, mContainer, false);
 
+        mEmergencies = new Emergencies().loadData(mRootView.getContext());
+        defineUIObjects();
+        loadListView();
+
         return mRootView;
 
     }
+
+
+    private void defineUIObjects(){
+
+        mListView = (ListView) mRootView.findViewById(R.id.mListViewEmergenciesFragment);
+
+
+    }
+
+
+    private void loadListView(){
+
+        mEmergencyAdapter = new EmergencyAdapter(mRootView.getContext(), mEmergencies.getList(), new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                onClickEmergencyButton(mView);
+            }
+        });
+
+        mListView.setAdapter(mEmergencyAdapter);
+
+    }
+
+
+    private void onClickEmergencyButton(View mView){
+
+        Emergency mEmergency = mEmergencyAdapter.getItem(mListView.getPositionForView(mView));
+        showSnackBar(mRootView.findFocus(), "Enviando "+mEmergency.getName(), false);
+    }
+
 }

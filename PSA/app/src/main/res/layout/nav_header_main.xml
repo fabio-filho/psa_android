@@ -10,11 +10,11 @@
     android:gravity="bottom">
 
     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon" android:id="@+id/imageView" />
+        android:paddingTop="@dimen/nav_header_vertical_spacing_image_view"
+        android:src="@mipmap/ic_launcher" android:id="@+id/imageView" />
 
     <TextView
-        android:id="@+id/mTextViewNavHeaderMainActivityName"
+        android:id="@+id/mTextViewNavBarMainActivityName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"

@@ -7,7 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.ufrj.nce.psa.Application.Data.Emergencies;
 import com.ufrj.nce.psa.Objects.AgendaContact;
@@ -23,11 +28,16 @@ import com.ufrj.nce.psa.R;
 public class EmergencyAddFragment extends MyFragment{
 
     private View mRootView;
-    final int PICK_CONTACT = 1;
+    final int PICK_CONTACT = 1, PICK_DOCTOR_CONTACT = 2;
     private Emergency mEmergency = new Emergency();
-    private EditText mEmergencyNameEditText, mContactsEditText;
+    private EditText mEmergencyNameEditText, mEmergencyMessageEditText, mDoctorMessageEditText;
+    private TextView mContactsEditText, mDoctorNumberTextView;
     private Button mSaveButton, mCancelButton, mRemoveAgendaContactButton;
     private Emergencies mEmergencies;
+
+    private Switch mDoctorPartSwitch;
+    private LinearLayout mDoctorPartLinearLayout;
+    private ImageView mAddDoctorNumberImageView;
 
 
     @Override
@@ -35,8 +45,7 @@ public class EmergencyAddFragment extends MyFragment{
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                openContacts();
+                openContacts(PICK_CONTACT);
             }
         };
     }
@@ -67,21 +76,59 @@ public class EmergencyAddFragment extends MyFragment{
         mEmergencies = new Emergencies().loadData(mRootView.getContext());
         Utilities.log(""+mEmergencies.getList().size());
 
-        definingUIObjects();
+        defineUIObjects();
 
         return mRootView;
     }
 
 
-    private void definingUIObjects(){
+    private void defineUIObjects(){
 
+        mDoctorNumberTextView = (TextView) mRootView.findViewById(R.id.mtTextViewEmergencyFragmentAddEmergencyDoctorNumber);
+        mAddDoctorNumberImageView = (ImageView) mRootView.findViewById(R.id.mImageViewEmergencyFragmentAddEmergencyAddDoctorNumber);
+        mDoctorPartSwitch = (Switch) mRootView.findViewById(R.id.mSwitchEmergencyFragmentAddEmergencyDoctorPart);
+        mDoctorPartLinearLayout = (LinearLayout) mRootView.findViewById(R.id.mLinearLayoutEmergencyFragmentAddEmergencyDoctor);
+        mDoctorMessageEditText = (EditText) mRootView.findViewById(R.id.mEditTextEmergencyFragmentAddEmergencyDoctorMessage);
+
+        mEmergencyMessageEditText = (EditText) mRootView.findViewById(R.id.mEditTextEmergencyFragmentAddEmergencyMessage);
         mEmergencyNameEditText  = (EditText) mRootView.findViewById(R.id.mEditTextEmergencyFragmentAddEmergencyName);
-        mContactsEditText = (EditText) mRootView.findViewById(R.id.mEditTextEmergencyFragmentAddContacts);
+        mContactsEditText = (TextView) mRootView.findViewById(R.id.mTextViewEmergencyFragmentAddContacts);
 
         mSaveButton                = (Button) mRootView.findViewById(R.id.mButtonEmergencyFragmentAddSave);
         mCancelButton              = (Button) mRootView.findViewById(R.id.mButtonEmergencyFragmentAddCancel);
         mRemoveAgendaContactButton = (Button) mRootView.findViewById(R.id.mButtonEmergencyFragmentAddRemoveContact);
 
+
+        mAddDoctorNumberImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openContacts(PICK_DOCTOR_CONTACT);
+            }
+        });
+
+        mDoctorPartSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        mEmergency.setDoctorPartActioned(isChecked);
+                        ViewGroup.LayoutParams mLayoutParams = mDoctorPartLinearLayout.getLayoutParams();
+
+                        if(isChecked)
+                            mLayoutParams.height = ViewGroup.LayoutParams.FILL_PARENT;
+                        else
+                            mLayoutParams.height = 0;
+
+                        mDoctorPartLinearLayout.setLayoutParams(mLayoutParams);
+                    }
+                });
+
+
+            }
+        });
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,14 +159,17 @@ public class EmergencyAddFragment extends MyFragment{
         if (requestCode == PICK_CONTACT && resultCode == getActivity().RESULT_OK)
             setContactOnUI(new AgendaContact(mRootView.getContext(), mData.getData()).getContact());
 
+        if (requestCode == PICK_DOCTOR_CONTACT && resultCode == getActivity().RESULT_OK)
+            setDoctorContactOnUI(new AgendaContact(mRootView.getContext(), mData.getData()).getContact());
+
     }
 
 
-    private void saveEmergency(){
+    private boolean canSaveEmergency(){
 
         try{
 
-            if (mEmergencyNameEditText.getText().length() == 0) {
+            if (!Emergency.isValidMessage(mEmergencyNameEditText.getText().toString())) {
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -128,10 +178,22 @@ public class EmergencyAddFragment extends MyFragment{
                     }
                 });
 
-                return;
+                return false;
             }
 
-            if(mContactsEditText.getText().length() <= 3){
+            if(!Emergency.isValidMessage(mEmergencyMessageEditText.getText().toString())){
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MessageBox.showOk(mRootView.getContext(), getResources().getString(R.string.activity_emergency_view_message_empty_message));
+                    }
+                });
+                return false;
+            }
+
+
+            if(!Emergency.isValidMessage(mContactsEditText.getText().toString())){
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -139,8 +201,54 @@ public class EmergencyAddFragment extends MyFragment{
                         MessageBox.showOk(mRootView.getContext(), getResources().getString(R.string.activity_emergency_view_message_empty_number_list));
                     }
                 });
-                return;
+                return false;
             }
+
+
+
+            /* DOCTOR PART */
+            if(mEmergency.isDoctorPartActioned()){
+
+                if(!Emergency.isValidMessage(mDoctorMessageEditText.getText().toString())){
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            MessageBox.showOk(mRootView.getContext(), getResources().getString(R.string.activity_emergency_view_message_empty_doctor_message));
+                        }
+                    });
+                    return false;
+                }
+
+
+                if(!Emergency.isValidMessage(mDoctorNumberTextView.getText().toString())){
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            MessageBox.showOk(mRootView.getContext(), getResources().getString(R.string.activity_emergency_view_message_empty_doctor_number));
+                        }
+                    });
+                    return false;
+                }
+            }
+
+        }catch (Exception o){
+            Utilities.log(o.toString());
+        }
+
+        return true;
+    }
+
+    private void saveEmergency(){
+
+        try{
+            if(!canSaveEmergency()) return;
+
+            mEmergency.setName(mEmergencyNameEditText.getText().toString());
+            mEmergency.setMessage(mEmergencyMessageEditText.getText().toString());
+
+            mEmergency.setDoctorMessage(mDoctorMessageEditText.getText().toString());
 
             mEmergencies.add(mEmergency);
             mEmergencies.saveData(mRootView.getContext());
@@ -159,17 +267,22 @@ public class EmergencyAddFragment extends MyFragment{
         if(!mEmergency.getListContact().add(mContact))
             showSnackBar(mRootView.findFocus(), getResources().getString(R.string.activity_emergency_view_message_item_already_exist), true);
 
-
         mContactsEditText.setText(mEmergency.getListContact().getListInStringFormat());
+    }
+
+    private void setDoctorContactOnUI(Contact mContact){
+
+        mEmergency.setDoctorContact(mContact);
+        mDoctorNumberTextView.setText(mEmergency.getDoctorContact().getName());
     }
 
 
 
-    private void openContacts(){
+    private void openContacts(int mResultTag){
 
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         //intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-        startActivityForResult(intent, PICK_CONTACT);
+        startActivityForResult(intent, mResultTag);
 
     }
 

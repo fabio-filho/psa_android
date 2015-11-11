@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:orientation="vertical"
         android:shadowColor="#FF8C00"
         android:shadowDx="0"
@@ -28,6 +28,22 @@
             android:id="@+id/mEditTextEmergencyFragmentAddEmergencyName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginBottom="30dp"/>
+
+
+        <TextView
+            style="@style/text_format_emergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_txt_message"/>
+
+
+        <EditText
+            style="@style/text_format_emergency"
+            android:id="@+id/mEditTextEmergencyFragmentAddEmergencyMessage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:singleLine="false"
             android:layout_marginBottom="30dp"/>
 
@@ -39,13 +55,13 @@
             android:text="@string/activity_emergency_view_txt_list_contacts"/>
 
 
-        <EditText
+        <TextView
             style="@style/text_format_emergency"
-            android:id="@+id/mEditTextEmergencyFragmentAddContacts"
+            android:textColor="@android:color/darker_gray"
+            android:id="@+id/mTextViewEmergencyFragmentAddContacts"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="false"
-            android:enabled="false"
             />
 
         <Button
@@ -53,8 +69,102 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/activity_emergency_view_btn_delete_contact"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="20dp"
             />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"/>
+
+
+
+
+
+        <!-- DOCTOR PART -->
+
+        <Switch
+            android:id="@+id/mSwitchEmergencyFragmentAddEmergencyDoctorPart"
+            style="@style/text_format_emergency"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_emergency_view_checkbox_doctor_send"
+            android:checked="false"
+            android:paddingBottom="20dp"/>
+
+
+        <LinearLayout
+            android:id="@+id/mLinearLayoutEmergencyFragmentAddEmergencyDoctor"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            >
+
+
+                <TextView
+                    style="@style/text_format_emergency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_emergency_view_txt_doctor_message"/>
+
+
+                <EditText
+                    style="@style/text_format_emergency"
+                    android:id="@+id/mEditTextEmergencyFragmentAddEmergencyDoctorMessage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:layout_marginBottom="30dp"/>
+
+
+                <TextView
+                    style="@style/text_format_emergency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_emergency_view_txt_doctor_number"
+                    android:paddingBottom="10dp"/>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:id="@+id/mImageViewEmergencyFragmentAddEmergencyAddDoctorNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_person_add_black_24dp"
+                        android:paddingRight="10dp"/>
+
+                    <TextView
+                        style="@style/text_format_emergency"
+                        android:id="@+id/mtTextViewEmergencyFragmentAddEmergencyDoctorNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        />
+
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- END DOCTOR PART -->
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"/>
 
 
         <Button
@@ -76,4 +186,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

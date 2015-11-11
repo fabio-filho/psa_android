@@ -52,10 +52,6 @@ public class MyLocation implements Serializable {
             return String.valueOf(mCurrentLocation.getLongitude());
     }
 
-    public void turnGPSOn(Context context) {
-
-        context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-    }
 
 
     public void loadLocation(Context context){

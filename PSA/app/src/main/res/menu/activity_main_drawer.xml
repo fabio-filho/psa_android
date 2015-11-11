@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/mNavEmergencyFragment" android:icon="@android:drawable/ic_menu_camera"
-            android:title="@string/fragment_emergency_title" />
-        <item android:id="@+id/mNavEmergencyManagementFragment" android:icon="@android:drawable/ic_menu_gallery"
+        <item android:id="@+id/mNavEmergencyFragment" android:icon="@mipmap/ic_local_hospital_black_24dp"
+            android:title="@string/fragment_emergencies_title" />
+        <item android:id="@+id/mNavEmergencyManagementFragment" android:icon="@mipmap/ic_assignment_black_24dp"
             android:title="@string/fragment_emergency_management_title" />
-        <item android:id="@+id/mNavHistoryFragment" android:icon="@android:drawable/ic_menu_slideshow"
+        <item android:id="@+id/mNavHistoryFragment" android:icon="@mipmap/ic_history_black_24dp"
             android:title="@string/fragment_emergency_history_title" />
     </group>
 
     <item android:title="@string/others">
         <menu>
-            <item android:id="@+id/mNavSettingsFragment" android:icon="@android:drawable/ic_menu_manage"
+            <item android:id="@+id/mNavSettingsFragment" android:icon="@mipmap/ic_build_black_24dp"
                 android:title="@string/fragment_settings_title" />
-            <item android:id="@+id/mNavInformationFragment" android:icon="@android:drawable/ic_menu_send"
+            <item android:id="@+id/mNavInformationFragment" android:icon="@android:drawable/ic_dialog_info"
                 android:title="@string/fragment_information_title" />
         </menu>
     </item>

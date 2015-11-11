@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import com.ufrj.nce.psa.Application.Data.Settings;
 import com.ufrj.nce.psa.Objects.Dialogs.DialogEditText;
 import com.ufrj.nce.psa.Objects.Dialogs.Dialogs;
+import com.ufrj.nce.psa.Objects.Dialogs.MessageBox;
+import com.ufrj.nce.psa.Objects.GPS;
 import com.ufrj.nce.psa.R;
 
 /**
@@ -26,6 +29,12 @@ public class SettingsFragment extends MyFragment {
     private int mChosenItemIndex;
     private Settings mMySettings;
     private Switch mGPSSSwitch;
+    private View.OnClickListener mChangeNameOnClickListener;
+    private Button mButtonChangeName;
+
+    public void setChangeNameOnClickListener(View.OnClickListener mChangeNameOnClickListener){
+        this.mChangeNameOnClickListener=mChangeNameOnClickListener;
+    }
 
     @Override
     public boolean isShowFloatingButton() {
@@ -55,24 +64,23 @@ public class SettingsFragment extends MyFragment {
         //Loading settings.
         mMySettings = new Settings().loadData(mRootView.getContext());
 
-        definingUIObjects();
+        defineUIObjects();
 
         return mRootView;
-
     }
 
 
 
-    private void definingUIObjects(){
+    private void defineUIObjects(){
+
+        mButtonChangeName = new Button(mRootView.getContext());
+        mButtonChangeName.setOnClickListener(mChangeNameOnClickListener);
 
         mTimeIntervalTextView            = (TextView) mRootView.findViewById(R.id.mTextViewSettingsFragmentTimeInterval);
         mTimeIntervalExplanationTextView = (TextView) mRootView.findViewById(R.id.mTextViewSettingsFragmentTimeIntervalExplanation);
         mGPSSSwitch                      = (Switch)   mRootView.findViewById(R.id.mSwitchSettingsFragmentUseGPS);
         mNameTextView                    = (TextView) mRootView.findViewById(R.id.mTextViewSettingsFragmentName);
         mTitleNameTextView               = (TextView) mRootView.findViewById(R.id.mTextViewSettingsFragmentTitleName);
-
-        if(mMySettings.getName().equals(""))
-            mMySettings.setName(mRootView.getResources().getString(R.string.fragment_settings_label_default_name));
 
         mNameTextView.setText(mMySettings.getName());
         mGPSSSwitch.setChecked(mMySettings.getUseGPS());
@@ -98,8 +106,25 @@ public class SettingsFragment extends MyFragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                mMySettings.setUseGPS(isChecked);
-                mMySettings.saveData(mRootView.getContext());
+                if(isChecked) {
+                    if (!GPS.isEnabled(mRootView.getContext())) {
+                        mGPSSSwitch.setChecked(false);
+
+                        MessageBox.showOkCancel(mRootView.getContext(),
+                                mRootView.getResources().getString(R.string.fragment_settings_dialog_gps_disabled_message_content),
+                                mRootView.getResources().getString(R.string.fragment_settings_dialog_gps_disabled_title), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        GPS.openGPSSettings(mRootView.getContext());
+                                    }
+                                });
+
+                    }else{
+                        mMySettings.setUseGPS(isChecked);
+                        mMySettings.saveData(mRootView.getContext());
+                    }
+                }
+
             }
         });
 
@@ -134,6 +159,8 @@ public class SettingsFragment extends MyFragment {
                         mMySettings.saveData(mRootView.getContext());
 
                         mNameTextView.setText(mMySettings.getName());
+
+                        mButtonChangeName.performClick();
                     }
                 },
                 null
