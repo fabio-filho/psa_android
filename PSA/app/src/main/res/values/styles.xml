@@ -41,7 +41,7 @@
 
     <style name="text_format_information">
         <item name="android:textSize">20dp</item>
-        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
         <item name="android:textColor">#000</item>
     </style>
 

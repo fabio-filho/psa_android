@@ -25,8 +25,8 @@
     <!-- Fragment Home-->
 
     <string name="fragment_emergencies_title">Emergências</string>
-    <string name="fragment_emergencies_subtitle">Clique para disparar uma emergência</string>
-    <string name="fragment_emergencies_no_emergencies">Sem emergências. Clique para Adicionar</string>
+    <string name="fragment_emergencies_subtitle">Clique para disparar uma emergência.</string>
+    <string name="fragment_emergencies_subtitle_no_emergencies">Sem emergências. Clique no botão abaixo para adicionar.</string>
 
     <!-- End Fragment Home-->
 
@@ -38,6 +38,12 @@
     <string name="fragment_emergency_management_title">Gerenciamento</string>
     <string name="fragment_emergency_management_remove_item">Tem certeza que deseja remover esta Emergência: </string>
     <string name="fragment_emergency_management_remove_item_title">Remover Emergência</string>
+    <string name="fragment_emergency_management_dialog_options_title">Escolha uma opção</string>
+
+    <string-array name="fragment_emergency_management_array_item_options">
+        <item>Remover</item>
+        <item>Editar</item>
+    </string-array>
     <!-- End Fragment Emergency Manager-->
 
 
@@ -127,7 +133,7 @@
     <string name="fragment_settings_dialog_change_alert_time_interval_title">Escolha o tempo</string>
     <string name="fragment_settings_dialog_change_name_title">Digite seu nome</string>
     <string name="fragment_settings_dialog_label_button_ok">Ok</string>
-    <string name="fragment_settings_dialog_label_button_cancel">Cancel</string>
+    <string name="fragment_settings_dialog_label_button_cancel">Cancelar</string>
 
     <string name="fragment_settings_dialog_gps_disabled_title">O GPS está desativado.</string>
     <string name="fragment_settings_dialog_gps_disabled_message_content">Deseja ativá-lo agora?</string>
@@ -158,9 +164,10 @@
 
     <string name="fragment_information_title">Informações</string>
     <string name="fragment_information_subtitle">UFRJ - NCE </string>
-    <string name="fragment_information_deployment">Desenvolvedor: Fábio Filho</string>
-    <string name="fragment_information_design">Design: Rogério Valença</string>
-    <string name="fragment_information_leader">Professor Orientador: Marcos Borges</string>
+    <string name="fragment_information_deployment_title">Desenvolvedor</string>
+    <string name="fragment_information_deployment_value">Fábio Filho, fabiofilho@dcc.ufrj.br</string>
+    <string name="fragment_information_leader_title">Professor Orientador</string>
+    <string name="fragment_information_leader_value">Marcos Borges, mborges@nce.ufrj.br</string>
 
     <!-- End Information Fragment  -->
 </resources>

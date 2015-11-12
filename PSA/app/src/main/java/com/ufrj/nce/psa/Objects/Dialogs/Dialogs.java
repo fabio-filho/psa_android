@@ -23,6 +23,21 @@ public class Dialogs {
     }
 
 
+    public static void showChooseOptionItemFromList(FragmentManager mFragmentManager, String mTitle, String mButtonLabelCancel,
+                                                    int mArrayList, DialogInterface.OnClickListener mDialogOnClickListenerChosenItem,
+
+                                                    DialogInterface.OnClickListener mDialogOnClickListenerCancel) {
+
+
+        DialogListItemChoice mDialogFragment = new DialogListItemChoice();
+
+        mDialogFragment.setAttributes(mTitle, mButtonLabelCancel, mArrayList,
+                mDialogOnClickListenerChosenItem, mDialogOnClickListenerCancel);
+
+        mDialogFragment.show(mFragmentManager, DialogSingleListChoice.class.getName());
+    }
+
+
     public static void showEditText(FragmentManager mFragmentManager, String mTitle, String mEditTextHint, String mButtonLabelOk, String mButtonLabelCancel,
                                                     DialogInterface.OnClickListener mDialogOnClickListenerOk,
                                                     DialogInterface.OnClickListener mDialogOnClickListenerCancel) {

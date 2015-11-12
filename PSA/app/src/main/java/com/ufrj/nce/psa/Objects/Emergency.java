@@ -1,5 +1,7 @@
 package com.ufrj.nce.psa.Objects;
 
+import android.content.Context;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ public class Emergency implements Serializable{
 
     public static final String CODE_EMPTY = "-1";
     public final static String TAG_EMERGENCY_MESSAGE = "@%$#";
+    public static final String TAG_SEPARATOR = "$.$";
 
     private String mName, mMessage, mDoctorMessage;
 
@@ -28,7 +31,6 @@ public class Emergency implements Serializable{
     }
 
 
-
     public Boolean sendAlertToContact(String message, Contact contact){
 
         try {
@@ -41,6 +43,38 @@ public class Emergency implements Serializable{
         }
 
         return true;
+    }
+
+
+    public Boolean sendEmergencyToAllContacts(Context mContext){
+
+        try {
+            MyLocation myLocation = new MyLocation();
+            myLocation.loadLocation(mContext);
+
+            for (Contact mContact : mListContact.getList()) {
+                String mMessage = TAG_EMERGENCY_MESSAGE
+                        + TAG_SEPARATOR + this.mName
+                        + TAG_SEPARATOR + this.mMessage
+                        + TAG_SEPARATOR + myLocation.getLatitude()
+                        + TAG_SEPARATOR + myLocation.getLongitude()
+                        + TAG_SEPARATOR + this.mIsDoctorPartActioned;
+                        //TODO correct this part, sending a separated sms to doctor.
+                        if(mIsDoctorPartActioned)
+                            mMessage += TAG_SEPARATOR + this.mDoctorContact.getNumber()
+                                      + TAG_SEPARATOR + this.mDoctorMessage;
+
+
+                Utilities.log(mMessage);
+
+                sendAlertToContact(mMessage, mContact);
+            }
+
+        }catch (Exception o){
+            Utilities.log("sendAlertToAllContacts", o.toString());
+        }
+
+        return false;
     }
 
 
@@ -62,8 +96,8 @@ public class Emergency implements Serializable{
         return mIsDoctorPartActioned;
     }
 
-    public void setDoctorPartActioned(boolean mIsDoctorPartActived) {
-        this.mIsDoctorPartActioned = mIsDoctorPartActived;
+    public void setDoctorPartActioned(boolean mIsDoctorPartActioned){
+        this.mIsDoctorPartActioned = mIsDoctorPartActioned;
     }
 
     public Contact getDoctorContact() {
@@ -103,8 +137,7 @@ public class Emergency implements Serializable{
 
         if(mMessage.length() <= 3 ||
                 mMessage.contains(TAG_EMERGENCY_MESSAGE) ||
-                mMessage.contains(EmergencyReceived.TAG_SMS_IDENTIFICATION)||
-                mMessage.contains(EmergencyReceived.TAG_SEPARATOR))
+                mMessage.contains(TAG_SEPARATOR))
 
             return false;
 

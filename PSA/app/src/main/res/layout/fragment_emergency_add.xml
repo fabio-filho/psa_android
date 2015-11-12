@@ -145,7 +145,7 @@
 
                     <TextView
                         style="@style/text_format_emergency"
-                        android:id="@+id/mtTextViewEmergencyFragmentAddEmergencyDoctorNumber"
+                        android:id="@+id/mTextViewEmergencyFragmentAddEmergencyDoctorNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/darker_gray"

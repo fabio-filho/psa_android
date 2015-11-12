@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ufrj.nce.psa.Application.Data.Emergencies;
+import com.ufrj.nce.psa.Objects.Adapters.EmergenciesFragmentAdapter;
 import com.ufrj.nce.psa.Objects.Adapters.EmergencyAdapter;
 import com.ufrj.nce.psa.Objects.Emergency;
 import com.ufrj.nce.psa.R;
@@ -20,6 +22,7 @@ public class EmergenciesFragment extends MyFragment  {
     private ListView mListView;
     private EmergencyAdapter mEmergencyAdapter;
     private Emergencies mEmergencies;
+    private TextView mSubTitleTextView;
 
 
     @Override
@@ -59,15 +62,14 @@ public class EmergenciesFragment extends MyFragment  {
 
     private void defineUIObjects(){
 
+        mSubTitleTextView = (TextView) mRootView.findViewById(R.id.mTextViewEmergenciesFragmentTitle);
         mListView = (ListView) mRootView.findViewById(R.id.mListViewEmergenciesFragment);
-
-
     }
 
 
     private void loadListView(){
 
-        mEmergencyAdapter = new EmergencyAdapter(mRootView.getContext(), mEmergencies.getList(), new View.OnClickListener() {
+        mEmergencyAdapter = new EmergenciesFragmentAdapter(mRootView.getContext(), mEmergencies.getList(), new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
                 onClickEmergencyButton(mView);
@@ -76,13 +78,25 @@ public class EmergenciesFragment extends MyFragment  {
 
         mListView.setAdapter(mEmergencyAdapter);
 
+        if(mEmergencyAdapter.getList().size() == 0)
+            mSubTitleTextView.setText(mRootView.getResources().getString(R.string.fragment_emergencies_subtitle_no_emergencies));
+        else
+            mSubTitleTextView.setText(mRootView.getResources().getString(R.string.fragment_emergencies_subtitle));
     }
 
 
     private void onClickEmergencyButton(View mView){
 
-        Emergency mEmergency = mEmergencyAdapter.getItem(mListView.getPositionForView(mView));
-        showSnackBar(mRootView.findFocus(), "Enviando "+mEmergency.getName(), false);
+         final Emergency mEmergency = mEmergencyAdapter.getItem(mListView.getPositionForView(mView));
+         new Thread(){
+             @Override
+             public void run() {
+
+                mEmergency.sendEmergencyToAllContacts(mRootView.getContext());
+
+             }
+         }.start();
+
     }
 
 }

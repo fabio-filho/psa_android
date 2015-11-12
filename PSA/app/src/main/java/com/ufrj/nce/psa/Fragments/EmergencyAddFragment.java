@@ -84,7 +84,7 @@ public class EmergencyAddFragment extends MyFragment{
 
     private void defineUIObjects(){
 
-        mDoctorNumberTextView = (TextView) mRootView.findViewById(R.id.mtTextViewEmergencyFragmentAddEmergencyDoctorNumber);
+        mDoctorNumberTextView = (TextView) mRootView.findViewById(R.id.mTextViewEmergencyFragmentAddEmergencyDoctorNumber);
         mAddDoctorNumberImageView = (ImageView) mRootView.findViewById(R.id.mImageViewEmergencyFragmentAddEmergencyAddDoctorNumber);
         mDoctorPartSwitch = (Switch) mRootView.findViewById(R.id.mSwitchEmergencyFragmentAddEmergencyDoctorPart);
         mDoctorPartLinearLayout = (LinearLayout) mRootView.findViewById(R.id.mLinearLayoutEmergencyFragmentAddEmergencyDoctor);

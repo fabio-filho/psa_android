@@ -5,8 +5,7 @@ package com.ufrj.nce.psa.Objects;
  */
 public class EmergencyReceived {
 
-    public static final String TAG_SEPARATOR = "$.$";
-    public static final String TAG_SMS_IDENTIFICATION = "#@#";
+
 
 
 }
