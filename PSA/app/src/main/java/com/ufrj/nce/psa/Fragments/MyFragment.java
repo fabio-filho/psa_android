@@ -35,5 +35,11 @@ public abstract class MyFragment extends Fragment{
             Snackbar.make(mView, mContent, Snackbar.LENGTH_SHORT).show();
     }
 
+
+    protected void showSnackBar(View mView, String mContent){
+
+        Snackbar.make(mView, mContent, Snackbar.LENGTH_LONG).show();
+    }
+
 }
 

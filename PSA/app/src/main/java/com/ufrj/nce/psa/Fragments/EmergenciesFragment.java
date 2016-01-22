@@ -92,7 +92,8 @@ public class EmergenciesFragment extends MyFragment  {
              @Override
              public void run() {
 
-                mEmergency.sendEmergencyToAllContacts(mRootView.getContext());
+                 mEmergency.sendEmergencyToAllContacts(mRootView.getContext());
+                 showSnackBar(getActivity().getCurrentFocus(), mRootView.getResources().getString(R.string.fragment_emergencies_sending_emergency));
 
              }
          }.start();

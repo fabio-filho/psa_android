@@ -27,6 +27,7 @@
     <string name="fragment_emergencies_title">Emergências</string>
     <string name="fragment_emergencies_subtitle">Clique para disparar uma emergência.</string>
     <string name="fragment_emergencies_subtitle_no_emergencies">Sem emergências. Clique no botão abaixo para adicionar.</string>
+    <string name="fragment_emergencies_sending_emergency">Enviado emergência...</string>
 
     <!-- End Fragment Home-->
 
@@ -126,7 +127,7 @@
     <string name="fragment_settings_label_alert_time">Intervalo de tempo, entre um alerta e outro, tocado quando uma emergência é recebida.</string>
     <string name="fragment_settings_label_alert_time_explanation">20 segundos.</string>
     <string name="fragment_settings_label_use_gps">Permitir uso do GPS</string>
-    <string name="fragment_settings_label_use_gps_explanation">Recomendado deixar ativado, para o envio da localização quando for feito um envio de emergência.</string>
+        <string name="fragment_settings_label_use_gps_explanation">Recomendado deixar ativado para acessar a sua localização no envio de uma emergência.</string>
     <string name="fragment_settings_label_title_name">Nome</string>
     <string name="fragment_settings_label_default_name">Seu nome</string>
 
